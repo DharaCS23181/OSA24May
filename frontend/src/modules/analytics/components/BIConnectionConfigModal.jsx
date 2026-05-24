@@ -215,7 +215,7 @@ const BIConnectionConfigModal = ({ isOpen, onClose, connector, userId }) => {
       const uid = userId ?? (typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : null);
       if (uid) fd.append('user_id', String(uid));
 
-      const res = await fetch('/api/files/upload', { method: 'POST', body: fd });
+      const res = await fetch('/analytics/files/upload', { method: 'POST', body: fd });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         throw new Error(uploadErrorMessage(data));

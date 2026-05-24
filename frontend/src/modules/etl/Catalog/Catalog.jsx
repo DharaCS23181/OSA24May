@@ -17,7 +17,7 @@ import { ExportModal } from './ExportModal';
 
 import './Catalog.css';
 
-const API = '/api/v1';
+const API = '/etl/api/v1';
 
 /* ─── Dtype Icon ─────────────────────────────────────────── */
 function DtypeIcon({ dtype = '' }) {

@@ -40,7 +40,7 @@ export const MarkDateTableModal = ({ isOpen, onClose, schema, fileId, modelTable
         setSuccess('');
         
         try {
-            const res = await fetch('/api/modeling/mark-date-table', {
+            const res = await fetch('/analytics/modeling/mark-date-table', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -192,7 +192,7 @@ export const ChangeDetectionModal = ({ isOpen, onClose, schema, fileId, modelTab
 
     const checkExisting = async () => {
         try {
-            const res = await fetch('/api/modeling/change-detection/status');
+            const res = await fetch('/analytics/modeling/change-detection/status');
             if (res.ok) {
                 const data = await res.json();
                 // Match against the file UUID, not the display name
@@ -222,7 +222,7 @@ export const ChangeDetectionModal = ({ isOpen, onClose, schema, fileId, modelTab
         setSuccess('');
         
         try {
-            const res = await fetch('/api/modeling/change-detection/setup', {
+            const res = await fetch('/analytics/modeling/change-detection/setup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

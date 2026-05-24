@@ -1,0 +1,63 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Environment / secrets ──────────────────────────────────────────────────────
+.env
+# keep .env.example so others can bootstrap
+!.env.example
+
+# ── Databases ─────────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── dlt pipeline state & secrets ──────────────────────────────────────────────
+# .dlt/config.toml may contain non-secret config; secrets.toml must never be committed
+**/.dlt/secrets.toml
+# Uncomment the next line to also ignore the full .dlt folder (pipeline state)
+# **/.dlt/
+
+# ── Test / coverage artifacts ─────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+
+# ── Alembic ───────────────────────────────────────────────────────────────────
+# Keep migration scripts; ignore compiled bytecode inside alembic
+alembic/__pycache__/
+alembic/versions/__pycache__/
+
+# ── Runtime data directories ───────────────────────────────────────────────────
+uploads/
+outputs/
+app/exports/
+app/outputs/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Build / dist ──────────────────────────────────────────────────────────────
+dist/
+build/
+*.whl
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

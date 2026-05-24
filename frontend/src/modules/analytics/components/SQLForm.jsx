@@ -60,7 +60,7 @@ const SQLForm = ({ userId, onUploadSuccess, onConnectionSuccess }) => {
         formData.append('user_id', userId);
 
         try {
-            const response = await fetch('/api/sql/upload', {
+            const response = await fetch('/analytics/sql/upload', {
                 method: 'POST',
                 body: formData,
             });
@@ -91,7 +91,7 @@ const SQLForm = ({ userId, onUploadSuccess, onConnectionSuccess }) => {
         });
 
         try {
-            const response = await fetch('/api/sql/connect', {
+            const response = await fetch('/analytics/sql/connect', {
                 method: 'POST',
                 body: formData,
             });

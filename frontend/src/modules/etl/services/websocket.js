@@ -14,9 +14,19 @@ class WebSocketManager {
     this.disconnect();
     this.pipelineId = pipelineId;
 
-    // Vite proxy proxies /ws -> ws://backend:8000
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws/pipeline/${pipelineId}`;
+    // In dev, Vite proxies /etl-ws/* to ws://localhost:8111
+    // In production, VITE_ETL_API_URL should be set to the ETL backend base URL
+    const etlBase = import.meta.env.VITE_ETL_API_URL || '';
+    let wsUrl;
+    if (etlBase) {
+      // Production: use the ETL backend URL directly with ws/wss protocol
+      const wsBase = etlBase.replace(/^http/, 'ws');
+      wsUrl = `${wsBase}/ws/pipeline/${pipelineId}`;
+    } else {
+      // Dev: use Vite proxy — /etl/* → ws://localhost:8111/*
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      wsUrl = `${protocol}//${window.location.host}/etl/ws/pipeline/${pipelineId}`;
+    }
     
     this.ws = new WebSocket(wsUrl);
 

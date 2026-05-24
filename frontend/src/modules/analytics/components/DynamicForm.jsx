@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Eye, EyeOff, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 
-const API_BASE = '/api';
+const API_BASE = '/analytics';
 
 /**
  * Renders a single form field based on a JSON Schema property.

@@ -1,8 +1,13 @@
 import axios from 'axios';
 
-// Vite proxy handles the /api prefix routing to backend
+// Requests go to /etl/api/v1/* which Vite proxies to http://localhost:8111/etl/api/v1/*
+// In production, set VITE_ETL_API_URL to your ETL backend base URL.
+const ETL_BASE = import.meta.env.VITE_ETL_API_URL
+  ? `${import.meta.env.VITE_ETL_API_URL}/etl/api/v1`
+  : '/etl/api/v1';
+
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8111/api/v1', // Ensure the port matches your backend
+  baseURL: ETL_BASE,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -73,10 +78,10 @@ export const api = {
 
   // File Download
   downloadInputFile: (filename) => {
-    window.open(`/api/v1/upload/download/${filename}`, '_blank');
+    window.open(`/etl/api/v1/upload/download/${filename}`, '_blank');
   },
   downloadOutputFile: (filename) => {
-    window.open(`/api/v1/upload/download-output/${filename}`, '_blank');
+    window.open(`/etl/api/v1/upload/download-output/${filename}`, '_blank');
   },
 
   // File Delete

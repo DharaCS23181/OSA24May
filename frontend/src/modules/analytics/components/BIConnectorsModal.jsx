@@ -244,7 +244,7 @@ const BIConnectorsModal = ({ isOpen, onClose, onConnect }) => {
         config: { ...values, engine_name: engine },
         output_file_name: values.output_file_name,
       };
-      const res = await fetch('/api/connectors/quick-extract', {
+      const res = await fetch('/analytics/connectors/quick-extract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

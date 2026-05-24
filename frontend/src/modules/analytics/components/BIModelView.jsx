@@ -148,7 +148,7 @@ const BIModelView = ({
     React.useEffect(() => {
         const fetchDateTables = async () => {
             try {
-                const res = await fetch('/api/modeling/date-tables');
+                const res = await fetch('/analytics/modeling/date-tables');
                 if (res.ok) {
                     const data = await res.json();
                     const mapping = {};
@@ -483,7 +483,7 @@ const BIModelView = ({
         const load = async () => {
             try {
                 const [connRes, savedRes] = await Promise.all([
-                    fetch('/api/db/connections').then((r) => r.json()),
+                    fetch('/analytics/db/connections').then((r) => r.json()),
                     userId ? fetch(`/api/db/saved?user_id=${encodeURIComponent(userId)}`).then((r) => r.json()) : Promise.resolve({ profiles: [] }),
                 ]);
                 if (cancelled) return;
@@ -524,7 +524,7 @@ const BIModelView = ({
         let cancelled = false;
         const loadCatalogSource = async () => {
             try {
-                const connRes = await fetch('/api/db/connections').then((r) => r.json());
+                const connRes = await fetch('/analytics/db/connections').then((r) => r.json());
                 if (cancelled) return;
                 const list = connRes.connections || [];
                 setUserConnections(list);
@@ -590,7 +590,7 @@ const BIModelView = ({
             } catch (_) {
                 /* ignore */
             }
-            const refreshed = await fetch('/api/db/connections').then((r) => r.json());
+            const refreshed = await fetch('/analytics/db/connections').then((r) => r.json());
             setUserConnections(refreshed.connections || []);
             setSelectedConn(cid);
             const schemas = await fetchSchemaOptions(cid);
@@ -731,7 +731,7 @@ const BIModelView = ({
 
         try {
             // 1. Upload
-            const uploadRes = await fetch('/api/files/upload', {
+            const uploadRes = await fetch('/analytics/files/upload', {
                 method: 'POST',
                 body: formData
             });
@@ -936,7 +936,7 @@ const BIModelView = ({
         if (userId) formData.append('user_id', userId);
 
         try {
-            const uploadRes = await fetch('/api/files/upload', { method: 'POST', body: formData });
+            const uploadRes = await fetch('/analytics/files/upload', { method: 'POST', body: formData });
             if (!uploadRes.ok) {
                 if (uploadRes.status === 413) {
                     throw new Error("Upload blocked by server gateway (413 Request Entity Too Large). Increase nginx proxy upload size (client_max_body_size).");
@@ -1058,7 +1058,7 @@ const BIModelView = ({
                 }
             }
             const runPreviewQuery = async (connId) => {
-                const res = await fetch('/api/db/query', {
+                const res = await fetch('/analytics/db/query', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

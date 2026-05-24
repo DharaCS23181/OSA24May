@@ -101,7 +101,7 @@ const PaginatedReportBuilder = ({ userId }) => {
 
   // Fetch DataVault items on mount
   useEffect(() => {
-    fetch('/api/vault/items')
+    fetch('/analytics/vault/items')
       .then(res => res.json())
       .then(data => {
         if (data.items) setVaultItems(data.items);

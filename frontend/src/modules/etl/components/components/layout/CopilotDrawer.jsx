@@ -106,7 +106,7 @@ export function CopilotDrawer({ isOpen, onClose, theme }) {
     const apiKey = localStorage.getItem('arithflow_copilot_key') || '';
 
     try {
-      const res = await fetch('/api/v1/copilot/chat', {
+      const res = await fetch('/etl/api/v1/copilot/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

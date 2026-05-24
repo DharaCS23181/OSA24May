@@ -222,7 +222,7 @@ const DataVaultPanel = ({ isOpen, onClose, onLoadDataset }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/vault/items');
+      const res = await fetch('/analytics/vault/items');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setItems(Array.isArray(data.items) ? data.items : []);

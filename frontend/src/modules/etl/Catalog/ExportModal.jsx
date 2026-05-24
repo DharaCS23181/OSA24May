@@ -49,7 +49,7 @@ export function ExportModal({ tableName, onClose }) {
     if (!targetUrl) return alert("Please provide a target URL");
     setExporting(true);
     try {
-      const resp = await fetch('/api/v1/export/to-api', {
+      const resp = await fetch('/etl/api/v1/export/to-api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
