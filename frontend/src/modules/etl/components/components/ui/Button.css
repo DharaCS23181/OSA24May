@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════════
+   Button — Unified Primary via CSS Design Tokens
+   No hardcoded colors — everything from :root / [data-theme]
+   ═══════════════════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all var(--dur-normal, 200ms) var(--ease-out, ease-out);
+  gap: 8px;
+  user-select: none;
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  border: none;
+}
+
+/* Subtle top-shine overlay on hover */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent);
+  opacity: 0;
+  transition: opacity 150ms;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btn:not(:disabled):hover::after {
+  opacity: 1;
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.btn:not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ── Sizes ── */
+.btn-sm {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 0.8rem;
+}
+
+.btn-md {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  height: 50px;
+  padding: 0 28px;
+  font-size: 0.95rem;
+}
+
+/* ═══ PRIMARY — Indigo-Violet gradient via CSS tokens ═══ */
+.btn-primary {
+  background: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  border-color: transparent !important;
+  font-weight: 700;
+  box-shadow: var(--btn-primary-shadow);
+}
+
+.btn-primary:not(:disabled):hover {
+  box-shadow: var(--btn-primary-shadow-hover);
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+}
+
+.btn-primary:not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--btn-primary-shadow);
+}
+
+/* ═══ SECONDARY — Subtle surface with border ═══ */
+.btn-secondary {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+/* ═══ DANGER — Solid Red ═══ */
+.btn-danger {
+  background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.35);
+}
+
+.btn-danger:not(:disabled):hover {
+  box-shadow: 0 6px 24px rgba(185, 28, 28, 0.5);
+}
+
+/* ═══ GHOST — Transparent with accent hover ═══ */
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:not(:disabled):hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* ═══ OUTLINE — Accent outlined ═══ */
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline:not(:disabled):hover {
+  background: var(--accent-subtle);
+}

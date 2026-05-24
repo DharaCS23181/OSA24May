@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════════════
+   GlobalLoader — Fullscreen loading overlay with logo animation
+   ═══════════════════════════════════════════════════════════ */
+
+.global-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-base);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+.global-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ── Logo Animation ── */
+.loader-logo-wrap {
+  position: relative;
+}
+
+.loader-svg {
+  display: block;
+}
+
+/* Spinning orbit */
+.loader-orbit {
+  transform-origin: center;
+  animation: loaderSpin 3s linear infinite;
+}
+
+@keyframes loaderSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pulsing inner circle */
+.loader-inner-circle {
+  animation: loaderPulse 2s ease-in-out infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+/* Glowing center dot */
+.loader-center-dot {
+  animation: loaderGlow 2s ease-in-out infinite;
+}
+
+@keyframes loaderGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ── Text ── */
+.loader-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.loader-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+.loader-status {
+  font-size: 1.0rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  animation: loaderDots 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderDots {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

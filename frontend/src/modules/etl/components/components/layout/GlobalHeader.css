@@ -1,0 +1,635 @@
+/* ═══════════════════════════════════════════════════════════
+   GlobalHeader — Full-Width Premium Top Bar
+   Clean, minimal, indigo-violet branded
+   ═══════════════════════════════════════════════════════════ */
+
+.global-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: var(--bg-elevated);
+  border-bottom: none;
+  box-shadow: 0 1px 0 var(--border);
+  flex-shrink: 0;
+  z-index: 60;
+  position: relative;
+  gap: 16px;
+  transition: all 0.28s ease;
+}
+
+[data-theme='dark'] .global-header {
+  background: var(--bg-elevated);
+}
+
+/* ── Mobile Hamburger (hidden on desktop) ── */
+.gh-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  flex-shrink: 0;
+}
+
+.gh-hamburger:hover {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .gh-hamburger {
+    display: flex;
+  }
+}
+
+
+.global-header.scrolled {
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ══ Left ══ */
+.gh-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.gh-app-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gh-app-logo {
+  height: 30px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.loading-spin {
+  animation: logoPulse 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3)); }
+}
+
+.gh-connectivity-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-elevated);
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.gh-connectivity-dot.online {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.gh-connectivity-dot.offline {
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+  animation: offlinePulse 1.5s infinite;
+}
+
+@keyframes offlinePulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.gh-app-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+}
+
+.gh-sep {
+  color: var(--text-muted);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.gh-page-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+}
+
+/* ══ Center: Search ══ */
+.gh-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  max-width: 50vw;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.gh-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  padding: 7px 13px;
+  background: var(--bg-base);
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 150ms;
+}
+
+[data-theme='dark'] .gh-search-trigger {
+  background: var(--bg-glass);
+}
+
+.gh-search-trigger:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.gh-search-trigger .gh-search-text {
+  flex: 1;
+  text-align: left;
+}
+
+.gh-search-trigger .gh-kbd {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  background: var(--bg-elevated);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ══ Right ══ */
+.gh-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.gh-clock {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  letter-spacing: 0.03em;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme='dark'] .gh-clock {
+  background: var(--bg-glass);
+}
+
+.gh-help-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--text-secondary);
+}
+
+.gh-help-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.gh-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.gh-theme-toggle:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.gh-theme-toggle svg,
+.gh-help-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.gh-theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Header Actions Group ── */
+.gh-actions-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-full);
+  padding: 2px 4px;
+  gap: 2px;
+}
+
+[data-theme='dark'] .gh-actions-group {
+  background: rgba(15, 23, 42, 0.4);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Notifications Panel Upgraded ── */
+.gh-notif-dropdown {
+  overflow: hidden;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3) !important;
+}
+
+.gh-notif-clear-btn {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.gh-notif-clear-btn:hover {
+  background: var(--accent-subtle);
+}
+
+.gh-notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  background: var(--bg-elevated);
+}
+
+.gh-notif-item:hover {
+  background: var(--bg-hover);
+}
+
+.gh-notif-item.unread {
+  background: var(--accent-subtle-alpha, rgba(59, 130, 246, 0.05));
+  border-left: 3px solid var(--accent);
+}
+
+.gh-notif-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.gh-notif-icon-wrap.error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.gh-notif-icon-wrap.warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.gh-notif-icon-wrap.info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.gh-notif-icon-wrap.success { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+
+.gh-notif-del-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.gh-notif-item:hover .gh-notif-del-btn {
+  opacity: 1;
+}
+
+.gh-notif-del-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #ef4444;
+}
+
+[data-theme='dark'] .gh-notif-del-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.gh-notif-scroll-area::-webkit-scrollbar {
+  width: 5px;
+}
+.gh-notif-scroll-area::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+/* ── User Context & Dropdown ── */
+.gh-user-context {
+  position: relative;
+  margin-left: 4px;
+}
+
+.gh-profile-trigger {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.gh-profile-trigger.active {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.profile-avatar-mini {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #475569, #0f172a);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gh-user-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 260px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.88));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  padding: 12px;
+  z-index: 100;
+  transform-origin: top right;
+}
+
+[data-theme='dark'] .gh-user-dropdown {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.88));
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-user-header {
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.user-email {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b98166;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.03);
+  margin: 8px -12px;
+}
+
+[data-theme='dark'] .dropdown-divider {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dropdown-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: rgba(var(--accent-rgb), 0.06);
+  color: var(--accent);
+  padding-left: 17px;
+}
+
+.dropdown-item.gold {
+  color: #f59e0b;
+}
+.dropdown-item.gold:hover {
+  background: rgba(245, 158, 11, 0.08);
+  color: #d97706;
+}
+
+.dropdown-item.danger {
+  color: #ef4444;
+}
+.dropdown-item.danger:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+}
+
+.dropdown-item svg {
+  opacity: 0.8;
+}
+
+/* Desktop Sidebar Toggle Button */
+.gh-sidebar-toggle-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.gh-sidebar-toggle-desktop:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.gh-sidebar-toggle-desktop svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 768px) {
+  .gh-sidebar-toggle-desktop {
+    display: none;
+  }
+
+  .global-header {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  /* Hide the live clock on mobile — saves space */
+  .gh-clock {
+    display: none;
+  }
+
+  /* Shrink search bar on mobile */
+  .gh-center {
+    position: static;
+    transform: none;
+    max-width: 180px;
+  }
+
+  .gh-search-trigger {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  /* Hide keyboard shortcut badge on mobile */
+  .gh-search-trigger .gh-kbd {
+    display: none;
+  }
+
+  /* Compact right section */
+  .gh-right {
+    gap: 4px;
+  }
+
+  /* Shorter theme toggle label on mobile */
+  .gh-theme-toggle {
+    padding: 5px 8px;
+    font-size: 0;  /* hide text label */
+    gap: 0;
+  }
+
+  .gh-theme-icon {
+    font-size: 14px;
+  }
+
+  .gh-app-name {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra-small: hide search bar entirely, show hamburger only */
+  .gh-center {
+    display: none;
+  }
+
+  .gh-page-title {
+    display: none;
+  }
+
+  .gh-sep {
+    display: none;
+  }
+}

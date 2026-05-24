@@ -1,0 +1,34 @@
+# Global ignores
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Temporary and build files
+**/*.tmp
+*.log
+dist/
+build/
+.next/
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+# Archives
+*.zip

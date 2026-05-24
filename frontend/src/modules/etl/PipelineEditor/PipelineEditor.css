@@ -1,0 +1,402 @@
+.pe-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* ── Navbar ── */
+.pe-navbar {
+  height: 50px; /* High-density sleeker height */
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 50;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.pe-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pe-title-input {
+  background: transparent;
+  border: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  outline: none;
+  font-family: var(--font-sans);
+  min-width: 140px;
+  max-width: 220px;
+  letter-spacing: -0.02em;
+  transition: border-bottom 0.2s;
+}
+
+.pe-title-input:focus {
+  border-bottom: 1.5px solid var(--accent);
+}
+
+.pe-comment-input {
+  background: transparent;
+  border: none;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  outline: none;
+  font-family: var(--font-sans);
+  max-width: 160px;
+  transition: border-bottom 0.2s;
+  padding: 2px 6px;
+  margin-left: 6px;
+  border-left: 1px solid var(--border-subtle);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pe-comment-input:focus {
+  border-bottom: 1.5px solid var(--accent);
+  color: var(--text-primary);
+}
+
+.pe-pid-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  padding: 1px 6px;
+  border: 1px solid var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+}
+
+.pe-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Tighter premium spacing */
+}
+
+.pe-nav-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border-strong);
+  margin: 0 2px;
+}
+
+.pe-btn-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; /* Svelte border radius */
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  transition: all var(--transition-fast);
+  border: 1px solid var(--border);
+}
+
+/* Segmented button styling */
+.pe-segmented-group {
+  display: flex;
+  align-items: center;
+}
+
+.pe-segmented-group .segmented-left {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: none !important;
+}
+
+.pe-segmented-group .segmented-right {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.pe-btn-icon:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-0.5px);
+}
+
+.pe-btn-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pe-btn-run {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  padding: 0 12px;
+  height: 28px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: none;
+  white-space: nowrap; /* Prevent text wrapping */
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .pe-btn-run {
+  background: var(--accent);
+  color: white;
+}
+
+.pe-btn-run:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--accent-glow);
+}
+
+[data-theme='dark'] .pe-btn-run:not(:disabled):hover {
+  box-shadow: var(--accent-glow);
+}
+
+.pe-btn-run.running {
+  background: var(--info);
+  box-shadow: 0 0 20px var(--info-subtle);
+}
+
+/* ── Workspace & Canvas ── */
+.pe-workspace {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-base);
+  height: calc(100vh - 50px - var(--header-height)); /* Account for navbar and potential bottom nav */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .pe-workspace {
+    height: calc(100vh - 56px - 50px); /* Adjust for mobile heights */
+  }
+}
+
+.pe-canvas-wrapper {
+  flex: 1;
+  position: relative;
+  z-index: 10;
+  height: 100%;
+}
+
+.pe-sidebar-panel {
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  z-index: 20;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.react-flow__background {
+  opacity: 0.4;
+}
+
+/* ── React Flow Controls Overrides — Always Visible ── */
+.pe-workspace .react-flow__controls {
+  position: absolute !important;
+  top: 24px !important;
+  left: 50% !important;
+  bottom: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 100 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 4px;
+  padding: 4px;
+  box-shadow: var(--shadow-md) !important;
+  border-radius: var(--radius-full) !important;
+  border: none !important;
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.pe-workspace .react-flow__controls button {
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  fill: var(--text-primary) !important;
+  border: none !important;
+  transition: all 0.2s;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pe-workspace .react-flow__controls button:hover {
+  background-color: var(--accent-subtle) !important;
+  color: var(--accent) !important;
+  fill: var(--accent) !important;
+}
+
+.pe-workspace .react-flow__minimap {
+  position: absolute !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  top: auto !important;
+  left: auto !important;
+  width: 180px !important;
+  height: auto !important;
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  backdrop-filter: blur(8px);
+  z-index: 40 !important;
+}
+
+.pe-workspace .react-flow__controls button svg {
+  fill: var(--text-primary);
+}
+
+/* ── Properties Panel — Flush IDE Design ── */
+.pe-props-panel {
+  width: 340px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  z-index: 20;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pe-props-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pe-props-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pe-props-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.pe-close-btn {
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.pe-close-btn:hover {
+  color: var(--danger);
+  background: var(--danger-subtle);
+}
+
+.pe-props-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* ── Responsive Media Queries ── */
+@media (max-width: 1200px) {
+  .pe-comment-input { display: none; } /* Hide comment on medium screens */
+  .pe-title-input { min-width: 150px; }
+}
+
+@media (max-width: 1024px) {
+  .pe-breadcrumb-parent,
+  .pe-breadcrumb-sep,
+  .pe-breadcrumb-current { 
+    display: none; 
+  }
+  
+  .pe-btn-icon[title*="Auto Layout"],
+  .pe-btn-icon[title*="Validate"] {
+    display: none; /* Hide advanced tools on small screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .pe-navbar {
+    padding: 0 12px;
+    height: 56px;
+  }
+  .pe-pid-badge { display: none; }
+  .pe-title-input { font-size: 1rem; min-width: 100px; }
+  
+  .pe-nav-right { gap: 4px; }
+  .pe-btn-run span { display: none; } /* Show only icon on mobile */
+  .pe-btn-run { width: 42px; padding: 0; justify-content: center; }
+}
+
+/* ── MiniMap Fixes ── */
+.react-flow__minimap {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.react-flow__minimap svg {
+  display: block;
+}
+
+.react-flow__minimap-node {
+  rx: 5px !important;
+  ry: 5px !important;
+  stroke-width: 1.5px !important;
+  fill-opacity: 0.85 !important;
+}
+
+.react-flow__minimap-mask {
+  fill: var(--bg-base) !important;
+  opacity: 0.65 !important;
+}
+
+.react-flow__minimap-viewport {
+  stroke: var(--accent) !important;
+  stroke-width: 2px !important;
+  fill: rgba(15, 82, 186, 0.05) !important;
+  rx: 4px !important;
+  ry: 4px !important;
+}

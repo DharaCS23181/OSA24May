@@ -1,0 +1,623 @@
+.bi-ribbon {
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #d1d1d1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+/* Title Bar / Search Bar */
+.bi-title-bar {
+    height: 36px;
+    background: #ffffff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    border-bottom: 1px solid #e1e1e1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bi-title-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    flex: 1;
+}
+
+.bi-app-icon {
+    color: #7a1e3a;
+}
+
+.bi-app-title {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #333;
+}
+
+.bi-file-name {
+    color: #666;
+    margin-left: 4px;
+    font-weight: 400;
+    opacity: 0.85;
+}
+
+.bi-search-wrapper {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.bi-search-input-container {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.bi-search-input-container:focus-within {
+    background-color: #fff;
+    border-color: #7a1e3a;
+    box-shadow: 0 0 0 2px rgba(122, 30, 58, 0.1);
+}
+
+.bi-search-icon {
+    color: #666 !important;
+    stroke: #666 !important;
+    margin-right: 6px;
+    opacity: 0.8;
+}
+
+.bi-ribbon-search {
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+}
+
+.bi-ribbon-search::placeholder {
+    color: #999;
+}
+
+.bi-title-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.bi-title-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #7a1e3a !important;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 3px 10px;
+    border-radius: 4px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.bi-title-btn svg,
+.bi-title-btn span {
+    color: #7a1e3a !important;
+    stroke: #7a1e3a !important;
+}
+
+/* Force ALL svgs inside the title bar to dark purple/grey */
+.bi-title-bar svg {
+    color: inherit;
+    stroke: inherit;
+}
+
+.bi-title-btn:hover {
+    background-color: #faf3ff;
+    border-color: #e0b8db;
+}
+
+.bi-share-btn {
+    background-color: #7a1e3a;
+    color: #ffffff !important;
+    font-weight: 600;
+    padding: 3px 14px;
+    border: 1px solid #7a1e3a;
+}
+
+.bi-share-btn svg,
+.bi-share-btn span {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+.bi-share-btn:hover {
+    background-color: #5e172c;
+    border-color: #5e172c;
+}
+
+/* Ribbon Tabs */
+.bi-ribbon-tabs {
+    display: flex;
+    padding-left: 8px;
+    background-color: #f3f3f3;
+    align-items: center;
+}
+
+.bi-ribbon-collapse-btn {
+    margin-left: auto;
+    margin-right: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    transition: background 0.1s, border-color 0.1s;
+}
+
+.bi-ribbon-collapse-btn:hover {
+    background-color: #e5e5e5;
+    border-color: #ccc;
+    color: #333;
+}
+
+.bi-ribbon-tab {
+    padding: 7px 13px;
+    font-size: 12px;
+    font-weight: 400;
+    border: none;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.bi-ribbon-tab:hover {
+    background-color: #e5e5e5;
+}
+
+.bi-ribbon-tab.active {
+    /* background-color: #fff; */
+    color: #7a1e3a;
+    font-weight: 400;
+    /* border-top: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1; */
+    position: relative;
+    z-index: 1;
+    margin-bottom: -1px;
+}
+
+/* ── AI Insights tab — premium pill with gradient text + glow ── */
+.bi-ribbon-tab.bi-ai-tab-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(122, 30, 58, 0.08), rgba(94, 23, 44, 0.04));
+    color: #5e172c;
+    font-weight: 600;
+    border-radius: 999px;
+    margin: 3px 4px 3px 6px;
+    padding: 5px 12px 5px 10px;
+    position: relative;
+    transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+}
+
+.bi-ribbon-tab.bi-ai-tab-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(122, 30, 58, 0.55), rgba(94, 23, 44, 0.35));
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+}
+
+.bi-ribbon-tab.bi-ai-tab-pill:hover {
+    background: linear-gradient(135deg, rgba(122, 30, 58, 0.16), rgba(94, 23, 44, 0.08));
+    box-shadow: 0 6px 18px -10px rgba(94, 23, 44, 0.5);
+}
+
+.bi-ribbon-tab.bi-ai-tab-pill:hover::before { opacity: 0.85; }
+
+.bi-ribbon-tab.bi-ai-tab-pill.active {
+    background: linear-gradient(135deg, #7a1e3a 0%, #5e172c 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px -10px rgba(94, 23, 44, 0.7);
+    margin-bottom: 3px;
+}
+
+.bi-ribbon-tab.bi-ai-tab-pill.active::before { opacity: 0; }
+
+.bi-ai-tab-pill-icon { flex-shrink: 0; }
+.bi-ribbon-tab.bi-ai-tab-pill.active .bi-ai-tab-pill-icon { color: #fff; }
+
+/* Contextual Tab (Measure Tools, Table Tools) */
+.bi-context-tab {
+    color: #0e0f0f;
+    font-weight: 400;
+}
+
+.bi-context-tab-active {
+    border-top: 2px solid #f1f6f6 !important;
+    color: #7a1e3a !important;
+}
+
+/* Base ribbon inputs */
+.bi-dropdown-select {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 2px;
+    font-size: 11px;
+    color: #333;
+    outline: none;
+    padding: 2px 4px;
+}
+
+.bi-ribbon-field-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 0 4px;
+}
+
+.bi-ribbon-field-label {
+    font-size: 11px;
+    color: #4b5563;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.bi-ribbon-field-icon {
+    color: #4b5563;
+    opacity: 0.8;
+}
+
+.bi-dropdown-select:focus {
+    border-color: #7a1e3a;
+}
+
+/* Tiny action buttons inside ribbon ($ % ,) */
+.bi-icon-btn-small {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 0 4px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-icon-btn-small:hover {
+    background-color: #e5e5e5;
+    border-color: #ccc;
+}
+
+/* Toolbar & Groupings */
+.bi-ribbon-toolbar {
+    display: flex;
+    padding: 1px 6px;
+    padding-bottom: 0px;
+    background-color: #fff;
+    height: 92px;
+    align-items: flex-start;
+    border-top: 1px solid #d1d1d1;
+    overflow: visible;
+    transition: height 0.18s ease, padding 0.18s ease, opacity 0.18s ease;
+    opacity: 1;
+}
+
+.bi-ribbon-toolbar.bi-ribbon-collapsed {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    border-top: none;
+}
+
+.bi-tool-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2px;
+    min-width: 40px;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.bi-tool-row {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bi-group-label {
+    font-size: 9px;
+    font-weight: 400;
+    color: #888;
+    margin-top: auto;
+    padding-bottom: 2px;
+}
+
+.bi-group-divider {
+    width: 1px;
+    height: 80%;
+    background-color: #eee;
+    margin: auto 4px;
+}
+
+/* Tool Buttons */
+.bi-ribbon-tool {
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+    color: #475569;
+}
+
+.bi-ribbon-tool:hover {
+
+    background-color: #eff6fc;
+    border-color: #deecf9;
+}
+
+.bi-tool-large {
+    padding: 5px 10px;
+    gap: 4px;
+    height: 80%;
+}
+
+.bi-tool-large > span:not(.bi-ribbon-tool-text) {
+    font-size: 10.5px;
+    font-weight: 400;
+    white-space: normal;
+    text-wrap: wrap;
+    text-align: center;
+    max-width: 150px;
+    line-height: 1.1;
+}
+
+.bi-tool-has-dropdown .bi-ribbon-tool-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    max-width: 150px;
+}
+
+.bi-tool-has-dropdown .bi-ribbon-tool-label {
+    font-size: 10.5px;
+    font-weight: 400;
+    white-space: normal;
+    text-wrap: wrap;
+    text-align: center;
+    line-height: 1.1;
+    width: 100%;
+}
+
+.bi-tool-has-dropdown .bi-ribbon-tool-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    line-height: 1;
+}
+
+.bi-tool-has-dropdown .bi-ribbon-tool-chevron svg {
+    width: 11px;
+    height: 11px;
+    margin: 0;
+    color: #64748b;
+    stroke-width: 2;
+}
+
+.bi-tool-large > svg:first-of-type {
+    color: #7a1e3a;
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.7;
+    opacity: 0.9;
+}
+
+.bi-tool-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bi-ribbon-tool-small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+    border-radius: 3px;
+    width: 80%;
+}
+
+.bi-ribbon-tool-small:hover {
+    background-color: #eff6fc;
+    border-color: #deecf9;
+}
+
+.bi-ribbon-tool-small svg {
+    color: #7a1e3a;
+    width: 12px;
+    height: 12px;
+    stroke-width: 1.8;
+}
+
+/* Dropdown styling */
+.bi-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.bi-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background-color: #fff !important;
+    border: 1px solid #d1d1d1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    padding: 4px 0;
+    margin-top: 4px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bi-dropdown-item {
+    width: 89;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.1s;
+}
+
+.bi-dropdown-item:hover {
+    background-color: #f3f3f3 !important;
+}
+
+.bi-dropdown-item.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.bi-dropdown-item-icon {
+    color: #7a1e3a;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.bi-dropdown-item-label {
+    font-size: 11px;
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.bi-dropdown-item-sub {
+    font-size: 9px;
+    color: #888;
+    white-space: nowrap;
+}
+
+.bi-dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 4px 0;
+}
+
+/* Theme Gallery */
+.bi-theme-gallery {
+    display: flex;
+    gap: 3px;
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+
+.bi-theme-thumbnail {
+    width: 20px;
+    height: 28px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 1px;
+    transition: all 0.1s;
+}
+
+.bi-theme-thumbnail:hover {
+    border-color: #7a1e3a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bi-theme-thumbnail.active {
+    border-color: #7a1e3a;
+    border-width: 2px;
+}
+
+/* Time Slicer Styles */
+.bi-ribbon-select {
+    height: 22px;
+    padding: 0 4px;
+    font-size: 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    background: #fff;
+    color: #111827;
+    width: 120px;
+    outline: none;
+}
+
+.bi-ribbon-select:focus {
+    border-color: #7a1e3a;
+}
+
+.osa-ribbon-reset {
+    margin-top: 2px;
+    border: 1px solid #fee2e2 !important;
+}
+
+.osa-ribbon-reset svg {
+    margin-right: 4px;
+}
+
+.osa-ribbon-reset:hover {
+    background-color: #fef2f2 !important;
+}

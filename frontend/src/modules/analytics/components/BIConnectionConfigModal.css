@@ -1,0 +1,582 @@
+/* Connection config — aligned with Get Data / Power BI–style dashboard */
+.bi-config-modal-overlay {
+  --bi-cfg-surface: #ffffff;
+  --bi-cfg-muted: #f3f2f1;
+  --bi-cfg-border: #e1dfdd;
+  --bi-cfg-text: #323130;
+  --bi-cfg-text-secondary: #605e5c;
+  --bi-cfg-accent: #7a1e3a;
+  --bi-cfg-accent-hover: #7a1e3a;
+  --bi-cfg-danger: #a4262c;
+  position: fixed;
+  inset: 0;
+  background: rgba(32, 33, 36, 0.45);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: bi-cfg-fade-in 0.22s ease-out;
+}
+
+.bi-config-modal-container {
+  width: min(1080px, 100%);
+  max-width: 100%;
+  background: var(--bi-cfg-surface);
+  border-radius: 8px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.12),
+    0 24px 48px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  max-height: min(860px, calc(100vh - 28px));
+  border: 1px solid var(--bi-cfg-border);
+  overflow: hidden;
+  position: relative;
+}
+
+.bi-config-modal-header {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--bi-cfg-border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bi-cfg-surface);
+}
+
+.bi-config-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.bi-config-modal-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--bi-cfg-accent) 14%, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bi-cfg-accent);
+}
+
+@supports not (background: color-mix(in srgb, red, white)) {
+  .bi-config-modal-icon-wrapper {
+    background: #deecf9;
+  }
+}
+
+.bi-config-modal-header-text {
+  min-width: 0;
+}
+
+.bi-config-modal-header-text h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--bi-cfg-text);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.bi-config-modal-header-text p {
+  margin: 4px 0 0 0;
+  font-size: 0.8125rem;
+  color: var(--bi-cfg-text-secondary);
+  line-height: 1.4;
+}
+
+.bi-config-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--bi-cfg-text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  margin: -2px -4px 0 0;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bi-config-modal-close:hover {
+  background: var(--bi-cfg-muted);
+  color: var(--bi-cfg-text);
+}
+
+.bi-config-modal-close:focus-visible {
+  outline: 2px solid var(--bi-cfg-accent);
+  outline-offset: 2px;
+}
+
+.bi-config-modal-content {
+  flex: 1;
+  min-height: 0;
+  padding: 16px 20px 18px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  background: var(--bi-cfg-surface);
+}
+
+.bi-config-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bi-config-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bi-config-modal-content::-webkit-scrollbar-thumb {
+  background: #c8c6c4;
+  border-radius: 4px;
+}
+
+.bi-config-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #a19f9d;
+}
+
+@supports (scrollbar-color: auto) {
+  .bi-config-modal-content {
+    scrollbar-color: #c8c6c4 transparent;
+    scrollbar-width: thin;
+  }
+}
+
+.bi-config-modal-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px;
+  align-items: start;
+}
+
+.bi-form-group--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .bi-config-modal-overlay {
+    padding: 12px;
+  }
+
+  .bi-config-modal-form {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bi-form-group--full {
+    grid-column: 1;
+  }
+}
+
+.bi-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bi-form-required {
+  color: var(--bi-cfg-danger);
+  margin-left: 2px;
+  font-weight: 600;
+}
+
+.bi-form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--bi-cfg-text);
+  line-height: 1.3;
+}
+
+.bi-form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--bi-cfg-border);
+  background: var(--bi-cfg-surface);
+  color: var(--bi-cfg-text);
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.bi-form-input:hover:not(:focus) {
+  border-color: #c8c6c4;
+}
+
+.bi-form-input:focus {
+  border-color: var(--bi-cfg-accent);
+  box-shadow: 0 0 0 1px var(--bi-cfg-accent);
+}
+
+.bi-form-input::placeholder {
+  color: #a19f9d;
+}
+
+.bi-form-description {
+  font-size: 0.75rem;
+  color: var(--bi-cfg-text-secondary);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.bi-config-modal-footer {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  background: var(--bi-cfg-muted);
+  border-top: 1px solid var(--bi-cfg-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bi-btn {
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+.bi-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.bi-btn-secondary {
+  background: var(--bi-cfg-surface);
+  border: 1px solid var(--bi-cfg-border);
+  color: var(--bi-cfg-text);
+}
+
+.bi-btn-secondary:hover:not(:disabled) {
+  background: #faf9f8;
+  border-color: #c8c6c4;
+}
+
+.bi-btn-primary {
+  background: var(--bi-cfg-accent);
+  border: 1px solid var(--bi-cfg-accent);
+  color: #ffffff;
+}
+
+.bi-btn-primary:hover:not(:disabled) {
+  background: var(--bi-cfg-accent-hover);
+  border-color: var(--bi-cfg-accent-hover);
+}
+
+.bi-btn:focus-visible {
+  outline: 2px solid var(--bi-cfg-accent);
+  outline-offset: 2px;
+}
+
+@keyframes bi-cfg-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.test-status-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.8125rem;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+.test-status-msg svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.test-status-msg.success {
+  background: #dff6dd;
+  color: #107c10;
+  border: 1px solid #bad80a;
+}
+
+.test-status-msg.error {
+  background: #fde7e9;
+  color: #a4262c;
+  border: 1px solid #f1707b;
+}
+
+.bi-form-textarea {
+  min-height: 88px;
+  resize: vertical;
+  font-family: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+select.bi-form-input {
+  cursor: pointer;
+  appearance: auto;
+  padding-right: 28px;
+}
+
+.bi-form-checkbox-row {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bi-form-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.bi-form-checkbox-label input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--bi-cfg-accent);
+}
+
+.bi-file-input-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bi-file-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.bi-file-upload-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  margin-bottom: 2px;
+  background: var(--bi-cfg-muted);
+  border: 1px dashed var(--bi-cfg-border);
+  border-radius: 6px;
+}
+
+.bi-file-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--bi-cfg-accent);
+  background: var(--bi-cfg-surface);
+  color: var(--bi-cfg-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  font-family: inherit;
+}
+
+.bi-file-upload-btn:hover:not(:disabled) {
+  background: #f3f9fd;
+}
+
+.bi-file-upload-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.bi-file-upload-btn-ghost {
+  border-color: var(--bi-cfg-border) !important;
+  color: var(--bi-cfg-text-secondary) !important;
+  background: var(--bi-cfg-surface) !important;
+}
+
+.bi-file-upload-btn-ghost:hover:not(:disabled) {
+  background: #faf9f8 !important;
+  border-color: #c8c6c4 !important;
+  color: var(--bi-cfg-text) !important;
+}
+
+.bi-file-upload-hint {
+  font-size: 0.75rem;
+  color: var(--bi-cfg-text-secondary);
+  line-height: 1.45;
+  flex: 1;
+  min-width: 0;
+}
+
+.bi-config-modal-note {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--bi-cfg-muted);
+  border-radius: 6px;
+  border: 1px solid var(--bi-cfg-border);
+}
+
+.bi-config-modal-note-inner {
+  display: flex;
+  gap: 10px;
+  color: var(--bi-cfg-text-secondary);
+  font-size: 0.75rem;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.bi-config-modal-note-inner p {
+  margin: 0;
+}
+
+.bi-config-modal-note-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--bi-cfg-accent);
+}
+
+.bi-file-picked-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #dff6dd;
+  border: 1px solid #bad80a;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #107c10;
+}
+
+.bi-file-picked-icon {
+  flex-shrink: 0;
+  color: #107c10;
+}
+
+.bi-file-picked-name {
+  font-weight: 600;
+}
+
+.bi-file-picked-meta {
+  color: #605e5c;
+  font-size: 0.6875rem;
+}
+
+.bi-file-picked-path {
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  background: var(--bi-cfg-surface);
+  border-radius: 3px;
+  border: 1px solid #bad80a;
+  color: var(--bi-cfg-text);
+  word-break: break-all;
+}
+
+/* Dark theme: app root uses .dark-theme; keep .dark-mode for legacy */
+.dark-theme .bi-config-modal-overlay,
+.dark-mode .bi-config-modal-overlay {
+  --bi-cfg-surface: #252423;
+  --bi-cfg-muted: #1b1a19;
+  --bi-cfg-border: #3b3a39;
+  --bi-cfg-text: #f3f2f1;
+  --bi-cfg-text-secondary: #c8c6c4;
+  --bi-cfg-accent: #4cc2ff;
+  --bi-cfg-accent-hover: #6bcdff;
+  --bi-cfg-danger: #f1707b;
+}
+
+.dark-theme .bi-config-modal-overlay,
+.dark-mode .bi-config-modal-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.dark-theme .bi-config-modal-icon-wrapper,
+.dark-mode .bi-config-modal-icon-wrapper {
+  background: rgba(76, 194, 255, 0.15);
+}
+
+.dark-theme .bi-config-modal-content::-webkit-scrollbar-thumb,
+.dark-mode .bi-config-modal-content::-webkit-scrollbar-thumb {
+  background: #605e5c;
+}
+
+.dark-theme .bi-config-modal-content::-webkit-scrollbar-thumb:hover,
+.dark-mode .bi-config-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #797775;
+}
+
+.dark-theme .bi-btn-secondary:hover:not(:disabled),
+.dark-mode .bi-btn-secondary:hover:not(:disabled) {
+  background: #323130;
+  border-color: #797775;
+}
+
+.dark-theme .test-status-msg.success,
+.dark-mode .test-status-msg.success {
+  background: rgba(16, 124, 16, 0.2);
+  color: #92c353;
+  border-color: rgba(146, 195, 83, 0.45);
+}
+
+.dark-theme .test-status-msg.error,
+.dark-mode .test-status-msg.error {
+  background: rgba(164, 38, 44, 0.2);
+  color: #f1707b;
+  border-color: rgba(241, 112, 123, 0.45);
+}
+
+.dark-theme .bi-file-upload-btn:hover:not(:disabled),
+.dark-mode .bi-file-upload-btn:hover:not(:disabled) {
+  background: rgba(76, 194, 255, 0.12);
+}
+
+.dark-theme .bi-file-picked-summary,
+.dark-mode .bi-file-picked-summary {
+  background: rgba(16, 124, 16, 0.18);
+  border-color: rgba(146, 195, 83, 0.4);
+  color: #92c353;
+}
+
+.dark-theme .bi-file-picked-icon,
+.dark-mode .bi-file-picked-icon {
+  color: #92c353;
+}
+
+.dark-theme .bi-file-picked-path,
+.dark-mode .bi-file-picked-path {
+  background: #1b1a19;
+  border-color: rgba(146, 195, 83, 0.35);
+  color: #f3f2f1;
+}
+
+.dark-theme .bi-file-upload-btn-ghost:hover:not(:disabled),
+.dark-mode .bi-file-upload-btn-ghost:hover:not(:disabled) {
+  background: #323130 !important;
+}

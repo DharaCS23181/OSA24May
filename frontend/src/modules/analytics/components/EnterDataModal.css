@@ -1,0 +1,121 @@
+/* EnterDataModal.css – styles for the enhanced Enter Data modal body */
+
+/* Overall container */
+.edm-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 640px;
+  max-width: 960px;
+  padding: 4px 0 4px;
+}
+
+/* -- Toolbar --------------------------------------------------------- */
+.edm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0 2px;
+  flex-wrap: wrap;
+}
+
+/* Paste hint bar */
+.edm-paste-hint {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 7px;
+}
+.edm-paste-icon   { font-size: 15px; flex-shrink: 0; }
+.edm-paste-text   { font-size: 12px; color: #475569; }
+.edm-paste-success { font-size: 12px; color: #16a34a; font-weight: 600; }
+
+/* Generator */
+.edm-generator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.edm-gen-label {
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.edm-gen-input {
+  width: 52px;
+  padding: 4px 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  outline: none;
+  background: #fff;
+  color: #1e293b;
+}
+
+.edm-gen-input:focus {
+  border-color: #8c2546;
+  box-shadow: 0 0 0 2px rgba(140, 37, 70,0.2);
+}
+
+.edm-gen-sep {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+.edm-gen-btn {
+  padding: 5px 12px;
+  background: linear-gradient(135deg, #7a1e3a, #0ea5e9);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.edm-gen-btn:hover {
+  opacity: 0.88;
+}
+
+/* ── Info line ───────────────────────────────────────────────────────── */
+.edm-info {
+  margin-left: auto;
+  font-size: 11px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+.edm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+/* ── Dark-mode overrides ─────────────────────────────────────────────── */
+.dark-theme .edm-generator {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark-theme .edm-gen-input {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f1f5f9;
+}

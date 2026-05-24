@@ -1,0 +1,1072 @@
+.bi-canvas {
+    height: 100%;
+    padding: 24px;
+    background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-x: visible;
+    overflow-y: auto;
+    position: relative;
+}
+
+.bi-report-header-banner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 10px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 500px;
+    /* background: #ffffff; */
+    /* border: 1px solid #e2e8f0; */
+}
+
+.bi-report-header-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 1.3;
+    padding-bottom: 2px; /* prevent descenders like 'g' clipping with ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bi-report-header-title.is-placeholder {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.bi-report-header-title[role="button"] {
+    cursor: text;
+}
+
+.bi-report-header-input {
+    width: min(100%, 560px);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #0f172a;
+    background: #ffffff;
+    outline: none;
+}
+
+.bi-report-header-input:focus {
+    border-color: #8c2546;
+    box-shadow: 0 0 0 2px rgba(140, 37, 70, 0.15);
+}
+
+/* Visuals Workspace (Power BI free-form canvas) */
+.bi-visuals-grid {
+    flex: 1;
+    position: relative;
+    display: block;
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+    min-height: 900px;
+}
+
+@media (max-width: 1200px) {
+    .bi-visuals-grid {
+        min-height: 900px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bi-visuals-grid {
+        min-height: 900px;
+    }
+}
+
+.bi-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bi-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.bi-visual-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    cursor: grab;
+}
+
+/* Free-form canvas uses persisted pixel width/height; no grid spans */
+
+.bi-visual-card.dragging {
+    opacity: 0.92;
+    border: 1px solid #7a1e3a;
+    box-shadow: 0 12px 28px rgba(140, 37, 70, 0.25), 0 4px 10px rgba(0,0,0,0.08);
+    z-index: 1000 !important;
+    transition: none !important;
+    will-change: transform;
+    cursor: grabbing !important;
+}
+
+.bi-visual-card.drag-over-card {
+    border: 1px solid #7a1e3a;
+    background-color: #f1f5f9;
+}
+
+.bi-visual-card.selected {
+    border: 1px solid #7a1e3a;
+    box-shadow: 0 0 0 2px rgba(122, 30, 58, 0.2);
+}
+
+.bi-visual-header {
+    padding: 6px 10px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+    min-height: 30px;
+    box-sizing: border-box;
+}
+
+.bi-header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+}
+
+.bi-drag-handle {
+    color: #cbd5e1;
+    cursor: move;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.bi-visual-card:hover .bi-drag-handle {
+    color: #94a3b8;
+    background: #f8fafc;
+}
+
+.bi-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: auto;
+    align-self: flex-start;
+    margin-top: -2px;
+    overflow: visible;
+    /* Pull icons up to align with first line of title */
+}
+
+.bi-reset-chart-colors-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.9;
+    position: relative;
+    z-index: 10;
+    pointer-events: all;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.bi-visual-card:hover .bi-reset-chart-colors-btn {
+    opacity: 1;
+}
+
+.bi-reset-chart-colors-btn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+/* Expand to Full Mode button */
+.bi-expand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+    z-index: 10;
+    pointer-events: all;
+}
+
+.bi-expand-btn:hover {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+.bi-expand-btn:active {
+    background: #c7d2fe;
+    transform: scale(0.95);
+}
+
+.bi-size-selector {
+    display: flex;
+    background: #f1f5f9;
+    padding: 2px;
+    border-radius: 6px;
+    gap: 1px;
+}
+
+.bi-size-btn {
+    display: none;
+    /* Hide legacy buttons */
+}
+
+.bi-visual-card:hover .bi-expand-btn {
+    opacity: 1;
+    background: #fff;
+    border-color: #8c2546;
+    color: #8c2546;
+}
+
+.bi-expand-btn:hover {
+    background: #8c2546 !important;
+    color: #fff !important;
+    border-color: #8c2546 !important;
+    box-shadow: 0 4px 6px -1px rgba(140, 37, 70, 0.2);
+}
+
+.bi-visual-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: -0.1px;
+    white-space: normal;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    line-height: 1.25;
+}
+
+.bi-delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #fee2e2;
+    border-radius: 4px;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.8;
+    position: relative;
+    z-index: 10;
+    pointer-events: all;
+    flex-shrink: 0;
+}
+
+.bi-visual-card:hover .bi-delete-btn {
+    opacity: 1;
+}
+
+.bi-delete-btn:hover {
+    background: #ef4444 !important;
+    color: #fff !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+}
+
+.bi-delete-btn:active {
+    transform: scale(0.95);
+}
+
+/* Second click — confirm delete (text must stay visible on red hover) */
+.bi-delete-btn.bi-delete-confirming {
+    width: auto;
+    min-width: 72px;
+    height: 24px;
+    padding: 0 10px;
+    background: #fff !important;
+    border: 1.5px solid #ef4444 !important;
+    border-radius: 12px;
+    color: #b91c1c !important;
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
+}
+
+.bi-delete-btn.bi-delete-confirming .bi-delete-confirm-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+    color: #b91c1c;
+}
+
+.bi-delete-btn.bi-delete-confirming:hover {
+    background: #ef4444 !important;
+    border-color: #dc2626 !important;
+    color: #fff !important;
+}
+
+.bi-delete-btn.bi-delete-confirming:hover .bi-delete-confirm-text {
+    color: #fff;
+}
+
+.bi-add-report-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #dbeafe;
+    border-radius: 4px;
+    color: #8c2546;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.8;
+    position: relative;
+    z-index: 10;
+    pointer-events: all;
+    flex-shrink: 0;
+}
+
+.bi-visual-card:hover .bi-add-report-btn {
+    opacity: 1;
+}
+
+.bi-add-report-btn:hover {
+    background: #8c2546 !important;
+    color: #fff !important;
+    border-color: #8c2546 !important;
+    box-shadow: 0 4px 6px -1px rgba(140, 37, 70, 0.2);
+}
+
+.bi-add-report-btn:active {
+    transform: scale(0.95);
+}
+
+/* No grid-wide overrides in free-form canvas */
+
+.bi-empty-canvas {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    color: #94a3b8;
+}
+
+.bi-empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.bi-visual-placeholder,
+.bi-visual-content {
+    flex: 1;
+    background-color: #fff;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.bi-visual-content > .chart-wrapper--state,
+.bi-visual-content > .chart-wrapper--metric-card,
+.bi-visual-content > .chart-wrapper--kpi-card {
+    flex: 1;
+    min-height: 0;
+}
+
+.bi-chart-mock {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #94a3b8;
+    background-color: #fff;
+}
+
+/* Specific Placeholder Colors to feel BI-like */
+.violin-chart {
+    background: linear-gradient(135deg, #fff 0%, #f1faff 100%);
+}
+
+.treemap-chart {
+    background: linear-gradient(135deg, #fff 0%, #f0fff4 100%);
+}
+
+.sankey-chart {
+    background: linear-gradient(135deg, #fff 0%, #fffaf0 100%);
+}
+
+.waterfall-chart {
+    background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+}
+
+/* Focus Mode Overlay */
+.bi-focus-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vw;
+    animation: fadeInModal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bi-focus-content {
+    background-color: #fff;
+    width: 95%;
+    max-width: 1400px;
+    height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bi-focus-header {
+    padding: 8px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.bi-focus-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.bi-focus-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bi-focus-zoom-slot {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+}
+
+.bi-focus-zoom-slot .chart-zoom-toolbar {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    padding: 0;
+    gap: 4px;
+    backdrop-filter: none;
+}
+
+.bi-focus-stats {
+    display: flex;
+    gap: 20px;
+    padding-right: 24px;
+    border-right: 1px solid #f1f5f9;
+}
+
+.bi-focus-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bi-focus-stat-item label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bi-focus-stat-item span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.bi-focus-close {
+    background-color: #f1f5f9;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bi-focus-close:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+    transform: scale(1.02);
+}
+
+.bi-focus-body {
+    flex: 1;
+    padding: 6px 10px 10px;
+    min-height: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.bi-focus-body .chart-wrapper--compact {
+    min-height: 0;
+}
+
+/* Focus Mode KPI Summary (Now in Header) */
+.bi-focus-kpi-bar {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+    justify-content: center;
+}
+
+.bi-focus-kpi-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-align: center;
+}
+
+.bi-focus-kpi-label {
+    font-size: 10px;
+    font-weight: 400;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.bi-focus-kpi-value {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+
+/* KPI card layout lives in DynamicChart.css (.kpi-card-visual) */
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bi-visual-card {
+    animation: fadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+/* Staggered delay for cards */
+.bi-visual-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.bi-visual-card:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.bi-visual-card:nth-child(3) {
+    animation-delay: 0.25s;
+}
+
+.bi-visual-card:nth-child(4) {
+    animation-delay: 0.35s;
+}
+
+.bi-canvas.drag-over {
+    background-color: #f1f5f9;
+}
+
+.bi-canvas.dragging-active {
+    cursor: move !important;
+}
+
+.bi-canvas.dragging-active .bi-visual-card:not(.dragging) {
+    transition: all 0.2s ease;
+}
+
+.bi-drag-hint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    animation: fadeIn 0.15s ease-out;
+}
+
+.bi-drag-hint-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 50px;
+    border-radius: 16px;
+    border: 3px dashed #8c2546;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.bi-drag-hint-icon {
+    font-size: 40px;
+}
+
+.bi-drag-hint p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #8c2546;
+}
+
+/* Interactive Resize Handles (8-Point) */
+.bi-resize-handle {
+    position: absolute;
+    z-index: 100;
+    background: transparent;
+    transition: background 0.2s;
+}
+
+.bi-visual-card:hover .bi-resize-handle {
+    background: rgba(140, 37, 70, 0.05);
+}
+
+.bi-resize-handle:hover {
+    background: #8c2546 !important;
+}
+
+/* Corners */
+.bi-resize-top-left {
+    top: -4px;
+    left: -4px;
+    width: 12px;
+    height: 12px;
+    cursor: nwse-resize;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+}
+
+.bi-resize-top-right {
+    top: -4px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    cursor: nesw-resize;
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+.bi-resize-bottom-left {
+    bottom: -4px;
+    left: -4px;
+    width: 12px;
+    height: 12px;
+    cursor: nesw-resize;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+}
+
+.bi-resize-bottom-right {
+    bottom: -4px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    cursor: nwse-resize;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+.bi-resize-bottom-right::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #cbd5e1;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+/* Edges */
+.bi-resize-top {
+    top: -4px;
+    left: 12px;
+    right: 12px;
+    height: 8px;
+    cursor: ns-resize;
+}
+
+.bi-resize-bottom {
+    bottom: -4px;
+    left: 12px;
+    right: 12px;
+    height: 8px;
+    cursor: ns-resize;
+}
+
+.bi-resize-left {
+    left: -4px;
+    top: 12px;
+    bottom: 12px;
+    width: 8px;
+    cursor: ew-resize;
+}
+
+.bi-resize-right {
+    right: -4px;
+    top: 12px;
+    bottom: 12px;
+    width: 8px;
+    cursor: ew-resize;
+}
+
+.bi-visual-card:hover .bi-resize-top-left,
+.bi-visual-card:hover .bi-resize-top-right,
+.bi-visual-card:hover .bi-resize-bottom-left,
+.bi-visual-card:hover .bi-resize-bottom-right {
+    border-color: #cbd5e1;
+}
+
+.bi-visual-card.resizing {
+    border: 1px solid #7a1e3a !important;
+    z-index: 100 !important;
+    box-shadow: 0 10px 15px -3px rgba(140, 37, 70, 0.2);
+}
+
+/* When the cursor is over a card, temporarily bring it to the front.
+   When the cursor leaves, stacking order returns so it can sit behind others. */
+.bi-visual-card:hover {
+    z-index: 10;
+}
+
+.resizing-active * {
+    user-select: none !important;
+    pointer-events: none !important;
+}
+
+.resizing-active .bi-visual-card.resizing,
+.resizing-active .bi-visual-card.resizing * {
+    pointer-events: all !important;
+}
+
+/* Grid Cell Debug (Optional, but helps with Power BI precision) */
+.bi-canvas-grid-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+    background-size: 25px 28px;
+    /* Matches calculateSpan/calculateRowSpan logic */
+    opacity: 0.05;
+    z-index: 0;
+}
+
+/* Free-form canvas: no grid-based overrides */
+
+/* Subtle Text Box Styles */
+.bi-visual-card.bi-is-text {
+    border: 1px solid #000000;
+    background: transparent;
+    box-shadow: none !important;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: unset !important;
+}
+
+.bi-visual-card.bi-is-text:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    border-color: #000000;
+}
+
+.bi-visual-card.bi-is-text.selected {
+    border: 1px solid #7a1e3a !important;
+    box-shadow: 0 0 0 2px rgba(122, 30, 58, 0.2) !important;
+}
+
+.bi-visual-card.bi-is-text .bi-visual-content {
+    background: transparent;
+    padding: 8px !important;
+    min-height: unset !important;
+}
+
+.bi-visual-card.bi-is-text .bi-visual-header {
+    background: transparent;
+    border-bottom: none;
+    padding: 4px 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.bi-visual-card.bi-is-text:hover .bi-visual-header,
+.bi-visual-card.bi-is-text.selected .bi-visual-header {
+    opacity: 1;
+}
+
+/* ─── Power BI Page Tab Bar ─── */
+.bi-page-tabs-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    background: #f1f5f9;
+    border-top: 1px solid #e2e8f0;
+    padding: 0 12px 0 0;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.bi-page-tabs-list {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    gap: 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.bi-page-tabs-list::-webkit-scrollbar {
+    display: none;
+}
+
+.bi-page-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.bi-page-tab:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.bi-page-tab.active {
+    background: #fff;
+    color: #5e172c;
+    border-bottom: 2px solid #7a1e3a;
+    font-weight: 600;
+}
+
+.bi-page-tab-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bi-page-tab-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 10px;
+    padding: 2px 3px;
+    border-radius: 3px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.bi-page-tab:hover .bi-page-tab-close,
+.bi-page-tab.active .bi-page-tab-close {
+    opacity: 1;
+}
+
+.bi-page-tab-close:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.bi-page-add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin: 4px 4px;
+    background: none;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+}
+
+.bi-page-add-btn:hover {
+    background: #7a1e3a;
+    border-color: #7a1e3a;
+    color: #fff;
+}
+
+.bi-status-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    padding-left: 12px;
+    border-left: 1px solid #e2e8f0;
+}
+
+.bi-status-right .bi-status-item {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ─── Chart KPI Summary Bar (inside each visual card) ─── */
+.bi-visual-card .chart-kpi-row {
+    display: flex;
+    gap: 0;
+    margin: 0;
+    padding: 10px 16px;
+    background: #fafbfc;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    flex-shrink: 0;
+}
+
+.bi-visual-card .chart-kpi-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    padding: 0 12px;
+    border-right: 1px solid #eef0f2;
+}
+
+.bi-visual-card .chart-kpi-item:last-child {
+    border-right: none;
+}
+
+.bi-visual-card .chart-kpi-item:first-child {
+    padding-left: 0;
+}
+
+.bi-visual-card .chart-kpi-item .kpi-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 1;
+}
+
+.bi-visual-card .chart-kpi-item .kpi-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}

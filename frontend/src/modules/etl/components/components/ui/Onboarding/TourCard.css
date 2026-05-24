@@ -1,0 +1,178 @@
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.tour-card {
+  position: absolute;
+  z-index: 9999;
+  width: 320px;
+  background: var(--bg-surface);
+  backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 
+    var(--shadow-xl),
+    0 30px 60px -15px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .tour-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mission Header - Compact line at top */
+.tour-mission-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 4px;
+}
+
+.mission-progress-segments {
+  display: flex;
+  gap: 3px;
+  height: 3px;
+}
+
+.progress-seg {
+  flex: 1;
+  background: var(--bg-active);
+  border-radius: 0 0 2px 2px;
+}
+
+.progress-seg.active {
+  background: var(--accent);
+}
+
+.progress-seg.done {
+  background: var(--success);
+}
+
+.tour-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.tour-title-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, rgba(15, 82, 186, 0.08), rgba(59, 130, 246, 0.08));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tour-title-text {
+  flex: 1;
+}
+
+.mission-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.tour-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.tour-description {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+/* Pro Tip - Minimalist but distinct */
+.tour-pro-tip {
+  background: var(--bg-active);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.tip-content {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.tip-content strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tour-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tour-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tour-btn-skip {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.tour-btn-next {
+  background: var(--accent);
+  color: white;
+}
+
+.tour-btn-next:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.tour-hotkeys {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  text-align: center;
+}
+
+.tour-kbd {
+  background: var(--bg-active);
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+}

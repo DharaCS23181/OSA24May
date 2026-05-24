@@ -1,0 +1,401 @@
+/* Full-screen overlay with slide-in animation */
+.bi-file-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background-color: rgba(0, 0, 0, 0.0);
+    animation: overlayFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* The actual panel that slides in from the left */
+.bi-file-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 900px;
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    animation: slideInLeft 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    overflow: hidden;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0.6;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ─── Left Sidebar ─── */
+.bi-file-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e8e8e8;
+    padding: 0;
+}
+
+.bi-file-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 16px 16px 24px;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #323130;
+    transition: background 0.12s;
+}
+
+.bi-file-back:hover {
+    background-color: #f3f2f1;
+    color: #201f1e;
+}
+
+.bi-file-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bi-file-nav-divider {
+    height: 1px;
+    background-color: #edebe9;
+    margin: 10px 20px;
+}
+
+.bi-file-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #484644;
+    font-size: 14px;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+    transition: background 0.15s ease, color 0.15s ease;
+    border-radius: 0;
+}
+
+.bi-file-nav-item:hover {
+    background-color: #f3f2f1;
+    color: #201f1e;
+}
+
+.bi-file-nav-item.active {
+    background-color: #f0f5ff;
+    color: #7a1e3a;
+    font-weight: 600;
+}
+
+.bi-file-nav-item.disabled {
+    color: #a19f9d;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.bi-file-nav-label {
+    font-size: 14px;
+}
+
+.bi-file-sidebar-bottom {
+    border-top: 1px solid #edebe9;
+    padding-top: 8px;
+    padding-bottom: 12px;
+}
+
+.bi-file-nav-bottom {
+    padding: 10px 24px;
+    color: #605e5c;
+}
+
+/* ─── Main Content ─── */
+.bi-file-content {
+    flex: 1;
+    padding: 48px 56px;
+    overflow-y: auto;
+    background-color: #faf9f8;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+.bi-section-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.bi-section-chevron {
+    font-size: 16px;
+    color: #555;
+    line-height: 1;
+}
+
+.bi-file-section-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1e293b;
+    margin: 0;
+}
+
+.bi-file-section {
+    margin-bottom: 36px;
+}
+
+/* ─── New Cards ─── */
+.bi-new-cards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.bi-new-card {
+    width: 140px;
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bi-new-card:hover {
+    border-color: #7a1e3a;
+    background-color: #f0f5ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.bi-new-card-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-new-card-label {
+    font-size: 14px;
+    color: #323130;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* ─── Recommended / Tabs ─── */
+.bi-recommended-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.bi-rec-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    font-size: 14px;
+    color: #484644;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bi-rec-tab:hover {
+    background-color: #f3f2f1;
+}
+
+.bi-rec-tab.active {
+    background-color: #201f1e;
+    border-color: #201f1e;
+    color: #fff;
+}
+
+.bi-rec-tab.active:hover {
+    background-color: #323130;
+}
+
+.bi-rec-tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+    display: inline-block;
+}
+
+.bi-rec-tab-icon {
+    font-size: 16px;
+}
+
+.bi-rec-filter {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bi-rec-filter-input {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 5px 10px;
+    width: 160px;
+    color: #94a3b8;
+}
+
+.bi-rec-filter-input input {
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color: #1e293b;
+    background: none;
+    width: 140px;
+}
+
+.bi-rec-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.bi-rec-filter-btn:hover {
+    background-color: #f1f5f9;
+}
+
+/* ─── Empty State ─── */
+.bi-recommended-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 16px;
+}
+
+.bi-empty-folder {
+    opacity: 0.85;
+}
+
+.bi-empty-text {
+    font-size: 13px;
+    color: #94a3b8;
+    text-align: center;
+    margin: 0;
+}
+
+/* ─── Open Section ─── */
+.bi-open-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+}
+
+.bi-open-option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background-color: #fff;
+    border: 1px solid #edebe9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.bi-open-option:hover {
+    border-color: #c8c6c4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    background-color: #fcfcfc;
+}
+
+.bi-open-option-icon {
+    font-size: 24px;
+    width: 40px;
+    text-align: center;
+}
+
+.bi-open-option-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #201f1e;
+    margin-bottom: 2px;
+}
+
+.bi-open-option-sub {
+    font-size: 13px;
+    color: #605e5c;
+}
+
+/* ─── Delete Button ─── */
+.bi-file-delete-btn {
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #e11d48;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: auto;
+    z-index: 10;
+}
+
+.bi-file-delete-btn:hover {
+    background-color: #fecaca;
+    color: #be123c;
+}

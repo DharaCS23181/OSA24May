@@ -1,0 +1,29 @@
+/**
+ * Shared palette for Format → Chart Color swatches and default series colors.
+ */
+export const VIBRANT_PALETTE = [
+    '#6366F1',
+    '#10B981',
+    '#F59E0B',
+    '#EC4899',
+    '#06B6D4',
+    '#8B5CF6',
+    '#F97316',
+    '#14B8A6',
+    '#1e293b',
+    '#DC2626',
+    '#84CC16',
+    '#0EA5E9',
+    '#EAB308',
+    '#D946EF',
+    '#22C55E',
+    '#64748B',
+    '#F43F5E',
+    '#0891B2',
+    '#7C3AED',
+    '#EA580C',
+    '#0D9488',
+    '#BE185D',
+    '#4ADE80',
+    '#C026D3',
+];

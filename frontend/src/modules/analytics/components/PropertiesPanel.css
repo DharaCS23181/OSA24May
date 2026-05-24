@@ -1,0 +1,64 @@
+.properties-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.properties-empty {
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+.prop-section {
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 15px;
+}
+
+.prop-section h4 {
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.prop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.prop-item label {
+  display: block;
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.prop-item input, .prop-item select, .prop-section textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: #f9fafb;
+}
+
+.prop-item.full {
+  grid-column: span 2;
+  margin-top: 8px;
+}
+
+.prop-section textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.prop-item input:focus, .prop-item select:focus, .prop-section textarea:focus {
+  outline: 2px solid #8c2546;
+  border-color: transparent;
+}

@@ -1,0 +1,165 @@
+/* ═══════════════════════════════════════════
+   DataForge Dashboard Theme
+   Unified design system — Light + Dark modes
+   Font: Inter
+   ═══════════════════════════════════════════ */
+
+/* ── LIGHT THEME (default) — Pure white, bold dark borders ── */
+:root,
+[data-theme="light"] {
+/* ── ALL backgrounds: pure bright white ── */
+  --df-bg: #FFFFFF;
+  --df-bg-secondary: #FFFFFF;
+  --df-surface: #FFFFFF;
+  --df-panel: #FFFFFF;
+
+  /* ── Borders: feather-light, barely visible ── */
+  --df-border: rgba(0, 0, 0, 0.07);
+  --df-border-light: rgba(0, 0, 0, 0.04);
+
+  /* ── Typography ── */
+  --df-text: #111111;
+  --df-text-soft: #333333;
+  --df-text-muted: #555555;
+  --df-strong: #000000;
+
+  /* ── Accent — burgundy ── */
+  --df-accent: #7A1E3A;
+  --df-accent-alt: #5E152C;
+  --df-accent-soft: #FDF0F3;
+  --df-accent-medium: rgba(122, 30, 58, 0.08);
+  --df-icon-accent: #7A1E3A;
+  --df-text-accent: #7A1E3A;
+  --df-gradient: #7A1E3A;
+
+  /* ── Semantic ── */
+  --df-success: #15803d;
+  --df-success-soft: rgba(21, 128, 61, 0.08);
+  --df-info: #1d4ed8;
+  --df-info-soft: rgba(29, 78, 216, 0.08);
+  --df-danger: #b91c1c;
+  --df-danger-soft: rgba(185, 28, 28, 0.08);
+
+  /* ── Navbar / Sidebar ── */
+  --df-nav-bg: #FFFFFF;
+  --df-sidebar-bg: #FFFFFF;
+  --df-sidebar-hover: rgba(122, 30, 58, 0.05);
+  --df-sidebar-active: rgba(122, 30, 58, 0.08);
+
+  /* ── Inputs ── */
+  --df-input-bg: #FFFFFF;
+  --df-input-border: rgba(0, 0, 0, 0.12);
+
+  /* ── Cards ── */
+  --df-card-bg: #FFFFFF;
+  --df-card-border: rgba(0, 0, 0, 0.07);
+
+  /* ── Code ── */
+  --df-code-bg: #FFFFFF;
+  --df-code-border: rgba(0, 0, 0, 0.07);
+
+  /* ── Table ── */
+  --df-table-header-bg: #FFFFFF;
+  --df-table-hover: rgba(122, 30, 58, 0.04);
+  --df-table-border: rgba(0, 0, 0, 0.05);
+}
+
+/* ── DARK THEME — Out of the world ── */
+[data-theme="dark"] {
+  --df-bg: #0C0C10;
+  --df-bg-secondary: #0C0C10;
+  --df-surface: #14141A;
+  --df-panel: #1A1A24;
+  --df-border: rgba(255, 255, 255, 0.09);
+  --df-border-light: rgba(255, 255, 255, 0.05);
+
+  /* ── Max contrast text — absolutely readable ── */
+  --df-text: #FFFFFF;
+  --df-text-soft: #E2E2E2;
+  --df-text-muted: #A0A0A0;
+  --df-strong: #FFFFFF;
+
+  /* ── Accent — burgundy (Match profile precisely, NO PINK) ── */
+  --df-accent: #7A1E3A;
+  --df-accent-alt: #5E152C;
+  --df-accent-soft: rgba(122, 30, 58, 0.35);
+  --df-accent-medium: rgba(122, 30, 58, 0.50);
+  --df-icon-accent: #B8385D;
+  --df-text-accent: #B8385D;
+  --df-gradient: #7A1E3A;
+
+  /* ── Semantic ── */
+  --df-success: #4ADE80;
+  --df-success-soft: rgba(74, 222, 128, 0.12);
+  --df-info: #60A5FA;
+  --df-info-soft: rgba(96, 165, 250, 0.12);
+  --df-danger: #FB7185;
+  --df-danger-soft: rgba(251, 113, 133, 0.12);
+
+  /* ── Sidebar / Nav ── */
+  --df-nav-bg: #0C0C10;
+  --df-sidebar-bg: #0C0C10;
+  --df-sidebar-hover: rgba(122, 30, 58, 0.25);
+  --df-sidebar-active: rgba(122, 30, 58, 0.45);
+
+  /* ── Inputs ── */
+  --df-input-bg: #16161E;
+  --df-input-border: rgba(255, 255, 255, 0.12);
+
+  /* ── Cards ── */
+  --df-card-bg: #14141A;
+  --df-card-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Code ── */
+  --df-code-bg: #111118;
+  --df-code-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Table ── */
+  --df-table-header-bg: #14141A;
+  --df-table-hover: rgba(226, 121, 154, 0.06);
+  --df-table-border: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Shape & Motion ── */
+:root {
+  --df-radius-sm: 8px;
+  --df-radius-md: 10px;
+  --df-radius-lg: 12px;
+  --df-radius-xl: 16px;
+  --df-radius-full: 9999px;
+  --df-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --df-shadow-sm: 0 3px 6px rgba(0, 0, 0, 0.05);
+  --df-shadow-md: 0 8px 16px rgba(0, 0, 0, 0.06);
+  --df-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
+  --df-shadow-glow: 0 4px 20px rgba(122, 30, 58, 0.15);
+  --df-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --df-duration: 0.3s;
+  --df-duration-slow: 0.5s;
+}
+
+/* ── Custom Professional Scrollbar ── */
+.df-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.df-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.df-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(122, 30, 58, 0.15);
+  border-radius: 2px;
+}
+
+.df-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(122, 30, 58, 0.4);
+}
+
+[data-theme="dark"] .df-scrollbar::-webkit-scrollbar-thumb {
+  background: #404040;
+}
+
+[data-theme="dark"] .df-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #505050;
+}

@@ -1,0 +1,251 @@
+.signin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.signin-modal-container {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-modal-header {
+    padding: 2rem 2rem 1rem;
+    text-align: center;
+}
+
+.signin-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.signin-modal-close:hover {
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.signin-modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.signin-modal-subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.signin-modal-body {
+    padding: 1rem 2rem 2rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-input {
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: #7a1e3a;
+    box-shadow: 0 0 0 3px rgba(122, 30, 58, 0.1);
+}
+
+.form-input.error {
+    border-color: #ff4d4f;
+}
+
+.error-message {
+    font-size: 0.8rem;
+    color: #ff4d4f;
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+    padding: 0;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #7a1e3a 0%, #a42c8c 100%);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(122, 30, 58, 0.3);
+}
+
+.btn-submit:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.toggle-link {
+    color: #7a1e3a;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.3rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}
+
+/* Dark Mode Support */
+.dark-theme .signin-modal-container {
+    background: #1e1e1e;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dark-theme .signin-modal-title {
+    color: #ffffff;
+}
+
+.dark-theme .signin-modal-subtitle {
+    color: #aaaaaa;
+}
+
+.dark-theme .signin-modal-close {
+    color: #aaaaaa;
+}
+
+.dark-theme .signin-modal-close:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .form-label {
+    color: #dddddd;
+}
+
+.dark-theme .form-input {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #ffffff;
+}
+
+.dark-theme .form-input:focus {
+    border-color: #9d3890;
+}
+
+.dark-theme .auth-toggle {
+    color: #aaaaaa;
+}
+
+.dark-theme .toggle-link {
+    color: #d46cc8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

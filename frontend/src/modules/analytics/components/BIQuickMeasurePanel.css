@@ -1,0 +1,453 @@
+/* BIQuickMeasurePanel CSS - Power BI Aesthetic */
+
+.bi-quick-measure-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f3f3f3;
+    border-left: 1px solid #d1d1d1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    animation: slideInRight 0.2s ease-out;
+    position: relative;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.bi-quick-measure-panel .bi-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    height: 32px;
+    background-color: #fff;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.bi-quick-measure-panel .bi-panel-title {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.bi-quick-measure-panel .bi-panel-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+.bi-quick-measure-panel .bi-panel-close:hover {
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+.bi-quick-measure-panel .bi-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Copilot Banner */
+.bi-qm-copilot-banner {
+    background: linear-gradient(90deg, #f0f7ff 0%, #ffffff 100%);
+    border: 1px solid #cce4ff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+}
+
+.bi-qm-copilot-icon {
+    font-size: 14px;
+    color: #7c3aed;
+}
+
+.bi-qm-copilot-text {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #333;
+    padding-right: 12px;
+}
+
+.bi-qm-copilot-text strong {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.bi-qm-copilot-text a {
+    color: #7a1e3a;
+    text-decoration: none;
+}
+
+.bi-qm-banner-close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #999;
+}
+
+.bi-qm-section-label {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: -4px;
+}
+
+/* Form Elements */
+.bi-qm-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bi-qm-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #666;
+}
+
+.bi-qm-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.bi-qm-select {
+    width: 100%;
+    height: 24px;
+    padding: 2px 8px;
+    padding-right: 24px;
+    font-size: 11px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #fff;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+}
+
+.bi-qm-select:focus {
+    border-color: #7a1e3a;
+}
+
+.bi-qm-select-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+/* Dropzone Style Inputs (Power BI Style) */
+.bi-qm-dropzone {
+    height: 24px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.bi-qm-dropzone:hover {
+    border-color: #999;
+}
+
+.bi-qm-dropzone-text {
+    font-size: 10px;
+    color: #999;
+    font-style: italic;
+}
+
+.bi-qm-dropzone-text.active {
+    color: #333;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.bi-qm-dropzone-icon {
+    color: #7a1e3a;
+}
+
+.bi-qm-info-icon {
+    color: #999;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+/* Footer Section */
+.bi-panel-footer {
+    padding: 12px;
+    background-color: #fff;
+    border-top: 1px solid #e1e1e1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.bi-qm-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.bi-qm-btn-primary {
+    background-color: #7a1e3a;
+    color: #fff;
+    border: 1px solid #7a1e3a;
+}
+
+.bi-qm-btn-primary:hover {
+    background-color: #5e172c;
+}
+
+.bi-qm-btn-primary:disabled {
+    background-color: #f3f3f3;
+    border-color: #d1d1d1;
+    color: #a1a1a1;
+    cursor: not-allowed;
+}
+
+.bi-qm-btn-secondary {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.bi-qm-btn-secondary:hover {
+    background-color: #f3f3f3;
+}
+
+/* Dynamic fields container */
+.bi-qm-dynamic-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+/* Collapsed state */
+.bi-quick-measure-panel.bi-qm-collapsed {
+    width: 100%;
+    min-width: 0;
+    background-color: #f3f3f3;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    border-left: 1px solid #d1d1d1;
+    height: 100%;
+}
+
+.bi-qm-collapsed-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.bi-qm-collapsed-expand {
+    background-color: #ffffff;
+    border: none;
+    color: #000000;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 16px;
+    z-index: 10;
+}
+
+.bi-qm-collapsed-expand:hover {
+    background-color: #e1e1e1;
+}
+
+.bi-qm-vertical-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+    letter-spacing: 0;
+}
+
+.bi-qm-collapsed-icon {
+    color: #666;
+    opacity: 0.8;
+}
+
+.bi-qm-minimize-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    padding: 2px;
+}
+
+.bi-qm-minimize-btn:hover {
+    background-color: #f3f3f3;
+}
+
+.bi-panel-title-group {
+    display: flex;
+    align-items: center;
+}
+
+/* Flyout Styles */
+.bi-qm-flyout {
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    width: 280px;
+    bottom: 60px;
+    background-color: #fff;
+    border: 1px solid #d1d1d1;
+    box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+}
+
+.bi-qm-flyout-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.bi-qm-flyout-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.bi-qm-flyout-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi-qm-flyout-search {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.bi-qm-search-icon {
+    color: #999;
+}
+
+.bi-qm-flyout-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color: #333;
+    background: transparent;
+}
+
+.bi-qm-flyout-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+}
+
+.bi-qm-table-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.bi-qm-db-icon {
+    color: #64748b;
+}
+
+.bi-qm-fields-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.bi-qm-field-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 24px;
+    cursor: pointer;
+}
+
+.bi-qm-field-item:hover {
+    background-color: #f0f7ff;
+}
+
+.bi-qm-field-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.bi-qm-field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+}
+
+.bi-qm-field-name {
+    font-size: 11px;
+    color: #333;
+}
+
+.bi-qm-no-results {
+    padding: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    font-style: italic;
+}

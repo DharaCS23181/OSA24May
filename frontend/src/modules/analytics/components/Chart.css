@@ -1,0 +1,21 @@
+/**
+ * Chart Component Styles
+ * Canvas-based chart rendering
+ */
+
+.chart-canvas {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  background-color: #faf3ff;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive canvas */
+@media (max-width: 768px) {
+  .chart-canvas {
+    max-width: 100%;
+  }
+}

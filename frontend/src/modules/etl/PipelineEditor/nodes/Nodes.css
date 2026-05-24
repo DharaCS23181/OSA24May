@@ -1,0 +1,214 @@
+/* ── Node Color Palette ─────────────────────────────────────────────
+   Extract  : Blue   (#3b82f6)
+   Transform: Amber  (#f59e0b)
+   Pandas   : Violet (#8b5cf6)
+   Load     : Green  (#10b981)
+──────────────────────────────────────────────────────────────────── */
+
+.custom-node {
+  padding: 0;
+  border-radius: 14px;
+  background: var(--bg-surface, #1e2130);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  min-width: 140px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+/* Per-type color accent strip */
+.custom-node.node-extract  { border-top: 3px solid #3b82f6; }
+.custom-node.node-transform { border-top: 3px solid #f59e0b; }
+.custom-node.node-pandas   { border-top: 3px solid #8b5cf6; }
+.custom-node.node-load     { border-top: 3px solid #10b981; }
+
+.custom-node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 2px var(--node-accent, rgba(255,255,255,0.15));
+}
+
+/* Hover glow colors per type */
+.custom-node.node-extract:hover  { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 2px rgba(59,130,246,0.4); }
+.custom-node.node-transform:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 2px rgba(245,158,11,0.4); }
+.custom-node.node-pandas:hover   { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 2px rgba(139,92,246,0.4); }
+.custom-node.node-load:hover     { box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 2px rgba(16,185,129,0.4); }
+
+/* ── Node Header ── */
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: linear-gradient(135deg, var(--bg-hover) 0%, var(--bg-active) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px 12px 0 0;
+}
+
+.node-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Icon backgrounds per type */
+.node-extract  .node-icon { background: rgba(59,130,246,0.18); color: #60a5fa; }
+.node-transform .node-icon { background: rgba(245,158,11,0.18); color: #fbbf24; }
+.node-pandas   .node-icon { background: rgba(139,92,246,0.18); color: #a78bfa; }
+.node-load     .node-icon { background: rgba(16,185,129,0.18); color: #34d399; }
+
+.node-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.node-preview-btn {
+  flex-shrink: 0;
+  color: var(--text-muted, #64748b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.node-preview-btn:hover,
+.node-preview-btn.active {
+  color: var(--accent, #6366f1);
+  background: rgba(99,102,241,0.15);
+}
+
+/* ── Node Body ── */
+.node-body {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  border-radius: 0 0 12px 12px;
+}
+
+/* ── Node Comment ── */
+.node-wrapper-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node-comment-external {
+  background: var(--bg-hover, rgba(255, 255, 255, 0.02));
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.node-comment-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  resize: none;
+  outline: none;
+  min-height: 40px;
+}
+
+.node-comment-input:focus {
+  color: var(--text-primary);
+}
+
+/* ── Status Dot ── */
+.node-status {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2.5px solid var(--bg-surface, #1e2130);
+  z-index: 10;
+}
+
+.status-running {
+  background: #3b82f6;
+  animation: node-pulse 1.4s ease-in-out infinite;
+  box-shadow: 0 0 8px #3b82f6;
+}
+.status-success {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+.status-failed {
+  background: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+}
+
+@keyframes node-pulse {
+  0%   { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
+  50%  { opacity: 0.9; transform: scale(1.15); box-shadow: 0 0 0 6px rgba(59,130,246,0); }
+  100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+/* ── Handles ── */
+.custom-node .react-flow__handle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong, rgba(255,255,255,0.2)) !important;
+  background: var(--bg-surface, #1e2130) !important;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.4);
+  transition: all 0.2s ease;
+  cursor: crosshair;
+}
+
+.node-extract  .react-flow__handle { border-color: #3b82f6 !important; }
+.node-transform .react-flow__handle { border-color: #f59e0b !important; }
+.node-pandas   .react-flow__handle { border-color: #8b5cf6 !important; }
+.node-load     .react-flow__handle { border-color: #10b981 !important; }
+
+.custom-node .react-flow__handle:hover {
+  transform: scale(1.6);
+  box-shadow: 0 0 8px currentColor;
+}
+.node-extract  .react-flow__handle:hover { background: #3b82f6 !important; }
+.node-transform .react-flow__handle:hover { background: #f59e0b !important; }
+.node-pandas   .react-flow__handle:hover { background: #8b5cf6 !important; }
+.node-load     .react-flow__handle:hover { background: #10b981 !important; }
+
+/* ── Data-flow edge animation ───────────────────────────────────────────
+   ReactFlow renders animated edges with class .react-flow__edge-path
+   and an svg stroke-dashoffset animation. We enhance its color here.
+──────────────────────────────────────────────────────────────────────── */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8 4;
+  animation: flowDash 0.8s linear infinite;
+  stroke: var(--accent, #6366f1);
+  stroke-width: 2.5px;
+  filter: drop-shadow(0 0 3px var(--accent, #6366f1));
+}
+
+/* When executing, edges glow more intensely */
+.react-flow__edge.animated.executing .react-flow__edge-path {
+  stroke: #10b981;
+  filter: drop-shadow(0 0 6px #10b981);
+  stroke-width: 3px;
+}
+
+@keyframes flowDash {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}

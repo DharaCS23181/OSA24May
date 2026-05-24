@@ -1,0 +1,376 @@
+/* ═══════════════════════════════════════════════════════════
+   AppShell — Premium Sidebar Layout
+   Collapsed: icon-only, perfectly centered, active = glowing
+   Expanded: icon + label, smooth spring animation
+   ═══════════════════════════════════════════════════════════ */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* ══ Body: Sidebar + Content ══ */
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ══ Sidebar ══ */
+.sidebar {
+  height: 100%;
+  width: 218px;
+  background: var(--bg-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  flex-shrink: 0;
+  position: relative;
+  border-right: none;
+  box-shadow: 1px 0 0 var(--border);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background var(--dur-normal) var(--ease-out);
+}
+
+.sidebar.collapsed {
+  width: 58px;
+}
+
+/* ── Nav Container ── */
+.sidebar-nav {
+  flex: 1;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: visible;
+  position: relative;
+}
+
+/* Scrollable only when expanded */
+.sidebar:not(.collapsed) .sidebar-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ── Nav Groups ── */
+.nav-group {
+  margin-bottom: 8px;
+}
+
+.nav-group-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 18px 16px 8px;
+  opacity: 0.8;
+}
+
+.nav-group-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 12px 16px;
+}
+
+/* ── Collapse Button at Bottom ── */
+.sidebar-footer {
+  padding: 10px 6px;
+  border-top: none;
+  flex-shrink: 0;
+}
+
+.sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-collapse-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+/* ── Nav Item ── */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 11px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  width: 100%;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  outline: none;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  overflow: hidden;
+}
+
+.nav-item:focus { outline: none; }
+.nav-item:focus-visible { outline: none; }
+
+/* Collapsed: center the icon */
+.nav-item.nav-collapsed {
+  padding: 10px;
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.nav-item.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Active Background Pill (Framer Motion layoutId) ── */
+.nav-active-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent-subtle);
+  z-index: -1;
+}
+
+/* ── Left accent bar for active item ── */
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+}
+
+/* Collapsed: center the accent bar */
+.nav-item.nav-collapsed.active::before {
+  height: 26px;
+}
+
+/* ── Icon Wrap ── */
+.nav-icon-wrap {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+  /* When collapsed this is the only visual element visible */
+}
+
+.nav-icon-wrap.active {
+  color: var(--accent);
+}
+
+.nav-label {
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: inherit;
+}
+
+/* Tooltips are now native browser title attributes */
+
+/* ══ Main Content ══ */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-base);
+}
+
+.main-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.main-content.no-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+.main-body.no-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — ≤ 768px
+   Strategy:
+   • Sidebar hidden off-canvas (slide-in overlay on tap)
+   • Bottom tab navigation bar replaces sidebar
+   • Header collapses to logo + hamburger + theme toggle
+   ════════════════════════════════════════════════════════ */
+
+/* -- Mobile overlay backdrop -- */
+.mobile-overlay {
+  display: none;
+}
+
+/* -- Mobile bottom tab bar -- */
+.mobile-tab-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* ── Root shell fills viewport ── */
+  .app-shell {
+    height: 100dvh; /* dynamic viewport height for mobile browsers */
+    overflow: hidden;
+  }
+
+  /* ── Body takes remaining space above bottom nav ── */
+  .app-body {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* ── Sidebar: off-canvas slide-in (controlled by .mobile-open) ── */
+  .sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    width: 240px !important;   /* override framer-motion inline width */
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+    box-shadow: var(--shadow-2xl);
+    border-right: 1px solid var(--border-strong);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* ── Backdrop dim when sidebar is open ── */
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 199;
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .mobile-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── Main content fills full width ── */
+  .main-content {
+    width: 100%;
+    padding-bottom: 60px; /* room for bottom tab bar */
+  }
+
+  /* ── Bottom tab bar ── */
+  .mobile-tab-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 58px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-strong);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    padding: 0 4px;
+    /* Safe area for iPhone home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex: 1;
+    height: 100%;
+    padding: 6px 4px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: color 0.18s, background 0.18s;
+    min-width: 44px; /* WCAG touch target */
+    font-family: var(--font-sans);
+  }
+
+  .mobile-tab-item.active {
+    color: var(--accent);
+  }
+
+  .mobile-tab-item span {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Collapse button hidden on mobile ── */
+  .sidebar-collapse-btn {
+    display: none;
+  }
+
+  /* Expanded nav items in mobile slide-in sidebar */
+  .nav-item.nav-collapsed {
+    justify-content: flex-start;
+    padding: 9px 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small: shrink header padding */
+  .main-body {
+    padding-bottom: 4px;
+  }
+}

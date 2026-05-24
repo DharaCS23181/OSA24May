@@ -1,0 +1,10 @@
+-- Database Initialization Script
+-- This file is intentionally empty.
+--
+-- User-facing schemas are NOT created at startup.
+-- They are created on-demand when a user creates a catalog via the UI.
+-- Each catalog auto-generates medallion schemas (bronze, silver, gold)
+-- as real PostgreSQL schemas namespaced like: {catalog}_bronze, {catalog}_silver, {catalog}_gold.
+--
+-- The public schema is reserved for internal metadata tables only:
+--   catalogs, logical_schemas, volumes, volume_files, table_tags, etc.

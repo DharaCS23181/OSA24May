@@ -1,0 +1,188 @@
+/* DynamicForm — Enterprise-Grade High-Density Layout */
+
+.dynamic-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 16px;
+  padding: 8px 4px 4px;
+}
+
+/* Full-width fields (JSON, Files, Checkboxes) */
+.df-full {
+  grid-column: 1 / -1;
+}
+
+/* Field wrapper */
+.df-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Typography ── */
+.df-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.df-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.df-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.df-action-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.df-action-btn svg {
+  opacity: 0.6;
+}
+
+.req-dot {
+  width: 5px;
+  height: 5px;
+  background: #ef4444;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.df-hint {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+
+/* ── Inputs & Selects ── */
+.ui-input,
+.ui-select {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.ui-input:hover,
+.ui-select:hover {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.ui-input:focus,
+.ui-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+  background: #ffffff;
+}
+
+[data-theme='dark'] .ui-input:focus,
+[data-theme='dark'] .ui-select:focus {
+  background: var(--bg-elevated);
+}
+
+/* ── Textarea (JSON / Code) ── */
+textarea.ui-input {
+  height: auto;
+  min-height: 60px;
+  max-height: 180px;
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  background: #f8fafc;
+}
+
+[data-theme='dark'] textarea.ui-input {
+  background: #0f172a;
+}
+
+/* ── Checkbox (Premium Toggle Style) ── */
+.df-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.df-checkbox-wrap:hover {
+  background: var(--bg-active);
+  border-color: var(--accent);
+}
+
+.df-checkbox-wrap span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.df-checkbox-wrap input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+/* ── Password Eyes ── */
+.df-password-wrap {
+  position: relative;
+}
+
+.df-password-wrap .ui-input {
+  padding-right: 40px;
+}
+
+.df-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  padding: 4px;
+}
+
+/* ── Animation ── */
+.dynamic-form {
+  animation: formSlideUp 0.3s ease-out;
+}
+
+@keyframes formSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

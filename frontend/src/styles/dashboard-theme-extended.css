@@ -1,0 +1,219 @@
+/* ── Table ── */
+.df-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.df-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.df-table thead th {
+  background: var(--df-table-header-bg);
+  color: var(--df-text-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--df-border);
+  white-space: nowrap;
+}
+
+.df-table thead th:first-child {
+  border-top-left-radius: var(--df-radius-md);
+}
+
+.df-table thead th:last-child {
+  border-top-right-radius: var(--df-radius-md);
+}
+
+.df-table tbody tr {
+  transition: background var(--df-duration) var(--df-ease);
+}
+
+.df-table tbody tr:hover {
+  background: var(--df-table-hover);
+}
+
+.df-table tbody td {
+  padding: 8px 16px;
+  color: var(--df-text);
+  border-bottom: 1px solid var(--df-table-border);
+  white-space: nowrap;
+}
+
+/* ── Code Block ── */
+.df-code {
+  background: var(--df-code-bg);
+  border: 1px solid var(--df-code-border);
+  border-radius: var(--df-radius-md);
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.8125rem;
+  color: var(--df-text);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+/* ── Label ── */
+.df-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--df-text);
+  margin-bottom: 6px;
+  letter-spacing: -0.1px;
+}
+
+/* ── Checkbox ── */
+.df-checkbox {
+  accent-color: var(--df-accent);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* ── Duration Bar ── */
+.df-duration-bar {
+  width: 64px;
+  height: 6px;
+  background: var(--df-accent-soft);
+  border-radius: var(--df-radius-full);
+  overflow: hidden;
+}
+
+.df-duration-bar-fill {
+  height: 100%;
+  background: var(--df-gradient);
+  border-radius: var(--df-radius-full);
+  transition: width var(--df-duration-slow) var(--df-ease);
+}
+
+/* ── Upload Zone ── */
+.df-upload-zone {
+  border: 2px dashed var(--df-border);
+  border-radius: var(--df-radius-lg);
+  padding: 40px 24px;
+  text-align: center;
+  transition: all var(--df-duration) var(--df-ease);
+  cursor: pointer;
+}
+
+.df-upload-zone:hover {
+  border-color: var(--df-accent);
+  background: var(--df-accent-soft);
+}
+
+/* ── Empty State ── */
+.df-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.df-empty-state-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--df-accent-soft);
+  border-radius: var(--df-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--df-accent);
+}
+
+.df-empty-state h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--df-strong);
+  margin-bottom: 4px;
+}
+
+.df-empty-state p {
+  font-size: 0.875rem;
+  color: var(--df-text-muted);
+  max-width: 280px;
+}
+
+/* ── Theme Toggle ── */
+.df-theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.4s var(--df-ease);
+  outline: none;
+  padding: 0;
+}
+
+.df-theme-toggle[data-active="false"] {
+  background: #E5E2DD;
+}
+
+.df-theme-toggle[data-active="true"] {
+  background: #333333;
+}
+
+.df-theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: all 0.4s var(--df-ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.df-theme-toggle[data-active="false"] .df-theme-toggle-knob {
+  left: 3px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.df-theme-toggle[data-active="true"] .df-theme-toggle-knob {
+  left: 27px;
+  background: #1A1A1A;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* ── Scrollbar ── */
+.df-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.df-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.df-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+}
+
+.df-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.4);
+}
+
+/* ── Global theme transition ── */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
+}

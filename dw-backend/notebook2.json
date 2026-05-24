@@ -1,0 +1,22 @@
+{
+  "_id": "69e46381e69d04e00ec9c90f",
+  "name": "Notebook 2",
+  "type": "notebook",
+  "parentId": null,
+  "isFavorite": false,
+  "isDeleted": false,
+  "isShared": false,
+  "language": "python",
+  "cells": [
+    {
+      "language": "python",
+      "content": "# Task 2: Aggregation\n\nprint(\"Starting Task 2: Aggregation\")\n\ndf = spark.sql(\"\"\"\nSELECT category, COUNT(*) as total_products, AVG(price) as avg_price\nFROM warehouse.dim_products\nGROUP BY category\n\"\"\")\n\ndf.show()\n\n# Save as temp view for next task\ndf.createOrReplaceTempView(\"category_summary\")\n\nprint(\"Task 2 completed \u2705\")",
+      "output": {
+        "text": "Starting Task 2: Aggregation\n+-----------+--------------+----------+\n|   category|total_products| avg_price|\n+-----------+--------------+----------+\n|       Home|           217|486.176912|\n|     Sports|           228|502.090702|\n|Electronics|           188|518.799574|\n|   Clothing|           196|525.292347|\n|      Books|           171|527.057836|\n+-----------+--------------+----------+\n\nTask 2 completed \u2705",
+        "execution_time": 2.079,
+        "row_count": 0
+      }
+    }
+  ],
+  "engine": "spark"
+}

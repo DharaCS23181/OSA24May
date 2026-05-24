@@ -1,0 +1,113 @@
+.bi-about-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30000;
+}
+
+.bi-about-modal {
+  background: white;
+  width: 500px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bi-about-header {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bi-about-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+}
+
+.bi-about-close:hover {
+  background: #f0f0f0;
+  color: #d11;
+}
+
+.bi-about-body {
+  padding: 0 40px 30px 40px;
+  text-align: center;
+}
+
+.bi-about-logo {
+  margin-bottom: 24px;
+}
+
+.bi-about-logo-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.bi-about-logo h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.bi-about-details {
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 16px;
+  border-radius: 4px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.bi-about-details p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.bi-about-desc {
+  text-align: left;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.bi-about-footer {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e1e1e1;
+  background: #fafafa;
+}
+
+.bi-about-footer span {
+  font-size: 11px;
+  color: #888;
+}
+
+.bi-about-footer .bi-btn-primary {
+  padding: 6px 20px;
+  background: #7a1e3a;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.bi-about-footer .bi-btn-primary:hover {
+  background: #5a1150;
+}

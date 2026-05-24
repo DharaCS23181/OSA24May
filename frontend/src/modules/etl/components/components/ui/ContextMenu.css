@@ -1,0 +1,68 @@
+.context-menu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 200px;
+  background: var(--bg-surface); /* More solid background */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+  text-align: left;
+  line-height: 1;
+}
+
+.context-menu-item:hover {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.context-menu-item.danger:hover {
+  background: var(--danger-subtle);
+  color: var(--danger);
+}
+
+.context-menu-icon {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.context-menu-shortcut {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  font-family: var(--font-mono);
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 6px;
+}
+
+[data-theme='dark'] .context-menu {
+  background: #1e293b; /* Solid Slate for dark mode */
+  border-color: #334155;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}

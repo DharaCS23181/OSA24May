@@ -1,0 +1,338 @@
+/* Smart Visualization Modal - Premium Glassmorphism */
+
+.smart-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 1, 20, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.smart-modal-container {
+    background: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark-theme .smart-modal-container {
+    background: #1a1a1a;
+    border: 1px solid rgba(157, 187, 242, 0.1);
+    color: #fff;
+}
+
+.smart-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #999;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.smart-modal-close:hover {
+    color: #7a1e3a;
+}
+
+.smart-modal-layout {
+    display: flex;
+    min-height: 500px;
+}
+
+/* Sidebar - Upload Section */
+.smart-modal-sidebar {
+    width: 350px;
+    background: rgba(122, 30, 58, 0.03);
+    padding: 2.5rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.dark-theme .smart-modal-sidebar {
+    background: rgba(157, 187, 242, 0.02);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #7a1e3a 0%, #9dbbf2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.dark-theme .modal-description {
+    color: #aaa;
+}
+
+.upload-zone {
+    border: 2px dashed rgba(122, 30, 58, 0.2);
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+}
+
+.dark-theme .upload-zone {
+    background: #252525;
+    border-color: rgba(157, 187, 242, 0.2);
+}
+
+.upload-zone:hover {
+    border-color: #7a1e3a;
+    background: rgba(122, 30, 58, 0.01);
+    transform: translateY(-2px);
+}
+
+.upload-zone.has-file {
+    border-style: solid;
+    border-color: #7a1e3a;
+    background: rgba(122, 30, 58, 0.05);
+}
+
+.upload-zone svg {
+    color: #7a1e3a;
+}
+
+.upload-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.upload-text strong {
+    color: #333;
+}
+
+.dark-theme .upload-text strong {
+    color: #eee;
+}
+
+.upload-text span {
+    color: #999;
+}
+
+.filename {
+    font-weight: 600;
+    color: #7a1e3a !important;
+    word-break: break-all;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.file-info-pill {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #f8f0f8;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    color: #7a1e3a;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.dark-theme .file-info-pill {
+    background: rgba(157, 187, 242, 0.1);
+    color: #9dbbf2;
+}
+
+/* Main Content - Chat Section */
+.smart-modal-main {
+    flex: 1;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.chat-welcome {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.sparkle-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #7a1e3a 0%, #9dbbf2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    box-shadow: 0 10px 20px rgba(122, 30, 58, 0.2);
+}
+
+.chat-welcome h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.chat-welcome p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.dark-theme .chat-welcome p {
+    color: #aaa;
+}
+
+.smart-query-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.query-input-wrapper {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.dark-theme .query-input-wrapper {
+    background: #252525;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.query-input-wrapper:focus-within {
+    border-color: #7a1e3a;
+    box-shadow: 0 8px 20px rgba(122, 30, 58, 0.1);
+}
+
+.smart-query-form textarea {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-family: inherit;
+    font-size: 1.05rem;
+    padding: 0.5rem;
+    outline: none;
+    color: #333;
+}
+
+.dark-theme .smart-query-form textarea {
+    color: #eee;
+}
+
+.btn-generate {
+    width: 100%;
+    background: #7a1e3a;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-generate:hover:not(:disabled) {
+    background: #5a1150;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(90, 17, 80, 0.2);
+}
+
+.btn-generate:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.query-error {
+    color: #ff4d4f;
+    background: rgba(255, 77, 79, 0.05);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border-left: 3px solid #ff4d4f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 850px) {
+    .smart-modal-layout {
+        flex-direction: column;
+    }
+
+    .smart-modal-sidebar {
+        width: 100%;
+        padding: 2rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+}

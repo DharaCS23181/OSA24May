@@ -1,0 +1,358 @@
+.sql-dataset-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 13000;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.sql-dataset-modal {
+  display: flex;
+  flex-direction: column;
+  width: min(1180px, 98vw);
+  max-height: 92vh;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  padding: 18px 20px 16px;
+}
+
+.sql-dataset-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.sql-dataset-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.sql-dataset-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+.sql-dataset-close:hover {
+  color: #374151;
+}
+
+.sql-dataset-lead {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 12px;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+.sql-dataset-lead code {
+  font-size: 12px;
+  background: #f3f4f6;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.sql-dataset-top-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.sql-dataset-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+}
+
+.sql-dataset-field span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.sql-dataset-field--editor {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sql-dataset-input,
+.sql-dataset-textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.sql-dataset-textarea {
+  flex: 1;
+  min-height: 200px;
+  resize: none;
+  line-height: 1.45;
+  background: #fafafa;
+}
+
+.sql-dataset-textarea:focus {
+  outline: none;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #fff;
+}
+
+.sql-dataset-error {
+  padding: 10px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+/* Two-column: SQL | Preview — grows between header and footer; preview scrolls inside */
+.sql-dataset-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.sql-dataset-split-left {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  min-width: 0;
+  min-height: 0;
+  background: linear-gradient(180deg, #fafbfc 0%, #f4f6f9 100%);
+  border-right: 1px solid #e2e8f0;
+}
+
+.sql-dataset-split-right {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: #fff;
+}
+
+.sql-dataset-footer {
+  flex-shrink: 0;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.sql-dataset-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sql-dataset-footer .sql-dataset-actions {
+  width: 100%;
+}
+
+.sql-dataset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.sql-dataset-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sql-dataset-btn-secondary {
+  background: #fff;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+.sql-dataset-btn-secondary:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.sql-dataset-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+
+.sql-dataset-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.sql-dataset-btn-danger {
+  background: #fff;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.sql-dataset-btn-clear {
+  margin-left: auto;
+}
+
+.sql-dataset-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.sql-dataset-preview-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sql-dataset-preview-meta {
+  font-size: 12px;
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
+}
+
+.sql-dataset-preview-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sql-dataset-preview-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px 16px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.sql-dataset-preview-empty-hint {
+  font-weight: 600;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.sql-dataset-preview-empty-sub {
+  font-size: 12px;
+  max-width: 220px;
+  line-height: 1.4;
+}
+
+.sql-dataset-preview-table-wrap {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.sql-dataset-preview-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sql-dataset-preview-table th,
+.sql-dataset-preview-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sql-dataset-preview-table th {
+  position: sticky;
+  top: 0;
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #334155;
+  z-index: 1;
+  box-shadow: 0 1px 0 #e2e8f0;
+}
+
+.sql-dataset-preview-table tr:hover td {
+  background: #fafafa;
+}
+
+@media (max-width: 900px) {
+  .sql-dataset-modal {
+    width: min(100%, 100vw - 24px);
+    max-height: 94vh;
+  }
+
+  .sql-dataset-top-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .sql-dataset-split {
+    grid-template-columns: 1fr;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .sql-dataset-split-left {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    max-height: 38vh;
+    min-height: 0;
+  }
+
+  .sql-dataset-split-right {
+    min-height: 180px;
+    max-height: 35vh;
+  }
+
+  .sql-dataset-textarea {
+    min-height: 160px;
+  }
+
+  .sql-dataset-btn-clear {
+    margin-left: 0;
+  }
+}

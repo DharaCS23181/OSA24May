@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════════
+   Status Badge — Icon-Based with Glow Effects
+   ═══════════════════════════════════════════════════════════ */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0px 3px;
+  border-radius: var(--radius-full);
+  font-family: 'Poppins', var(--font-sans, sans-serif);
+  font-size: 0.3rem; /* Made even smaller */
+  font-weight: 100 !important; /* Made even lighter */
+  text-transform: capitalize !important;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  line-height: 1.1;
+}
+
+.status-icon {
+  flex-shrink: 0;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 1.5s linear infinite;
+}
+
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success ── */
+.badge-success {
+  background: rgba(5, 150, 105, 0.12);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.28);
+}
+
+/* ── Danger ── */
+.badge-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.28);
+}
+
+/* ── Warning ── */
+.badge-warning {
+  background: rgba(217, 119, 6, 0.1);
+  color: #d97706;
+  border-color: rgba(217, 119, 6, 0.28);
+}
+
+/* ── Info / Running ── */
+.badge-info {
+  background: rgba(109, 40, 217, 0.09);
+  color: #6D28D9;
+  border-color: rgba(109, 40, 217, 0.22);
+  box-shadow: 0 0 8px rgba(109, 40, 217, 0.12);
+}
+
+/* ── Neutral ── */
+.badge-neutral {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border-color: rgba(100, 116, 139, 0.22);
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .badge-success { color: #34D399; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.3); }
+[data-theme="dark"] .badge-danger { color: #f87171; background: rgba(248, 113, 113, 0.12); border-color: rgba(248, 113, 113, 0.3); }
+[data-theme="dark"] .badge-warning { color: #fbbf24; background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); }
+[data-theme="dark"] .badge-info { color: #A78BFA; background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.3); box-shadow: 0 0 12px rgba(139, 127, 255, 0.2); }

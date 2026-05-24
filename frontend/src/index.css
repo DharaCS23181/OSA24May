@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('https://cdn.jsdelivr.net/gh/morteza-fsh/Nohemi@master/fonts/Nohemi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('https://cdn.jsdelivr.net/gh/morteza-fsh/Nohemi@master/fonts/Nohemi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('https://cdn.jsdelivr.net/gh/morteza-fsh/Nohemi@master/fonts/Nohemi-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@theme {
+  --color-off-white: #FFFFFF;
+  --color-light-gray: #E5E5E5;
+  --color-dark-gray: #333333;
+  --color-black: #000000;
+  --font-nohemi: 'Nohemi', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  color: var(--color-dark-gray);
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide scrollbars but allow scrolling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Remove all boldness from the website */
+* {
+  font-weight: 400 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 400 !important;
+}

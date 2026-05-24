@@ -1,0 +1,454 @@
+.sql-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+    align-items: flex-start;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Main Panel */
+.sql-main-panel {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    flex: 1;
+}
+
+.sql-form-tabs {
+    display: flex;
+    background: #f8fafc;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1.25rem;
+    border: none;
+    background: none;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.tab-btn:hover {
+    background: rgba(0, 0, 0, 0.02);
+    color: #7a1e3a;
+}
+
+.tab-btn.active {
+    color: #7a1e3a;
+    background: white;
+    position: relative;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #7a1e3a, #c084fc);
+}
+
+.sql-form-content {
+    padding: 2.5rem;
+}
+
+/* Form Styles - Professional Minimalist Refinement */
+.sql-connect-container {
+    max-width: 520px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.sql-connect-container .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+}
+
+.sql-connect-container .span-2 {
+    grid-column: span 2;
+}
+
+.sql-connect-container .form-group {
+    text-align: left;
+}
+
+.sql-connect-container .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.sql-connect-container .form-group input {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid #f1f5f9;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    background: #f8fafc;
+    color: #334155;
+    text-align: left;
+}
+
+.sql-connect-container .form-group input:focus {
+    border-color: #7a1e3a;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(122, 30, 58, 0.05);
+}
+
+.sql-connect-container .btn-connect {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #7a1e3a, #c084fc);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.sql-connect-container .btn-connect:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(122, 30, 58, 0.2);
+    filter: brightness(1.05);
+}
+
+/* Original Base Styles (Preserved for other parts of the app) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.span-2 {
+    grid-column: span 2;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: -0.65rem 1.1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #7a1e3a;
+    box-shadow: 0 0 0 4px rgba(122, 30, 58, 0.1);
+}
+
+.btn-connect {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #7a1e3a, #c084fc);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-connect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(122, 30, 58, 0.25);
+    filter: brightness(1.1);
+}
+
+/* Sidebar Styles */
+.sql-sidebar {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: sticky;
+    top: 2rem;
+}
+
+.side-section-head h3 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.connection-list-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+}
+
+.connection-list-v2::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    bottom: 0;
+    width: 1px;
+    background: #f1f5f9;
+}
+
+.connection-item-v2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+}
+
+.connection-item-v2:hover {
+    background: #fdf4ff;
+    transform: translateX(4px);
+}
+
+.conn-bullet {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 2px solid #7a1e3a;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.connection-item-v2:hover .conn-bullet {
+    background: #7a1e3a;
+    box-shadow: 0 0 8px rgba(122, 30, 58, 0.3);
+}
+
+.conn-info-v2 {
+    flex: 1;
+    min-width: 0;
+}
+
+.conn-name-v2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.conn-meta-v2 {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: block;
+}
+
+.btn-conn-select-v2 {
+    padding: 0.4rem 0.75rem;
+    background: transparent;
+    border: 1.5px solid #7a1e3a;
+    color: #7a1e3a;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.connection-item-v2:hover .btn-conn-select-v2 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.btn-conn-select-v2:hover {
+    background: #7a1e3a;
+    color: white;
+}
+
+.sql-pro-tip {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #f1f5f9;
+}
+
+.sql-pro-tip h5 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #7a1e3a;
+}
+
+.sql-pro-tip p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.empty-connections-v2 {
+    text-align: center;
+    padding: 2rem 0;
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+/* Error Message */
+.sql-error-msg {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    border-left: 4px solid #dc2626;
+    font-weight: 500;
+}
+
+/* Upload Zone */
+.sql-upload-zone {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.sql-upload-zone input[type="file"] {
+    display: none;
+}
+
+.upload-ui {
+    border: 2px dashed #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    background: #fafafa;
+}
+
+.upload-ui:hover {
+    border-color: #7a1e3a;
+    background: #fdf4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(122, 30, 58, 0.05);
+}
+
+.upload-icon {
+    font-size: 2rem;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+}
+
+.upload-ui p {
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.upload-ui small {
+    color: #64748b;
+    font-size: 0.8rem;
+    display: block;
+}
+
+/* Dark Mode Support */
+.dark-theme .sql-main-panel {
+    background: #1e1e2d;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .sql-form-tabs {
+    background: #161625;
+}
+
+.dark-theme .tab-btn.active {
+    background: #1e1e2d;
+}
+
+.dark-theme .sql-sidebar {
+    background: #1e1e2d;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .form-group input {
+    background: #161625;
+    border-color: #2d2d3f;
+    color: white;
+}
+
+.dark-theme .connection-item-v2:hover {
+    background: rgba(122, 30, 58, 0.1);
+}
+
+.dark-theme .conn-name-v2 {
+    color: #f1f5f9;
+}
+
+.dark-theme .sql-pro-tip {
+    background: #161625;
+    border-color: #2d2d3f;
+}
+
+.dark-theme .upload-ui {
+    border-color: #2d2d3f;
+}
+
+.dark-theme .upload-ui p {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sql-form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sql-sidebar {
+        position: static;
+    }
+}

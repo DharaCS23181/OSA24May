@@ -1,0 +1,218 @@
+.bi-right-panel {
+    border-left: 1px solid #e5e7eb;
+}
+
+.bi-viz-section {
+    border-bottom: 2px solid #e5e7eb;
+    background-color: #fff;
+}
+
+.bi-viz-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    padding: 8px;
+    background-color: #f8fafc;
+}
+
+.bi-viz-icon-wrapper {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bi-viz-icon-wrapper:hover {
+    background-color: #eff6ff;
+    border-color: #8c2546;
+    color: #7a1e3a;
+    z-index: 1;
+}
+
+.bi-viz-dropzones {
+    padding: 12px;
+    background-color: #fff;
+}
+
+.bi-dropzone {
+    margin-bottom: 8px;
+}
+
+.bi-dropzone-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.bi-dropzone-area {
+    min-height: 28px;
+    background-color: #f1f5f9;
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 10px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+}
+
+/* Fields Section */
+.bi-fields-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.bi-fields-search {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    color: #64748b;
+}
+
+.bi-fields-search input {
+    border: none;
+    background: transparent;
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+}
+
+.bi-fields-content {
+    background-color: #fff;
+}
+
+.bi-field-tree-node {
+    font-size: 12px;
+}
+
+.bi-table-header {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 6px;
+    cursor: pointer;
+    color: #334155;
+    transition: background-color 0.2s;
+}
+
+.bi-table-header:hover {
+    background-color: #f8fafc;
+}
+
+.bi-table-icon {
+    color: #64748b;
+}
+
+.bi-table-name {
+    font-weight: 500;
+}
+
+.bi-table-fields {
+    padding-left: 28px;
+}
+
+.bi-field-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: #475569;
+}
+
+.bi-field-item input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+/* Drill-through */
+.bi-drill-section {
+    padding: 12px;
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.bi-drill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.bi-drill-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bi-drill-label {
+    font-size: 10px;
+    color: #475569;
+}
+
+.bi-switch {
+    width: 24px;
+    height: 12px;
+    background-color: #cbd5e1;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+
+.bi-switch::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+
+/* ── Measure Items ── */
+.bi-measure-icon {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7c3aed;
+    font-style: normal;
+}
+
+.bi-measure-item {
+    color: #3730a3;
+}
+
+.bi-measure-item:hover {
+    background-color: #f5f3ff;
+    border-radius: 3px;
+}
+
+.bi-measure-field-icon {
+    font-size: 12px;
+    font-weight: 700;
+    color: #7c3aed;
+    min-width: 14px;
+    text-align: center;
+}
+
+.bi-field-item-empty {
+    font-size: 11px;
+    color: #94a3b8;
+    padding: 4px 0;
+    font-style: italic;
+}

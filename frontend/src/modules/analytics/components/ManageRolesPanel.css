@@ -1,0 +1,531 @@
+/* ManageRolesPanel.css */
+
+/* ── Overlay ──────────────────────────────────────────────────────────────── */
+.mrp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 12100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  animation: mrp-fade-in 0.2s ease;
+}
+
+@keyframes mrp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Panel shell ─────────────────────────────────────────────────────────── */
+.mrp-panel {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow:
+    0 25px 50px -12px rgba(15, 23, 42, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  width: min(100%, 1000px);
+  max-width: calc(100vw - 32px);
+  height: min(90vh, 700px);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: mrp-slide-up 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes mrp-slide-up {
+  from { transform: translateY(14px) scale(0.985); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.mrp-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  flex-shrink: 0;
+}
+
+.mrp-header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #7c3aed 0%, #8b5cf6 100%);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.mrp-header-text h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin: 0;
+}
+
+.mrp-header-text p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+.mrp-close-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+}
+.mrp-close-btn:hover { background: #f3f4f6; color: #374151; }
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.mrp-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+.mrp-sidebar {
+  width: 252px;
+  flex-shrink: 0;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+}
+
+.mrp-sidebar-header {
+  padding: 14px 16px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mrp-roles-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.mrp-role-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 11px;
+  margin: 0 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.mrp-role-item:hover { background: #f5f3ff; }
+.mrp-role-item.active {
+  background: #ede9fe;
+  border-left-color: #7c3aed;
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.12);
+}
+
+.mrp-role-item-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e9d5ff, #ddd6fe);
+  border: 1px solid #e9d5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #6d28d9;
+}
+
+.mrp-role-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mrp-role-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: #ede9fe;
+  color: #7c3aed;
+  border-radius: 20px;
+  padding: 1px 7px;
+}
+
+.mrp-role-del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #d1d5db;
+  padding: 3px;
+  border-radius: 4px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+}
+.mrp-role-item:hover .mrp-role-del-btn { opacity: 1; }
+.mrp-role-del-btn:hover { color: #ef4444; }
+
+.mrp-add-role-btn {
+  margin: 12px;
+  padding: 9px;
+  border: 2px dashed #c4b5fd;
+  border-radius: 8px;
+  background: none;
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.mrp-add-role-btn:hover { background: #f5f3ff; border-color: #7c3aed; }
+
+/* ── Editor ──────────────────────────────────────────────────────────────── */
+.mrp-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mrp-editor-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  color: #9ca3af;
+}
+.mrp-editor-empty svg { opacity: 0.3; }
+.mrp-editor-empty p { font-size: 14px; }
+
+.mrp-editor-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 22px 24px 20px;
+  background: #ffffff;
+}
+
+/* ── Role meta fields ────────────────────────────────────────────────────── */
+.mrp-field-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.mrp-field-row-stack {
+  margin-bottom: 20px;
+}
+
+.mrp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mrp-field-grow {
+  flex: 1.35;
+}
+
+.mrp-field-compact {
+  flex: 0 0 200px;
+  max-width: 220px;
+}
+
+.mrp-field-full {
+  flex: 1;
+}
+
+.mrp-sidebar-empty {
+  padding: 20px 14px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.mrp-field label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #6b7280;
+}
+
+.mrp-field input,
+.mrp-field textarea,
+.mrp-field select {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: #1f2937;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  font-family: inherit;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+.mrp-field textarea {
+  min-height: 72px;
+  resize: vertical;
+  line-height: 1.45;
+}
+.mrp-field select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 32px;
+}
+.mrp-field input:focus,
+.mrp-field textarea:focus,
+.mrp-field select:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Section title ───────────────────────────────────────────────────────── */
+.mrp-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin: 8px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mrp-section-title svg {
+  color: #7c3aed;
+  flex-shrink: 0;
+}
+.mrp-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #e5e7eb, transparent);
+}
+
+/* ── Rules ───────────────────────────────────────────────────────────────── */
+.mrp-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mrp-rule-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9f9fb;
+  border: 1.5px solid #e8e8f0;
+  border-radius: 9px;
+  padding: 10px 12px;
+  transition: border-color 0.15s;
+}
+.mrp-rule-row:hover { border-color: #c4b5fd; }
+.mrp-rule-row.error { border-color: #fca5a5; background: #fff5f5; }
+
+.mrp-connector-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #dbeafe;
+  color: #7a1e3a;
+  white-space: nowrap;
+}
+.mrp-connector-badge.or {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.mrp-rule-select,
+.mrp-rule-input {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 7px;
+  padding: 6px 9px;
+  font-size: 12.5px;
+  color: #1f2937;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.mrp-rule-select:focus,
+.mrp-rule-input:focus { border-color: #7c3aed; }
+
+.mrp-rule-select { cursor: pointer; }
+
+.mrp-rule-col   { flex: 2; min-width: 0; }
+.mrp-rule-op    { flex: 1.2; min-width: 90px; }
+.mrp-rule-val   { flex: 2; min-width: 0; }
+.mrp-rule-logic { flex: 0 0 72px; }
+
+.mrp-rule-del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #d1d5db;
+  padding: 4px;
+  border-radius: 5px;
+  display: flex;
+  transition: color 0.15s, background 0.15s;
+}
+.mrp-rule-del-btn:hover { color: #ef4444; background: #fee2e2; }
+
+.mrp-rule-error {
+  font-size: 11px;
+  color: #ef4444;
+  margin-top: 2px;
+}
+
+.mrp-add-rule-btn {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: 1.5px dashed #c4b5fd;
+  border-radius: 8px;
+  background: none;
+  color: #7c3aed;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
+}
+.mrp-add-rule-btn:hover { background: #f5f3ff; }
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.mrp-editor-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+.mrp-save-btn {
+  padding: 10px 24px;
+  background: linear-gradient(145deg, #7c3aed 0%, #8b5cf6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+  transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+  order: 2;
+}
+.mrp-save-btn:hover:not(:disabled) {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+.mrp-save-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.mrp-cancel-btn {
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  order: 1;
+}
+.mrp-cancel-btn:hover {
+  border-color: #d1d5db;
+  color: #111827;
+  background: #f9fafb;
+}
+
+.mrp-status-msg {
+  font-size: 12.5px;
+  width: 100%;
+  text-align: right;
+  order: 3;
+  flex-basis: 100%;
+  margin-top: 2px;
+}
+
+@media (max-width: 720px) {
+  .mrp-panel {
+    height: calc(100vh - 32px);
+    max-height: none;
+  }
+  .mrp-body {
+    flex-direction: column;
+  }
+  .mrp-sidebar {
+    width: 100%;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .mrp-field-row {
+    flex-direction: column;
+  }
+  .mrp-field-compact {
+    flex: 1;
+    max-width: none;
+  }
+}
+.mrp-status-msg.success { color: #16a34a; }
+.mrp-status-msg.error   { color: #dc2626; }
+
+/* ── Loading/spinner ─────────────────────────────────────────────────────── */
+.mrp-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

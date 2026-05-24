@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════
+   Card — Premium Glassmorphism · Neural Observatory Theme
+   ═══════════════════════════════════════════════════════════ */
+
+.ui-card {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: none;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ui-card.glass {
+  background: var(--bg-surface-glass, var(--bg-surface));
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--ghost-border, transparent);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ui-card.glass:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-subtle);
+  box-shadow: var(--shadow-md), var(--accent-glow);
+}
+
+/* Light theme: clean white glass card, no visible border */
+[data-theme='light'] .ui-card.glass {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+/* ═══ Hoverable — Ambient Glow (No Box Feel) ═══ */
+.ui-card.hoverable {
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ui-card.hoverable:hover {
+  background: var(--bg-hover);
+  box-shadow: 0 0 28px var(--accent-subtle);
+}
+
+[data-theme='light'] .ui-card.hoverable:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 24px rgba(109, 40, 217, 0.08);
+}
+
+[data-theme='dark'] .ui-card.hoverable:hover {
+  background: rgba(32, 38, 44, 0.7);
+  box-shadow: 0 0 32px rgba(139, 127, 255, 0.12);
+}
+
+/* ═══ Plain glass card without .glass class ═══ */
+.ui-card:not(.glass):not(.hoverable) {
+  border-radius: var(--radius-xl);
+}
+
+/* ═══ Card Header ═══ */
+.card-header {
+  padding: 12px 18px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: none;
+  position: relative;
+  z-index: 1;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-subtle);
+  border-radius: var(--radius-md);
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.ui-card.hoverable:hover .card-icon {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.card-title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-title-group h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.card-subtitle {
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ═══ Card Body ═══ */
+.card-body {
+  padding: 12px 18px 16px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ Animated Gradient Border (kept for template cards) ═══ */
+.ui-card.gradient-border {
+  border: none;
+  padding: 1px;
+  background: conic-gradient(from var(--gradient-angle, 0deg), var(--accent), var(--accent-hover), var(--accent-secondary), var(--accent));
+  animation: rotateGradient 4s linear infinite;
+  border-radius: var(--radius-xl);
+}
+
+.card-gradient-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from var(--gradient-angle, 0deg),
+    rgba(109, 40, 217, 0.25),
+    rgba(124, 58, 237, 0.15),
+    rgba(139, 127, 255, 0.15),
+    rgba(109, 40, 217, 0.25));
+  animation: rotateGradient 4s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ui-card.hoverable:hover .card-gradient-ring {
+  opacity: 1;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateGradient {
+  to { --gradient-angle: 360deg; }
+}

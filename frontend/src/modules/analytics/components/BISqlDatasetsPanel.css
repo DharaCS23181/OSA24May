@@ -1,0 +1,356 @@
+.bi-model-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.bi-sql-datasets-panel {
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
+  border-right: 1px solid #e2e8f0;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.bi-sql-datasets-panel--collapsed {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  border-right: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+
+.bi-sql-datasets-panel-expand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #475569;
+}
+
+.bi-sql-datasets-panel-expand:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.bi-sql-datasets-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.bi-sql-datasets-panel-header span {
+  flex: 1;
+}
+
+.bi-sql-datasets-panel-tabs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.bi-sql-datasets-panel-tab {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bi-sql-datasets-panel-tab.active {
+  border-color: #94a3b8;
+  background: #eef2ff;
+  color: #1e293b;
+}
+
+.bi-sql-datasets-panel-collapse {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bi-sql-datasets-panel-collapse:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.bi-sql-datasets-panel-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  min-height: 0;
+}
+
+.bi-model-catalog-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.bi-model-catalog-search--tree {
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0 10px;
+  background: #fff;
+}
+
+.bi-model-catalog-search input {
+  width: 100%;
+  height: 36px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 12px;
+  outline: none;
+}
+
+.bi-model-catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bi-panel-catalog-tree {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 8px;
+}
+
+.bi-panel-catalog-node {
+  width: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.bi-panel-catalog-node--level1 {
+  padding-left: 18px;
+  color: #475569;
+}
+
+.bi-panel-catalog-table-list {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bi-panel-catalog-table-item {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: #334155;
+  text-align: left;
+  font-size: 13px;
+}
+
+.bi-panel-catalog-table-item:hover {
+  color: #0f172a;
+}
+
+.bi-model-catalog-item {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bi-model-catalog-item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.bi-model-catalog-item-name {
+  font-size: 13px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.bi-model-catalog-item-meta {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.bi-sql-datasets-panel-empty {
+  font-size: 12px;
+  color: #64748b;
+  margin: 8px 4px;
+  line-height: 1.4;
+}
+
+.bi-sql-datasets-item {
+  position: relative;
+  padding: 10px 10px 8px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.bi-sql-datasets-item:hover {
+  border-color: #cbd5e1;
+}
+
+.bi-sql-datasets-item--active {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.25);
+  background: #eef2ff;
+}
+
+.bi-sql-datasets-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+  padding-right: 72px;
+  word-break: break-word;
+}
+
+.bi-sql-datasets-item-snippet {
+  font-size: 11px;
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.35;
+  max-height: 3.2em;
+  overflow: hidden;
+}
+
+.bi-sql-datasets-item-meta {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+.bi-sql-datasets-apply-row {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.bi-sql-datasets-apply-btn {
+  width: 48px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #6366f1;
+  background: #eef2ff;
+  color: #4338ca;
+  cursor: pointer;
+}
+
+.bi-sql-datasets-apply-btn:hover:not(:disabled) {
+  background: #e0e7ff;
+}
+
+.bi-sql-datasets-apply-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bi-sql-datasets-apply-btn--applied:disabled {
+  opacity: 1;
+  width: 48px;
+  cursor: default;
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+  color: #3730a3;
+}
+
+.bi-sql-datasets-item-actions {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 2px;
+}
+
+.bi-sql-datasets-icon-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bi-sql-datasets-icon-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.bi-sql-datasets-icon-btn--danger:hover:not(:disabled) {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.bi-sql-datasets-icon-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bi-sql-datasets-rename-input {
+  width: 100%;
+  font-size: 13px;
+  padding: 4px 6px;
+  border: 1px solid #6366f1;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.bi-model-layout > .bi-model-view {
+  flex: 1;
+  min-width: 0;
+}

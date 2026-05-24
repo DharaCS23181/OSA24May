@@ -1,0 +1,85 @@
+.report-page {
+  background-color: white;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #111;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Dimensions for A4 at 96 DPI */
+.report-page.a4.portrait {
+  width: 794px;
+  height: 1123px;
+}
+
+.report-page.a4.landscape {
+  width: 1123px;
+  height: 794px;
+}
+
+/* Inner container to hold headers/footers/content */
+.report-page-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header and Footer regions */
+.report-page-header {
+  height: 60px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  z-index: 10;
+}
+
+.report-page-footer {
+  height: 40px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: #6b7280;
+  border-top: 1px solid transparent;
+  z-index: 10;
+}
+
+/* Main content area where elements are placed */
+.report-page-content {
+  flex: 1;
+  position: relative; /* All elements inside will be absolute */
+  padding: 20px 40px;
+  z-index: 5;
+}
+
+/* Grid lines for design mode - only visible if parent has .design-mode */
+.design-mode .report-page-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Page number indicator */
+.page-number-indicator {
+  font-weight: 500;
+}
+
+@media print {
+  .report-page {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+  }
+}

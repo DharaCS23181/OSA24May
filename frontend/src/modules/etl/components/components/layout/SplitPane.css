@@ -1,0 +1,69 @@
+.split-pane {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent; /* Changed from solid color to let base grid show */
+}
+
+.split-pane.dragging {
+  cursor: col-resize;
+  user-select: none;
+}
+
+.pane-left {
+  height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
+  /* Make the main canvas truly transparent to see background grid */
+  background: transparent; 
+}
+
+.pane-right {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Give the right panel a heavy glass blur so it floats over the grid */
+  background: var(--bg-surface-glass);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  z-index: 50;
+}
+
+.resizer {
+  width: 8px; /* wider grab area */
+  background-color: transparent;
+  cursor: col-resize;
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color var(--transition-normal);
+  transform: translateX(-50%); /* Center over line */
+}
+
+.resizer:hover,
+.split-pane.dragging .resizer {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.resizer-handle {
+  width: 2px;
+  height: 48px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.resizer:hover .resizer-handle,
+.split-pane.dragging .resizer-handle {
+  background-color: var(--accent-primary);
+  width: 4px;
+  height: 64px;
+  box-shadow: var(--accent-glow);
+}
