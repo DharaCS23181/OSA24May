@@ -14,7 +14,7 @@ start "ETL Backend :8111" cmd /k "cd /d d:\Projects\OSA\OSA24May\ETL-backend && 
 
 REM ── Analytics Backend (port 8010) ─────────────────────────────────────────
 echo [3/4] Starting Analytics Backend on port 8010...
-start "Analytics Backend :8010" cmd /k "cd /d d:\Projects\OSA\OSA24May\Analytics-backend && python -m uvicorn main:app --host 127.0.0.1 --port 8010 --reload"
+start "Analytics Backend :8010" cmd /k "cd /d d:\Projects\OSA\OSA24May\Analytics-backend && venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8010 --reload"
 
 REM ── Frontend (port 5173) ──────────────────────────────────────────────────
 echo [4/4] Starting Frontend on port 5173...
