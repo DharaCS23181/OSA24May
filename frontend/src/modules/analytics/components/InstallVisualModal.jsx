@@ -118,7 +118,7 @@ const InstallVisualModal = ({ isOpen, onClose, mode = 'appsource', onAddVisual }
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('/api/visuals/marketplace');
+            const response = await fetch('/analytics/visuals/marketplace');
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
             setMarketplaceVisuals(data);
@@ -140,7 +140,7 @@ const InstallVisualModal = ({ isOpen, onClose, mode = 'appsource', onAddVisual }
             if (onAddVisual) onAddVisual(visualComponent.id);
             onClose();
             // Best-effort backend registration
-            fetch('/api/visuals/installed', {
+            fetch('/analytics/visuals/installed', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(visualMeta),

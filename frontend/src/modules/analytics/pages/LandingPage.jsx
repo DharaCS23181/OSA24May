@@ -127,7 +127,7 @@ function LandingPage({ userId, userName, isDarkMode, toggleTheme, onLogin, onLog
     if (userId) formData.append('user_id', userId);
 
     try {
-      const res = await fetch('/api/files/upload', {
+      const res = await fetch('/analytics/files/upload', {
         method: 'POST',
         body: formData
       });
@@ -469,7 +469,7 @@ function LandingPage({ userId, userName, isDarkMode, toggleTheme, onLogin, onLog
                     const formData = new FormData();
                     formData.append('query', q);
                     if (connectionId) formData.append('connection_id', connectionId);
-                    const res = await fetch('/api/sql/visualize', { method: 'POST', body: formData });
+                    const res = await fetch('/analytics/sql/visualize', { method: 'POST', body: formData });
                     if (res.ok) {
                       const data = await res.json();
                       setFileId(data.file_id);

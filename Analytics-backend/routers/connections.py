@@ -21,7 +21,7 @@ from routers.db import (
 from services.credentials_crypto import decrypt_secret, encrypt_secret
 from services.remote_db_manager import remote_db_manager, _default_port
 
-router = APIRouter(prefix="/api/connections", tags=["connections"])
+router = APIRouter(prefix="/connections", tags=["connections"])
 
 
 class FavoriteBody(BaseModel):

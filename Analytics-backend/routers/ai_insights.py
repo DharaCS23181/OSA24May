@@ -14,7 +14,7 @@ from pydantic import BaseModel
 from services.ai_insights import AIInsightsService, MODES
 
 
-router = APIRouter(prefix="/api/ai", tags=["ai-insights"])
+router = APIRouter(prefix="/ai", tags=["ai-insights"])
 
 
 class ChartContext(BaseModel):

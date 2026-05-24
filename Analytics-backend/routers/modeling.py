@@ -8,7 +8,7 @@ from database import get_db
 from models import DateTable, ChangeDetectionConfig
 from services.modeling_service import ModelingService
 
-router = APIRouter(prefix="/api/modeling", tags=["Modeling"])
+router = APIRouter(prefix="/modeling", tags=["Modeling"])
 
 
 class MarkDateTableRequest(BaseModel):

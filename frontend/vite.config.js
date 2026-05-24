@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     tailwindcss(),
@@ -17,14 +16,24 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      // ── ETL Backend (port 8111) — /etl/* ──────────────────────────────────
+      '/etl': {
+        target: 'http://localhost:8111',
+        changeOrigin: true,
+        ws: true,
+      },
+
+      // ── Analytics Backend (port 8010) — /analytics/* ──────────────────────
+      '/analytics': {
+        target: 'http://localhost:8010',
+        changeOrigin: true,
+      },
+
+      // ── DW Backend (port 8004) — /dw/* ────────────────────────────────────
       '/dw': {
         target: 'http://localhost:8004',
         changeOrigin: true,
       },
-      // '/analytics-studio': {
-      //   target: 'http://mvpanalytics.onestopanalytics.com:5174',
-      //   changeOrigin: true,
-      // },
     },
   },
 })

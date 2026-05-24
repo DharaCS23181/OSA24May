@@ -22,7 +22,7 @@ from app.api.v1.export import router as export_router
 from app.api.v1.copilot import router as copilot_router
 from app.api.v1.saved_connections import router as saved_connections_router
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix="/etl/api/v1")
 
 router.include_router(pipelines_router)
 router.include_router(jobs_router)

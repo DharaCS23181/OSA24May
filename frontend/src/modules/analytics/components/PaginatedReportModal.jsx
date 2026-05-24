@@ -210,7 +210,7 @@ const PaginatedReportModal = ({
         }
       }
 
-      const pdfResponse = await fetch('/api/reports/generate-pdf-direct', {
+      const pdfResponse = await fetch('/analytics/reports/generate-pdf-direct', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)

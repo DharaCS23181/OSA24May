@@ -614,7 +614,7 @@ const BIWorkspace = ({
     
     const interval = setInterval(async () => {
       try {
-        const res = await fetch('/api/modeling/change-detection/status');
+        const res = await fetch('/analytics/modeling/change-detection/status');
         if (res.ok) {
           const data = await res.json();
           // Filter to only configs active in the current app context
@@ -1691,7 +1691,7 @@ const BIWorkspace = ({
     if (userId) formData.append('user_id', userId);
     try {
       setUploadJob({ active: true, phase: 'uploading', progress: 15, message: 'Uploading file...' });
-      const res = await fetch('/api/files/upload', { method: 'POST', body: formData });
+      const res = await fetch('/analytics/files/upload', { method: 'POST', body: formData });
       if (!res.ok) {
         let msg = `Upload failed (${res.status})`;
         if (res.status === 413) {
@@ -1831,7 +1831,7 @@ const BIWorkspace = ({
     const fd = new FormData();
     if (userId) fd.append('user_id', userId);
     try {
-      const res = await fetch('/api/files/blank-report', { method: 'POST', body: fd });
+      const res = await fetch('/analytics/files/blank-report', { method: 'POST', body: fd });
       if (!res.ok) {
         let msg = `Could not start blank report (${res.status})`;
         try {
@@ -1936,7 +1936,7 @@ const BIWorkspace = ({
     setAiChatHistory((prev) => [...prev, { role: 'user', content: question }]);
     setAiLoading(true);
     try {
-      const res = await fetch('/api/ai/ask', {
+      const res = await fetch('/analytics/ai/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3221,7 +3221,7 @@ const BIWorkspace = ({
     }
 
     try {
-      const response = await fetch('/api/db/connect', {
+      const response = await fetch('/analytics/db/connect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3300,7 +3300,7 @@ const BIWorkspace = ({
   //   formData.append('password', dataverseConnData.password);
   //
   //   try {
-  //     const response = await fetch('/api/sql/connect', {
+  //     const response = await fetch('/analytics/sql/connect', {
   //       method: 'POST',
   //       body: formData
   //     });
@@ -3485,7 +3485,7 @@ const BIWorkspace = ({
       if (userId) formData.append('user_id', userId);
 
       // 1. Upload the file
-      const uploadRes = await fetch('/api/files/upload', {
+      const uploadRes = await fetch('/analytics/files/upload', {
         method: 'POST',
         body: formData
       });
@@ -5040,7 +5040,7 @@ const BIWorkspace = ({
               formData.append('file', file);
               if (userId) formData.append('user_id', userId);
               
-              const uploadRes = await fetch('/api/files/upload', { method: 'POST', body: formData });
+              const uploadRes = await fetch('/analytics/files/upload', { method: 'POST', body: formData });
               if (!uploadRes.ok) throw new Error('Failed to materialize dataset into workspace');
               const uploadData = await uploadRes.json();
               

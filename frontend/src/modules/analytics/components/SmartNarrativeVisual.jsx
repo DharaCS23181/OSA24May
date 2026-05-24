@@ -133,7 +133,7 @@ const SmartNarrativeVisual = ({ fileId, dataset, graphDefinition, onUpdate, isPi
                 return;
             }
 
-            const res = await fetch('/api/smart/narrative', {
+            const res = await fetch('/analytics/smart/narrative', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)

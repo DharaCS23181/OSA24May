@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from typing import List
 from pydantic import BaseModel
 
-router = APIRouter(prefix="/api/visuals", tags=["visuals"])
+router = APIRouter(prefix="/visuals", tags=["visuals"])
 
 class VisualMetadata(BaseModel):
     id: str

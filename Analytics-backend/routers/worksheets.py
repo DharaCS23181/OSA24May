@@ -29,8 +29,8 @@ from database import SessionLocal
 from models import Worksheet, WorksheetColumn, WorksheetPermission
 from services import query_service, worksheet_service
 
-router = APIRouter(prefix="/api/worksheets", tags=["worksheets"])
-files_router = APIRouter(prefix="/api/files", tags=["worksheets"])
+router = APIRouter(prefix="/worksheets", tags=["worksheets"])
+files_router = APIRouter(prefix="/files", tags=["worksheets"])
 
 
 # ── DB dependency ──────────────────────────────────────────────────────────────

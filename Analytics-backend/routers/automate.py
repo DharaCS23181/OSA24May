@@ -26,7 +26,7 @@ import schemas
 
 logger = logging.getLogger("power_automate")
 
-router = APIRouter(prefix="/api/power-automate", tags=["automate"])
+router = APIRouter(prefix="/power-automate", tags=["automate"])
 
 # Where generated PDFs are stored (relative to backend root)
 EXPORTS_DIR = Path(__file__).parent.parent / "exports"

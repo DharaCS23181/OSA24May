@@ -1,9 +1,10 @@
 /**
  * rlsService.js
  * Thin fetch wrapper for all /api/rls/* endpoints.
+ * Vite proxies /api/rls/* → http://localhost:8010 (Analytics backend)
  */
 
-const BASE = '/api/rls';
+const BASE = '/analytics/rls';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 

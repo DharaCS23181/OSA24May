@@ -13,7 +13,7 @@ import io
 
 logger = get_logger("routers.reports")
 
-router = APIRouter(prefix="/api/reports", tags=["reports"])
+router = APIRouter(prefix="/reports", tags=["reports"])
 
 
 def _cap_row_list(data_list, cap: int):

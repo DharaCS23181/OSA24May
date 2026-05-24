@@ -15,7 +15,7 @@ import services.worksheet_service as ws_svc
 import uuid
 import traceback
 
-router = APIRouter(prefix="/api/files", tags=["files"])
+router = APIRouter(prefix="/files", tags=["files"])
 
 def get_db():
     db = SessionLocal()

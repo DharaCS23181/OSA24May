@@ -21,7 +21,7 @@ import models
 import schemas
 from services.rls_engine import apply_rls_to_dataset, invalidate_cache
 
-router = APIRouter(prefix="/api/rls", tags=["rls"])
+router = APIRouter(prefix="/rls", tags=["rls"])
 
 
 # ── DB dependency ─────────────────────────────────────────────────────────────

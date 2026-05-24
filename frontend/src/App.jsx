@@ -45,7 +45,7 @@ import JobDetails from "./modules/dw/jobs/JobDetails";
 import GlobalRunsPage from "./modules/dw/runs/GlobalRunsPage";
 
 // ── Analytics Module ──────────────────────────────────────────────────────────
-import AnalyticsHub from "./modules/analytics/dashboard/AnalyticsHub";
+import AnalyticsRoot from "./modules/analytics/AnalyticsRoot";
 
 function App() {
   return (
@@ -110,8 +110,8 @@ function App() {
                     element={<DashboardLayout><GlobalRunsPage /></DashboardLayout>} />
 
                   {/* ── Analytics Module: /analytics/* ───────────── */}
-                  <Route path="/analytics"
-                    element={<DashboardLayout><AnalyticsHub /></DashboardLayout>} />
+                  <Route path="/analytics/*"
+                    element={<DashboardLayout><AnalyticsRoot /></DashboardLayout>} />
 
                   {/* ── Catch-all ─────────────────────────────────── */}
                   <Route path="*" element={<Navigate to="/dashboard" replace />} />

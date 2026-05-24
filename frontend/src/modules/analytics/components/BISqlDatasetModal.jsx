@@ -71,7 +71,7 @@ export default function BISqlDatasetModal({
 
   useEffect(() => {
     if (!isOpen) return;
-    fetch('/api/db/connections')
+    fetch('/analytics/db/connections')
       .then((r) => r.json())
       .then((d) => {
         const list = d.connections || [];
@@ -134,7 +134,7 @@ export default function BISqlDatasetModal({
     }
     setLoading(true);
     try {
-      const res = await fetch('/api/db/sql/execute', {
+      const res = await fetch('/analytics/db/sql/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

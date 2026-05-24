@@ -21,7 +21,7 @@ from models import ConnectorCatalog
 
 logger = get_logger("routers.modular_connectors")
 
-router = APIRouter(prefix="/api/connectors", tags=["connectors"])
+router = APIRouter(prefix="/connectors", tags=["connectors"])
 
 
 def get_db():

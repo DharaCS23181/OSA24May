@@ -164,8 +164,9 @@ app = FastAPI(
     version=settings.APP_VERSION,
     lifespan=lifespan,
     # Only expose API docs in non-production environments
-    docs_url="/docs" if settings.ENVIRONMENT != "production" else None,
-    redoc_url="/redoc" if settings.ENVIRONMENT != "production" else None,
+    docs_url="/etl/docs" if settings.ENVIRONMENT != "production" else None,
+    redoc_url="/etl/redoc" if settings.ENVIRONMENT != "production" else None,
+    openapi_url="/etl/openapi.json" if settings.ENVIRONMENT != "production" else None,
 )
 
 # CORS — allow the dev server and production domain
@@ -193,7 +194,7 @@ app.include_router(v1_router)
 app.include_router(ws_router)
 
 
-@app.get("/api/health", tags=["System"])
+@app.get("/etl/health", tags=["System"])
 async def health_check():
     """
     Health check endpoint for monitoring systems.

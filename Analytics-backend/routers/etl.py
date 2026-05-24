@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 import models
 
-router = APIRouter(prefix="/api/etl", tags=["etl"])
+router = APIRouter(prefix="/etl", tags=["etl"])
 
 
 # ── DB dependency ──────────────────────────────────────────────────────────────

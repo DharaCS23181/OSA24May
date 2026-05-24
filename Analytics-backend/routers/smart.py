@@ -12,7 +12,7 @@ from pydantic import BaseModel
 import uuid
 from services.upload_limits import save_upload_file
 
-router = APIRouter(prefix="/api/smart", tags=["smart"])
+router = APIRouter(prefix="/smart", tags=["smart"])
 
 def get_db():
     db = SessionLocal()

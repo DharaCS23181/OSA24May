@@ -12,8 +12,8 @@ import time
 import threading
 import json
 
-router = APIRouter(prefix="/api/files", tags=["graphs"])
-top_router = APIRouter(prefix="/api/graphs", tags=["graphs_top"])
+router = APIRouter(prefix="/files", tags=["graphs"])
+top_router = APIRouter(prefix="/graphs", tags=["graphs_top"])
 
 _GRAPH_QUERY_CACHE = {}
 _GRAPH_QUERY_CACHE_LOCK = threading.Lock()

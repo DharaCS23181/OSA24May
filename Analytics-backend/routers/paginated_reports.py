@@ -12,7 +12,7 @@ from services.sql_execute import execute_paginated_select
 import io
 import pandas as pd
 
-router = APIRouter(prefix="/api/reports", tags=["paginated_reports"])
+router = APIRouter(prefix="/reports", tags=["paginated_reports"])
 
 def get_db():
     db = SessionLocal()

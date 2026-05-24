@@ -20,7 +20,7 @@ def get_db():
     finally:
         db.close()
 
-router = APIRouter(prefix="/api/db", tags=["remote-db"])
+router = APIRouter(prefix="/db", tags=["remote-db"])
 
 SAFE_IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 ALLOWED_AGG = {"SUM", "COUNT", "AVG", "MIN", "MAX"}

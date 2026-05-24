@@ -13,7 +13,7 @@ import pandas as pd
 from typing import Optional, List, Dict, Any
 from services.upload_limits import save_upload_file
 
-router = APIRouter(prefix="/api/sql", tags=["sql"])
+router = APIRouter(prefix="/sql", tags=["sql"])
 
 def get_db():
     db = SessionLocal()

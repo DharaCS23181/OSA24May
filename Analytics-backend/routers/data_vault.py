@@ -13,7 +13,7 @@ from database import SessionLocal
 import models
 from models import DataVaultItem, UploadedFile
 
-router = APIRouter(prefix="/api/vault", tags=["datavault"])
+router = APIRouter(prefix="/vault", tags=["datavault"])
 
 
 def get_db():
