@@ -66,25 +66,28 @@ def ensure_schema_exists(engine, schema_name: str):
 
 def init_db():
     """
-    Initialize the main database.
+    Initialize the main onestop_platform database.
 
-    No user-facing schemas are created at startup.
-    Catalogs and their medallion schemas (bronze/silver/gold) are created
+    Creates the internal logical schemas used by each service:
+      - public    → platform metadata (catalogs, users, connector_catalog, volumes)
+      - workflow  → job orchestration (jobs, tasks, runs, logs)
+      - history   → SQL query history (renamed from HistorySql)
+
+    User-facing medallion schemas ({catalog}_bronze/silver/gold) are created
     on-demand when users create catalogs via the UI.
-
-    The public schema is used internally for metadata tables only
-    (catalogs, logical_schemas, volumes, table_tags, etc.).
     """
-    logger.info("Main database initialized (no default user schemas created).")
-    # ORM metadata tables (catalogs, logical_schemas, etc.) are created by
-    # Base.metadata.create_all() in main.py lifespan.
+    # Ensure internal service schemas exist before ORM create_all
+    for schema in ("workflow", "history"):
+        ensure_schema_exists(engine, schema)
+    logger.info("Platform schemas initialized: public, workflow, history")
 
 
 def init_jobs_db(jobs_engine):
     """
-    Initializes the Jobs & Pipelines database by running jobs_schema.sql.
-    This creates all required schemas, enum types, tables, and adds any
-    missing columns to existing tables. Safe to run multiple times.
+    Initializes the workflow schema by running jobs_schema.sql.
+    Now runs against the same engine as the main DB (onestop_platform).
+    The SQL file uses 'workflow.' schema prefix for all table names.
+    Safe to run multiple times (idempotent).
     """
     schema_file_path = os.path.join(os.path.dirname(__file__), "..", "db", "schema", "jobs_schema.sql")
 
@@ -100,6 +103,7 @@ def init_jobs_db(jobs_engine):
             with connection.begin():
                 connection.execute(text(jobs_sql))
 
-        logger.debug("Jobs DB initialized successfully from jobs_schema.sql.")
+        logger.debug("Workflow schema initialized successfully from jobs_schema.sql.")
     except Exception as e:
-        logger.error(f"Jobs DB SQL init failed: {e}")
+        logger.error(f"Workflow schema SQL init failed: {e}")
+

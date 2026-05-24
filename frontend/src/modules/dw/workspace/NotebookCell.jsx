@@ -204,7 +204,7 @@ const NotebookCell = ({ cell, index, total, onUpdate, onDelete, onRun, onMoveUp,
                                 <thead>
                                     <tr>
                                         {cell.output.columns.map((col, i) => (
-                                            <th key={i} className="text-left px-2 py-1.5 font-semibold border-b"
+                                            <th key={`th-${i}-${col}`} className="text-left px-2 py-1.5 font-semibold border-b"
                                                 style={{ borderColor: 'var(--df-border)', color: 'var(--df-strong)', backgroundColor: 'var(--df-surface)' }}>
                                                 {col}
                                             </th>
@@ -213,9 +213,9 @@ const NotebookCell = ({ cell, index, total, onUpdate, onDelete, onRun, onMoveUp,
                                 </thead>
                                 <tbody>
                                     {cell.output.rows.slice(0, 50).map((row, ri) => (
-                                        <tr key={ri}>
+                                        <tr key={`tr-${ri}`}>
                                             {cell.output.columns.map((col, ci) => (
-                                                <td key={ci} className="px-2 py-1 border-b"
+                                                <td key={`td-${ri}-${ci}`} className="px-2 py-1 border-b"
                                                     style={{ borderColor: 'var(--df-border)', color: 'var(--df-text-soft)' }}>
                                                     {row[col] != null ? String(row[col]) : <span style={{ color: 'var(--df-text-muted)', fontStyle: 'italic' }}>NULL</span>}
                                                 </td>

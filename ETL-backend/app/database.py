@@ -100,21 +100,24 @@ async def ensure_job_schema_consistency(conn) -> None:
     
     # 1. Add 'name' column if missing
     try:
-        await conn.execute(text("ALTER TABLE jobs ADD COLUMN name VARCHAR(255);"))
-        logger.info("Added 'name' column to 'jobs' table.")
+        async with conn.begin_nested():
+            await conn.execute(text("ALTER TABLE etl.jobs ADD COLUMN name VARCHAR(255);"))
+        logger.info("Added 'name' column to 'etl.jobs' table.")
     except Exception:
         pass # Likely already exists or table doesn't exist yet
 
     # 2. Add 'job_metadata' column if missing
     try:
-        await conn.execute(text("ALTER TABLE jobs ADD COLUMN job_metadata JSON;"))
-        logger.info("Added 'job_metadata' column to 'jobs' table.")
+        async with conn.begin_nested():
+            await conn.execute(text("ALTER TABLE etl.jobs ADD COLUMN job_metadata JSON;"))
+        logger.info("Added 'job_metadata' column to 'etl.jobs' table.")
     except Exception:
         pass # Likely already exists
 
     # 3. Ensure 'pipeline_id' is nullable
     try:
-        await conn.execute(text("ALTER TABLE jobs ALTER COLUMN pipeline_id DROP NOT NULL;"))
+        async with conn.begin_nested():
+            await conn.execute(text("ALTER TABLE etl.jobs ALTER COLUMN pipeline_id DROP NOT NULL;"))
     except Exception:
         pass # Already nullable or not supported (SQLite)
 
@@ -122,11 +125,13 @@ async def ensure_job_schema_consistency(conn) -> None:
 async def setup_database() -> None:
     """
     Central Schema Registry — called on app startup.
+    Creates the 'etl' schema inside onestop_platform, then creates all ORM tables.
     Includes a retry loop to survive transient DB outages at startup.
     """
     import asyncio
     import logging
     from sqlalchemy.exc import OperationalError
+    from sqlalchemy import text
 
     logger = logging.getLogger("arithflow.database")
     
@@ -139,6 +144,7 @@ async def setup_database() -> None:
     from app.models.quality_rule import QualityRule, QualityResult # noqa: F401
     from app.models.job_log import JobLog             # noqa: F401
     from app.models.saved_connection import SavedConnection # noqa: F401
+    from app.models.watermark import PipelineWatermark # noqa: F401
 
     max_retries = 5
     retry_delay = 2  # base delay in seconds
@@ -146,10 +152,12 @@ async def setup_database() -> None:
     for attempt in range(1, max_retries + 1):
         try:
             async with engine.begin() as conn:
+                # Ensure the 'etl' schema exists before creating tables
+                await conn.execute(text('CREATE SCHEMA IF NOT EXISTS etl'))
                 await conn.run_sync(Base.metadata.create_all)
                 # Ensure existing tables are updated with new columns
                 await ensure_job_schema_consistency(conn)
-            logger.info("Database schema synchronized successfully.")
+            logger.info("ETL schema synchronized successfully (onestop_platform.etl).")
             return
         except (OperationalError, Exception) as e:
             if attempt == max_retries:
@@ -162,3 +170,4 @@ async def setup_database() -> None:
                 f"Retrying in {wait}s... (Error: {e})"
             )
             await asyncio.sleep(wait)
+

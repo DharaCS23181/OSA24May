@@ -1,61 +1,105 @@
 -- =============================================================================
--- Jobs & Pipelines Database Initialization Script
--- Creates all required schemas, enum types, and tables for the orchestration
--- and SQL history system. Safe to run multiple times (idempotent).
+-- onestop_platform — Workflow & History Schema Initialization Script
+--
+-- Previously targeted a separate 'workflow_db' database.
+-- Now runs inside onestop_platform using schema-qualified names:
+--   workflow.*   → job orchestration tables
+--   history.*    → SQL query history tables
+--
+-- Safe to run multiple times (fully idempotent).
 -- =============================================================================
 
 -- 0. Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- 1. Create Schemas
-CREATE SCHEMA IF NOT EXISTS "HistorySql";
+CREATE SCHEMA IF NOT EXISTS workflow;
+CREATE SCHEMA IF NOT EXISTS history;
 
--- 2. Define Enum Types (safe: only creates if not existing)
+-- 2. Define Enum Types inside workflow schema (safe: only creates if not existing)
 DO $$ BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'jobtype') THEN
-        CREATE TYPE jobtype AS ENUM ('Job', 'Pipeline');
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'jobtype' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.jobtype AS ENUM ('Job', 'Pipeline');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'runstatus') THEN
-        CREATE TYPE runstatus AS ENUM ('Pending', 'Running', 'Success', 'Failed');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'runstatus' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.runstatus AS ENUM ('Pending', 'Running', 'Success', 'Failed');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'taskrunstatus') THEN
-        CREATE TYPE taskrunstatus AS ENUM ('Pending', 'Running', 'Success', 'Failed', 'Skipped');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'taskrunstatus' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.taskrunstatus AS ENUM ('Pending', 'Running', 'Success', 'Failed', 'Skipped');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'tasktype') THEN
-        CREATE TYPE tasktype AS ENUM ('sql', 'notebook');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'tasktype' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.tasktype AS ENUM ('sql', 'notebook');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'computetype') THEN
-        CREATE TYPE computetype AS ENUM ('Serverless', 'Cluster');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'tasktypecategory' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.tasktypecategory AS ENUM ('notebook', 'source', 'destination', 'sql');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'backofftype') THEN
-        CREATE TYPE backofftype AS ENUM ('fixed', 'exponential');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'computetype' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.computetype AS ENUM ('Serverless', 'Cluster');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'triggertype') THEN
-        CREATE TYPE triggertype AS ENUM ('Manual', 'Schedule');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'backofftype' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.backofftype AS ENUM ('fixed', 'exponential');
     END IF;
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'loglevel') THEN
-        CREATE TYPE loglevel AS ENUM ('INFO', 'WARN', 'ERROR', 'DEBUG');
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'triggertype' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.triggertype AS ENUM ('Manual', 'Schedule');
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_type t JOIN pg_namespace n ON t.typnamespace = n.oid
+        WHERE t.typname = 'loglevel' AND n.nspname = 'workflow'
+    ) THEN
+        CREATE TYPE workflow.loglevel AS ENUM ('INFO', 'WARN', 'ERROR', 'DEBUG');
     END IF;
 END $$;
 
--- HistorySql schema enum (separate namespace)
+-- history schema enum
 DO $$ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_type t
         JOIN pg_namespace n ON t.typnamespace = n.oid
-        WHERE t.typname = 'querystatus' AND n.nspname = 'HistorySql'
+        WHERE t.typname = 'querystatus' AND n.nspname = 'history'
     ) THEN
-        CREATE TYPE "HistorySql".querystatus AS ENUM ('success', 'failed');
+        CREATE TYPE history.querystatus AS ENUM ('success', 'failed');
     END IF;
 END $$;
 
 -- 3. Create Tables (safe: IF NOT EXISTS)
 
--- Jobs
-CREATE TABLE IF NOT EXISTS jobs (
+-- workflow.jobs
+CREATE TABLE IF NOT EXISTS workflow.jobs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
-    type jobtype NOT NULL DEFAULT 'Job',
+    type workflow.jobtype NOT NULL DEFAULT 'Job',
     description TEXT DEFAULT '',
     owner VARCHAR(100) DEFAULT 'current_user',
     schedule_config JSONB DEFAULT '{}',
@@ -64,42 +108,43 @@ CREATE TABLE IF NOT EXISTS jobs (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tasks
-CREATE TABLE IF NOT EXISTS tasks (
+-- workflow.tasks
+CREATE TABLE IF NOT EXISTS workflow.tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    job_id UUID NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+    job_id UUID NOT NULL REFERENCES workflow.jobs(id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL,
-    type tasktype NOT NULL DEFAULT 'sql',
+    type workflow.tasktype NOT NULL DEFAULT 'sql',
+    task_type workflow.tasktypecategory NOT NULL DEFAULT 'notebook',
     query TEXT DEFAULT '',
     notebook_path VARCHAR(500) DEFAULT '',
-    compute computetype DEFAULT 'Serverless',
+    compute workflow.computetype DEFAULT 'Serverless',
     catalog VARCHAR(255) DEFAULT '',
     retry_count INTEGER DEFAULT 0,
     retry_limit INTEGER DEFAULT 0,
     retry_delay_seconds INTEGER DEFAULT 10,
-    backoff_type backofftype DEFAULT 'fixed',
+    backoff_type workflow.backofftype DEFAULT 'fixed',
     timeout INTEGER DEFAULT 3600,
     depends_on JSONB DEFAULT '[]',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Job Runs
-CREATE TABLE IF NOT EXISTS job_runs (
+-- workflow.job_runs
+CREATE TABLE IF NOT EXISTS workflow.job_runs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    job_id UUID NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
-    status runstatus NOT NULL DEFAULT 'Pending',
-    trigger_type triggertype DEFAULT 'Manual',
+    job_id UUID NOT NULL REFERENCES workflow.jobs(id) ON DELETE CASCADE,
+    status workflow.runstatus NOT NULL DEFAULT 'Pending',
+    trigger_type workflow.triggertype DEFAULT 'Manual',
     parameters JSONB DEFAULT '[]',
     started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ended_at TIMESTAMP
 );
 
--- Task Runs
-CREATE TABLE IF NOT EXISTS task_runs (
+-- workflow.task_runs
+CREATE TABLE IF NOT EXISTS workflow.task_runs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    job_run_id UUID NOT NULL REFERENCES job_runs(id) ON DELETE CASCADE,
-    task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
-    status taskrunstatus NOT NULL DEFAULT 'Pending',
+    job_run_id UUID NOT NULL REFERENCES workflow.job_runs(id) ON DELETE CASCADE,
+    task_id UUID NOT NULL REFERENCES workflow.tasks(id) ON DELETE CASCADE,
+    status workflow.taskrunstatus NOT NULL DEFAULT 'Pending',
     resolved_query TEXT DEFAULT '',
     error_message TEXT DEFAULT '',
     attempt_number INTEGER DEFAULT 1,
@@ -107,95 +152,102 @@ CREATE TABLE IF NOT EXISTS task_runs (
     ended_at TIMESTAMP
 );
 
--- Task Logs
-CREATE TABLE IF NOT EXISTS task_logs (
+-- workflow.task_logs
+CREATE TABLE IF NOT EXISTS workflow.task_logs (
     id SERIAL PRIMARY KEY,
-    task_run_id UUID NOT NULL REFERENCES task_runs(id) ON DELETE CASCADE,
+    task_run_id UUID NOT NULL REFERENCES workflow.task_runs(id) ON DELETE CASCADE,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    level loglevel DEFAULT 'INFO',
+    level workflow.loglevel DEFAULT 'INFO',
     message TEXT NOT NULL
 );
 
--- Task Run Outputs
-CREATE TABLE IF NOT EXISTS task_run_outputs (
+-- workflow.task_run_outputs
+CREATE TABLE IF NOT EXISTS workflow.task_run_outputs (
     id SERIAL PRIMARY KEY,
-    task_run_id UUID NOT NULL REFERENCES task_runs(id) ON DELETE CASCADE,
+    task_run_id UUID NOT NULL REFERENCES workflow.task_runs(id) ON DELETE CASCADE,
     output_type VARCHAR(50) DEFAULT 'table',
     output_name VARCHAR(500) DEFAULT '',
     rows_processed INTEGER DEFAULT 0
 );
 
--- SQL Query History (in HistorySql schema)
-CREATE TABLE IF NOT EXISTS "HistorySql".query_history (
+-- history.query_history (renamed from HistorySql.query_history)
+CREATE TABLE IF NOT EXISTS history.query_history (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     query TEXT NOT NULL,
-    status "HistorySql".querystatus NOT NULL DEFAULT 'success',
+    status history.querystatus NOT NULL DEFAULT 'success',
     duration_ms INTEGER DEFAULT 0,
     row_count INTEGER DEFAULT 0,
     error_message TEXT DEFAULT '',
-    user_email VARCHAR(255) DEFAULT 'current_user@arithwise.com',
+    user_email VARCHAR(255) DEFAULT 'current_user@onestop.com',
     executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Saved Queries (in HistorySql schema)
-CREATE TABLE IF NOT EXISTS "HistorySql".saved_queries (
+-- history.saved_queries (renamed from HistorySql.saved_queries)
+CREATE TABLE IF NOT EXISTS history.saved_queries (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
     sql TEXT NOT NULL,
     description TEXT DEFAULT '',
-    user_email VARCHAR(255) DEFAULT 'current_user@arithwise.com',
+    user_email VARCHAR(255) DEFAULT 'current_user@onestop.com',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 4. ADD MISSING COLUMNS to existing tables (safe migration)
---    This handles the case where tables already exist but are missing new columns.
 DO $$ BEGIN
-    -- job_runs.trigger_type
+    -- workflow.job_runs.trigger_type
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'job_runs' AND column_name = 'trigger_type'
+        WHERE table_schema = 'workflow' AND table_name = 'job_runs' AND column_name = 'trigger_type'
     ) THEN
-        ALTER TABLE job_runs ADD COLUMN trigger_type triggertype DEFAULT 'Manual';
+        ALTER TABLE workflow.job_runs ADD COLUMN trigger_type workflow.triggertype DEFAULT 'Manual';
     END IF;
 
-    -- task_runs.resolved_query
+    -- workflow.task_runs.resolved_query
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'task_runs' AND column_name = 'resolved_query'
+        WHERE table_schema = 'workflow' AND table_name = 'task_runs' AND column_name = 'resolved_query'
     ) THEN
-        ALTER TABLE task_runs ADD COLUMN resolved_query TEXT DEFAULT '';
+        ALTER TABLE workflow.task_runs ADD COLUMN resolved_query TEXT DEFAULT '';
     END IF;
 
-    -- task_runs.attempt_number
+    -- workflow.task_runs.attempt_number
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'task_runs' AND column_name = 'attempt_number'
+        WHERE table_schema = 'workflow' AND table_name = 'task_runs' AND column_name = 'attempt_number'
     ) THEN
-        ALTER TABLE task_runs ADD COLUMN attempt_number INTEGER DEFAULT 1;
+        ALTER TABLE workflow.task_runs ADD COLUMN attempt_number INTEGER DEFAULT 1;
     END IF;
 
-    -- tasks.retry_limit
+    -- workflow.tasks.retry_limit
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'tasks' AND column_name = 'retry_limit'
+        WHERE table_schema = 'workflow' AND table_name = 'tasks' AND column_name = 'retry_limit'
     ) THEN
-        ALTER TABLE tasks ADD COLUMN retry_limit INTEGER DEFAULT 0;
+        ALTER TABLE workflow.tasks ADD COLUMN retry_limit INTEGER DEFAULT 0;
     END IF;
 
-    -- tasks.retry_delay_seconds
+    -- workflow.tasks.retry_delay_seconds
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'tasks' AND column_name = 'retry_delay_seconds'
+        WHERE table_schema = 'workflow' AND table_name = 'tasks' AND column_name = 'retry_delay_seconds'
     ) THEN
-        ALTER TABLE tasks ADD COLUMN retry_delay_seconds INTEGER DEFAULT 10;
+        ALTER TABLE workflow.tasks ADD COLUMN retry_delay_seconds INTEGER DEFAULT 10;
     END IF;
 
-    -- tasks.backoff_type
+    -- workflow.tasks.backoff_type
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'tasks' AND column_name = 'backoff_type'
+        WHERE table_schema = 'workflow' AND table_name = 'tasks' AND column_name = 'backoff_type'
     ) THEN
-        ALTER TABLE tasks ADD COLUMN backoff_type backofftype DEFAULT 'fixed';
+        ALTER TABLE workflow.tasks ADD COLUMN backoff_type workflow.backofftype DEFAULT 'fixed';
+    END IF;
+
+    -- workflow.tasks.task_type (new column — TaskTypeCategory)
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_schema = 'workflow' AND table_name = 'tasks' AND column_name = 'task_type'
+    ) THEN
+        ALTER TABLE workflow.tasks ADD COLUMN task_type workflow.tasktypecategory DEFAULT 'notebook';
     END IF;
 END $$;

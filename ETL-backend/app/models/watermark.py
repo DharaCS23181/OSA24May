@@ -16,16 +16,18 @@ from app.database import Base
 
 class PipelineWatermark(Base):
     __tablename__ = "pipeline_watermarks"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     pipeline_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("pipelines.id", ondelete="CASCADE"),
+        ForeignKey("etl.pipelines.id", ondelete="CASCADE"),
         nullable=False,
     )
     node_id: Mapped[str] = mapped_column(String(100), nullable=False)
+
     cursor_column: Mapped[str] = mapped_column(String(100), nullable=False)
     last_value: Mapped[str] = mapped_column(String(255), nullable=False)
 

@@ -18,6 +18,7 @@ from app.database import Base
 class QualityRule(Base):
     """Configuration for a data quality validation check."""
     __tablename__ = "quality_rules"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
@@ -51,6 +52,7 @@ class QualityRule(Base):
 class QualityResult(Base):
     """Outcome of a data quality check run."""
     __tablename__ = "quality_results"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4

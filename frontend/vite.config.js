@@ -16,21 +16,31 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // ── ETL Backend (port 8111) — /etl/* ──────────────────────────────────
-      '/etl': {
+      // ── ETL Backend (port 8111) ───────────────────────────────────────────
+      '/etl/api': {
         target: 'http://localhost:8111',
+        changeOrigin: true,
+      },
+      '/etl/ws': {
+        target: 'ws://localhost:8111',
         changeOrigin: true,
         ws: true,
       },
 
-      // ── Analytics Backend (port 8010) — /analytics/* ──────────────────────
-      '/analytics': {
+      // ── Analytics Backend (port 8010) ─────────────────────────────────────
+      '/analytics/api': {
         target: 'http://localhost:8010',
         changeOrigin: true,
       },
+      // Legacy Analytics API routes
+      '/api': {
+        target: 'http://localhost:8010/analytics',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
 
-      // ── DW Backend (port 8004) — /dw/* ────────────────────────────────────
-      '/dw': {
+      // ── DW Backend (port 8004) ────────────────────────────────────────────
+      '/dw/api': {
         target: 'http://localhost:8004',
         changeOrigin: true,
       },

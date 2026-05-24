@@ -17,6 +17,7 @@ from app.database import Base
 
 class Pipeline(Base):
     __tablename__ = "pipelines"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
@@ -30,7 +31,7 @@ class Pipeline(Base):
     )
 
     status: Mapped[str] = mapped_column(
-        SAEnum("draft", "active", "paused", "archived", name="pipeline_status"),
+        SAEnum("draft", "active", "paused", "archived", name="pipeline_status", schema="etl"),
         default="draft",
         nullable=False,
     )
@@ -56,19 +57,20 @@ class Pipeline(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<Pipeline(id={self.id}, name='{self.name}', status='{self.status}')>"
+        return f"<Pipeline(id={self.id}, name='{self.name}', status='{self.status}')"
 
 
 class PipelineVersion(Base):
     """Snapshot of a pipeline's DAG for version history and rollbacks."""
     __tablename__ = "pipeline_versions"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     pipeline_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("pipelines.id", ondelete="CASCADE"),
+        ForeignKey("etl.pipelines.id", ondelete="CASCADE"),
         nullable=False,
     )
     

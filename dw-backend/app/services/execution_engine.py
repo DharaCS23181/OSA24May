@@ -29,7 +29,7 @@ import traceback
 import logging
 from typing import Optional, Dict, Any, List
 from sqlalchemy import text
-from app.core.jobs_database import ExecSessionLocal
+from app.core.database import SessionLocal
 from app.services.spark_service import spark_service
 
 logger = logging.getLogger("execution_engine")
@@ -289,7 +289,7 @@ class ExecutionEngine:
             )
 
         start = time.time()
-        db = ExecSessionLocal()
+        db = SessionLocal()
 
         try:
             # Validate schema name to prevent SQL injection

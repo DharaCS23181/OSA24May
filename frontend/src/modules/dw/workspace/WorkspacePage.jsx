@@ -137,83 +137,81 @@ const WorkspacePage = () => {
       <div className="flex-1 flex flex-col h-full min-w-0 min-h-0">
         <div className="pt-3 px-2 flex flex-col flex-shrink-0">
           {/* --- DUAL ROW HEADER --- */}
-          <div className="flex flex-col mb-1 pt-0">
-            {/* ROW 1: Breadcrumbs + Action Cluster */}
-            <div className="flex items-center justify-between mb-0.5">
-              <div className="flex items-center text-[13px] overflow-hidden">
-                <Breadcrumbs
-                  currentFolderId={activeItem ? activeItem.parentId : currentFolderId}
-                  items={items.filter(i => !i.isDeleted)}
-                  onNavigate={handleNavigate}
-                />
-              </div>
+          {!activeItem && (
+            <div className="flex flex-col mb-1 pt-0">
+              {/* ROW 1: Breadcrumbs + Action Cluster */}
+              <div className="flex items-center justify-between mb-0.5">
+                <div className="flex items-center text-[13px] overflow-hidden">
+                  <Breadcrumbs
+                    currentFolderId={currentFolderId}
+                    items={items.filter(i => !i.isDeleted)}
+                    onNavigate={handleNavigate}
+                  />
+                </div>
 
-              <div className="flex items-center gap-4 relative" ref={headerRef}>
+                <div className="flex items-center gap-4 relative" ref={headerRef}>
+                  <button className="p-1 px-1.5 rounded-lg hover:bg-[rgba(0,0,0,0.03)] transition-all opacity-70 hover:opacity-100" style={{ color: 'var(--df-text-soft)' }}>
+                    <FiMoreVertical size={14} />
+                  </button>
 
+                  <div className="h-4 w-[1px]" style={{ backgroundColor: 'var(--df-border)' }} />
 
-                <button className="p-1 px-1.5 rounded-lg hover:bg-[rgba(0,0,0,0.03)] transition-all opacity-70 hover:opacity-100" style={{ color: 'var(--df-text-soft)' }}>
-                  <FiMoreVertical size={14} />
-                </button>
+                  <div className="flex items-center gap-2 relative">
+                    {(!isVirtualView || isUsersView || isSharedView) && (
+                      <>
+                        <button
+                          onClick={() => setShowShareModal(true)}
+                          className="px-3 py-1.5 rounded-lg text-[13px] font-semibold transition-all border"
+                          style={{
+                            backgroundColor: 'transparent',
+                            borderColor: 'var(--df-border)',
+                            color: 'var(--df-text-soft)'
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--df-surface)'; e.currentTarget.style.color = 'var(--df-strong)'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--df-text-soft)'; }}
+                        >
+                          Share
+                        </button>
 
-                <div className="h-4 w-[1px]" style={{ backgroundColor: 'var(--df-border)' }} />
-
-                <div className="flex items-center gap-2 relative">
-                  {!activeItem && (!isVirtualView || isUsersView || isSharedView) && (
-                    <>
-                      <button
-                        onClick={() => setShowShareModal(true)}
-                        className="px-3 py-1.5 rounded-lg text-[13px] font-semibold transition-all border"
-                        style={{
-                          backgroundColor: 'transparent',
-                          borderColor: 'var(--df-border)',
-                          color: 'var(--df-text-soft)'
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--df-surface)'; e.currentTarget.style.color = 'var(--df-strong)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--df-text-soft)'; }}
-                      >
-                        Share
-                      </button>
-
-                      <CreateDropdown onCreate={(type, extra) => {
-                        setCreateModalState({ isOpen: true, type, extra, nameValue: `New ${type}` });
-                      }} />
-                    </>
-                  )}
+                        <CreateDropdown onCreate={(type, extra) => {
+                          setCreateModalState({ isOpen: true, type, extra, nameValue: `New ${type}` });
+                        }} />
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* ROW 2: Large Title + Favorite Star */}
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--df-text)' }}>
-                {activeItem
-                  ? activeItem.name
-                  : isTrashView ? 'Trash'
+              {/* ROW 2: Large Title + Favorite Star */}
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--df-text)' }}>
+                  {isTrashView ? 'Trash'
                     : isFavoritesView ? 'Favorites'
                       : isSharedView ? 'Shared with me'
                         : isUsersView ? 'My Notebooks'
                           : 'Home'
-                }
-              </h1>
-              {!isVirtualView && (activeItem || currentFolderId !== null) && (
-                <button
-                  onClick={() => {
-                    const currentItem = activeItem || items.find(i => i.id === currentFolderId);
-                    if (currentItem) handleToggleFavorite(currentItem);
-                  }}
-                  className="p-1.5 rounded-lg transition-all"
-                  style={{
-                    color: (activeItem ? activeItem.isFavorite : items.find(i => i.id === currentFolderId)?.isFavorite) ? '#fbbf24' : 'var(--df-text-muted)'
-                  }}
-                >
-                  <FiStar
-                    size={18}
-                    fill={(activeItem ? activeItem.isFavorite : items.find(i => i.id === currentFolderId)?.isFavorite) ? '#fbbf24' : 'none'}
-                  />
-                </button>
-              )}
+                  }
+                </h1>
+                {!isVirtualView && (currentFolderId !== null) && (
+                  <button
+                    onClick={() => {
+                      const currentItem = items.find(i => i.id === currentFolderId);
+                      if (currentItem) handleToggleFavorite(currentItem);
+                    }}
+                    className="p-1.5 rounded-lg transition-all"
+                    style={{
+                      color: items.find(i => i.id === currentFolderId)?.isFavorite ? '#fbbf24' : 'var(--df-text-muted)'
+                    }}
+                  >
+                    <FiStar
+                      size={18}
+                      fill={items.find(i => i.id === currentFolderId)?.isFavorite ? '#fbbf24' : 'none'}
+                    />
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Search bar (not shown in editor view) */}
           {!activeItem && (
