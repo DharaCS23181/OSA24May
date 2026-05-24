@@ -22,19 +22,19 @@ async function request(url, options = {}) {
 
 // ── Catalog ──────────────────────────────────────────
 export const catalogs = {
-  listTables: () => request('/catalog/tables'),
-  list: () => request('/catalog/list'),
-  create: (name) => request('/catalog/create', { method: 'POST', body: JSON.stringify({ name }) }),
-  listSchemas: (catalogName) => request(`/catalog/schemas?catalog_name=${catalogName || ''}`),
-  createSchema: (name, catalog_name) => request('/catalog/schema/create', { method: 'POST', body: JSON.stringify({ name, catalog_name }) }),
-  dropTable: (schema, tableName) => request(`/catalog/tables/${schema}/${tableName}`, { method: 'DELETE' }),
-  resolveSchema: (catalogName, schemaName) => request(`/catalog/resolve-schema?catalog_name=${catalogName}&schema_name=${schemaName}`),
+  listTables: () => request('/dw/catalog/tables'),
+  list: () => request('/dw/catalog/list'),
+  create: (name) => request('/dw/catalog/create', { method: 'POST', body: JSON.stringify({ name }) }),
+  listSchemas: (catalogName) => request(`/dw/catalog/schemas?catalog_name=${catalogName || ''}`),
+  createSchema: (name, catalog_name) => request('/dw/catalog/schema/create', { method: 'POST', body: JSON.stringify({ name, catalog_name }) }),
+  dropTable: (schema, tableName) => request(`/dw/catalog/tables/${schema}/${tableName}`, { method: 'DELETE' }),
+  resolveSchema: (catalogName, schemaName) => request(`/dw/catalog/resolve-schema?catalog_name=${catalogName}&schema_name=${schemaName}`),
   uploadTable: (catalog, schema, file) => {
     const formData = new FormData();
     formData.append('catalog', catalog);
     formData.append('schema', schema);
     formData.append('file', file);
-    return fetch(`${API_BASE}/catalog/upload-table`, {
+    return fetch(`${API_BASE}/dw/catalog/upload-table`, {
       method: 'POST',
       body: formData,
     }).then(r => {
@@ -47,12 +47,12 @@ export const catalogs = {
 // ── Query Execution ──────────────────────────────────
 export const query = {
   execute: (sql, schema = 'public') =>
-    request('/query/execute', {
+    request('/dw/query/execute', {
       method: 'POST',
       body: JSON.stringify({ query: sql, schema }),
     }),
   paginated: (sql, schema = 'public', page = 1, pageSize = 50) =>
-    request('/query/paginated', {
+    request('/dw/query/paginated', {
       method: 'POST',
       body: JSON.stringify({ query: sql, schema, page, page_size: pageSize }),
     }),
@@ -73,78 +73,78 @@ export const injection = {
 // ── Table Data ───────────────────────────────────────
 export const tables = {
   preview: (table, schema = 'public', limit = 100) =>
-    request(`/catalog/tables/${table}/preview?schema=${schema}&limit=${limit}`),
+    request(`/dw/catalog/tables/${table}/preview?schema=${schema}&limit=${limit}`),
   schema: (table, schema = 'public') =>
-    request(`/catalog/tables/${table}/columns?schema=${schema}`),
+    request(`/dw/catalog/tables/${table}/columns?schema=${schema}`),
   metadata: (schema, table) =>
-    request(`/table-metadata/${schema}/${table}`),
+    request(`/dw/table-metadata/${schema}/${table}`),
   stats: (schema, table) =>
-    request(`/table-stats/${schema}/${table}`),
+    request(`/dw/table-stats/${schema}/${table}`),
   exportCSVUrl: (schema, table) =>
-    `${API_BASE}/export/${schema}/${table}`,
+    `${API_BASE}/dw/export/${schema}/${table}`,
   exportJSONUrl: (schema, table) =>
-    `${API_BASE}/export-json/${schema}/${table}`,
+    `${API_BASE}/dw/export-json/${schema}/${table}`,
 };
 
 // ── Tags ─────────────────────────────────────────────
 export const tags = {
   list: (schema, table) =>
-    request(`/tags/${schema}/${table}`),
+    request(`/dw/tags/${schema}/${table}`),
   add: (schema, table, tag) =>
-    request(`/tags/${schema}/${table}`, {
+    request(`/dw/tags/${schema}/${table}`, {
       method: 'POST',
       body: JSON.stringify({ tag }),
     }),
   remove: (schema, table, tag) =>
-    request(`/tags/${schema}/${table}/${tag}`, { method: 'DELETE' }),
+    request(`/dw/tags/${schema}/${table}/${tag}`, { method: 'DELETE' }),
 };
 
 // ── Dashboard ────────────────────────────────────────
 export const dashboard = {
-  stats: () => request('/dashboard-stats'),
+  stats: () => request('/dw/dashboard-stats'),
 };
 
 // ── Compute ──────────────────────────────────────────
 export const compute = {
-  status: () => request('/compute/status'),
-  start: () => request('/compute/start', { method: 'POST' }),
-  stop: () => request('/compute/stop', { method: 'POST' }),
+  status: () => request('/dw/compute/status'),
+  start: () => request('/dw/compute/start', { method: 'POST' }),
+  stop: () => request('/dw/compute/stop', { method: 'POST' }),
 };
 
 // ── Volumes ──────────────────────────────────────────
 export const volumes = {
-  list: () => request('/volumes'),
-  listFiles: (volumeId) => request(`/volumes/${volumeId}/files`),
-  create: (data) => request('/volume/create', { method: 'POST', body: JSON.stringify(data) }),
+  list: () => request('/dw/volumes'),
+  listFiles: (volumeId) => request(`/dw/volumes/${volumeId}/files`),
+  create: (data) => request('/dw/volume/create', { method: 'POST', body: JSON.stringify(data) }),
   upload: (volumeId, file) => {
     const formData = new FormData();
     formData.append('volume_id', volumeId);
     formData.append('file', file);
-    return fetch(`${API_BASE}/volume/upload`, {
+    return fetch(`${API_BASE}/dw/volume/upload`, {
       method: 'POST',
       body: formData,
     }).then(r => r.json());
   },
   convert: (fileId) =>
-    request(`/volume/${fileId}/convert`, { method: 'POST' }),
+    request(`/dw/volume/${fileId}/convert`, { method: 'POST' }),
   remove: (id) =>
-    request(`/volume/${id}`, { method: 'DELETE' }),
-  downloadUrl: (id) => `${API_BASE}/volume/${id}/download`,
+    request(`/dw/volume/${id}`, { method: 'DELETE' }),
+  downloadUrl: (id) => `${API_BASE}/dw/volume/${id}/download`,
 };
 
 // ── Jobs ─────────────────────────────────────────────
 export const jobs = {
-  list: () => request('/jobs'),
-  get: (id) => request(`/jobs/${id}`),
-  create: (data) => request('/jobs', { method: 'POST', body: JSON.stringify(data) }),
-  remove: (id) => request(`/jobs/${id}`, { method: 'DELETE' }),
-  run: (id, params = []) => request(`/jobs/${id}/run`, { method: 'POST', body: JSON.stringify({ parameters: params }) }),
+  list: () => request('/dw/jobs'),
+  get: (id) => request(`/dw/jobs/${id}`),
+  create: (data) => request('/dw/jobs', { method: 'POST', body: JSON.stringify(data) }),
+  remove: (id) => request(`/dw/jobs/${id}`, { method: 'DELETE' }),
+  run: (id, params = []) => request(`/dw/jobs/${id}/run`, { method: 'POST', body: JSON.stringify({ parameters: params }) }),
 };
 
 // ── Notebook Execution ───────────────────────────────
 export const notebook = {
   executeCell: (cell_type, content, engine = 'postgres', schema = 'public', session_id = null) =>
-    request('/notebook/execute-cell', {
+    request('/dw/notebook/execute-cell', {
       method: 'POST',
       body: JSON.stringify({ cell_type, content, engine, schema, session_id }),
     }),
@@ -152,8 +152,8 @@ export const notebook = {
 
 // ── Workspace ────────────────────────────────────────
 export const workspace = {
-  list: () => request('/workspace/'),
-  listNotebooks: () => request('/workspace/notebooks'),
+  list: () => request('/dw/workspace/'),
+  listNotebooks: () => request('/dw/workspace/notebooks'),
 };
 // ── Runs (Global) ────────────────────────────────────
 export const runs = {
@@ -164,11 +164,11 @@ export const runs = {
     if (params.hours) qs.set('hours', params.hours);
     if (params.limit) qs.set('limit', params.limit);
     if (params.offset) qs.set('offset', params.offset);
-    return request(`/runs?${qs.toString()}`);
+    return request(`/dw/runs?${qs.toString()}`);
   },
-  stats: (days = 7) => request(`/runs/stats?days=${days}`),
-  get: (runId) => request(`/runs/${runId}`),
-  tasks: (runId) => request(`/runs/${runId}/tasks`),
+  stats: (days = 7) => request(`/dw/runs/stats?days=${days}`),
+  get: (runId) => request(`/dw/runs/${runId}`),
+  tasks: (runId) => request(`/dw/runs/${runId}/tasks`),
 };
 
 export default { catalogs, query, injection, tables, tags, dashboard, compute, volumes, jobs, notebook, workspace, runs };

@@ -10,7 +10,7 @@ export const useQueryTabs = () => {
     } catch (e) {
       console.warn("Failed to parse saved tabs", e);
     }
-    return [{ id: 1, name: 'Query 1', content: defaultQuery, results: null, status: null, executionTime: null }];
+    return [{ id: 1, name: 'Query 1', content: defaultQuery, type: 'sql', results: null, status: null, executionTime: null }];
   });
 
   const [activeTabId, setActiveTabId] = useState(() => {
@@ -34,15 +34,32 @@ export const useQueryTabs = () => {
     localStorage.setItem('dataforge_active_tab', activeTabId);
   }, [activeTabId]);
 
-  const addTab = (initialContent = '') => {
+  const addTab = (initialContent = '', type = 'sql') => {
     const newId = tabCounter;
     setTabCounter(prev => prev + 1);
     const now = new Date();
     const dd = String(now.getDate()).padStart(2, '0');
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-    const tabName = `New Query ${dd}/${mm} ${timeStr}`;
-    const newTabs = [...tabs, { id: newId, name: tabName, content: initialContent, results: null, status: null, executionTime: null }];
+    
+    let tabName = '';
+    if (type === 'notebook') {
+      tabName = `Notebook ${dd}/${mm} ${timeStr}`;
+    } else if (type === 'alert') {
+      tabName = `Alert ${dd}/${mm} ${timeStr}`;
+    } else {
+      tabName = `New Query ${dd}/${mm} ${timeStr}`;
+    }
+    
+    const newTabs = [...tabs, { 
+      id: newId, 
+      name: tabName, 
+      content: initialContent, 
+      type: type,
+      results: null, 
+      status: null, 
+      executionTime: null 
+    }];
     setTabs(newTabs);
     setActiveTabId(newId);
     return newId;
