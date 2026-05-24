@@ -8,6 +8,7 @@ import SqlEditor from './SqlEditor';
 import ResultsPanel from './ResultsPanel';
 import SchemaBrowser from './SchemaBrowser';
 import SaveQueryModal from './SaveQueryModal';
+import WelcomeScreen from './WelcomeScreen';
 import CatalogSelector from '../catalog/CatalogSelector';
 import { FiDatabase, FiCommand, FiSave, FiSidebar, FiShare2, FiMoreVertical, FiCheckCircle, FiMaximize2, FiMinimize2, FiGrid, FiPlay, FiSend, FiTrash2, FiDownload, FiClock, FiGitCommit, FiCopy, FiEdit2, FiMove, FiRefreshCcw, FiLink, FiTable, FiPlusSquare, FiPieChart, FiBell } from 'react-icons/fi';
 
@@ -18,6 +19,7 @@ const SqlLab = () => {
   const navigate = useNavigate();
   const [saveMsg, setSaveMsg] = useState('');
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const defaultCat = catalogs && Object.keys(catalogs)[0] ? Object.keys(catalogs)[0] : 'workspace';
   const defaultSch = catalogs && catalogs[defaultCat] ? Object.keys(catalogs[defaultCat])[0] : 'default';
@@ -205,6 +207,29 @@ const SqlLab = () => {
   const handleShare = () => { if (!activeTab?.content) return; navigator.clipboard.writeText(activeTab.content); setSaveMsg('Copied to clipboard!'); setTimeout(() => setSaveMsg(''), 2000); };
   const handleLoadQuery = (name, content) => { updateTabContent(activeTabId, content); renameTab(activeTabId, name); setSaveMsg('Query loaded!'); setTimeout(() => setSaveMsg(''), 1500); };
 
+  // Handle creation from modal
+  const handleCreateNew = (type) => {
+    if (type === 'sql') {
+      addTab('', 'sql');
+    } else if (type === 'notebook') {
+      addTab('', 'notebook');
+    } else if (type === 'alert') {
+      addTab('', 'alert');
+    }
+  };
+
+  // Keyboard shortcut for Cmd+K
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsCreateModalOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleFormat = () => {
     if (!activeTab?.content) return;
     let sql = activeTab.content;
@@ -225,7 +250,18 @@ const SqlLab = () => {
 
         <div className="flex-1 flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--df-bg-secondary)' }}>
           <div className="px-4" style={{ backgroundColor: 'var(--df-surface)', borderBottom: '1px solid var(--df-border)' }}>
-            <QueryTabs tabs={tabs} activeTabId={activeTabId} onTabChange={setActiveTabId} onTabAdd={() => addTab()} onTabClose={removeTab} onTabRename={renameTab} />
+            <QueryTabs 
+              tabs={tabs} 
+              activeTabId={activeTabId} 
+              onTabChange={setActiveTabId} 
+              onTabAdd={() => addTab()} 
+              onTabClose={removeTab} 
+              onTabRename={renameTab}
+              isCreateModalOpen={isCreateModalOpen}
+              onOpenCreateModal={() => setIsCreateModalOpen(true)}
+              onCloseCreateModal={() => setIsCreateModalOpen(false)}
+              onCreateNew={handleCreateNew}
+            />
           </div>
 
           {/* Toolbar — below tabs, above editor */}
@@ -376,16 +412,7 @@ const SqlLab = () => {
                     onSave={handleSave}
                   />
                 ) : (
-                  <div className="flex-1 df-card flex flex-col items-center justify-center relative group overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-110" style={{ background: 'var(--df-accent-soft)' }}></div>
-                    <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full -ml-12 -mb-12 transition-transform duration-700 group-hover:scale-110" style={{ background: 'var(--df-accent-soft)' }}></div>
-                    <div className="relative z-10 flex flex-col items-center text-center px-6">
-                      <div className="df-empty-state-icon" style={{ marginBottom: '16px' }}><FiDatabase size={28} /></div>
-                      <h3 className="text-xl font-medium mb-1 tracking-tight" style={{ color: 'var(--df-strong)' }}>Ready to query?</h3>
-                      <p className="text-sm mb-6 max-w-[240px]" style={{ color: 'var(--df-text-soft)' }}>Create a new SQL workspace to start exploring your data.</p>
-                      <button onClick={() => addTab()} className="df-btn df-btn-primary text-sm">+ New Query</button>
-                    </div>
-                  </div>
+                  <WelcomeScreen onCreateNew={handleCreateNew} recentFiles={[]} />
                 )}
               </div>
 
