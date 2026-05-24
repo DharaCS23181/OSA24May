@@ -1,162 +1,196 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-/* ─── Existing Icons ─── */
-const IconWorkspace = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
-    <line x1="12" y1="22" x2="12" y2="12" />
-    <line x1="22" y1="8.5" x2="12" y2="12" />
-    <line x1="2" y1="8.5" x2="12" y2="12" />
-    <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3" />
-  </svg>
-);
-
-const IconSqlEditor = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <ellipse cx="12" cy="5" rx="8" ry="3" />
-    <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
-    <polyline points="9 11 6 14 9 17" />
-    <polyline points="15 11 18 14 15 17" />
-  </svg>
-);
-
-const IconCatalog = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="18" cy="6" r="3" />
-    <circle cx="6" cy="18" r="3" />
-    <circle cx="18" cy="18" r="3" />
-    <circle cx="6" cy="6" r="3" />
-    <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.5" />
-    <path d="M7 7l4 4M17 7l-4 4M7 17l4-4M17 17l-4-4" opacity="0.5" />
+/* ─── Icons ──────────────────────────────────────────────────────────────── */
+const IconDashboard = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="9" rx="1" />
+    <rect x="14" y="3" width="7" height="5" rx="1" />
+    <rect x="14" y="12" width="7" height="9" rx="1" />
+    <rect x="3" y="16" width="7" height="5" rx="1" />
   </svg>
 );
 
 const IconPipeline = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M2 12c4 0 6-6 10-6s6 6 10 6" />
-    <path d="M2 12c4 0 6 6 10 6s6-6 10-6" opacity="0.4" />
-    <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-    <circle cx="2" cy="12" r="1.5" fill="currentColor" />
-    <circle cx="22" cy="12" r="1.5" fill="currentColor" />
-  </svg>
-);
-
-/* ─── NEW Icons ─── */
-const IconConnector = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-       stroke="currentColor" strokeWidth="2"
-       strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z"/>
-    <path d="M17 21v-2"/>
-    <path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10"/>
-    <path d="M21 21v-2"/>
-    <path d="M3 5V3"/>
-    <path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z"/>
-    <path d="M7 5V3"/>
-  </svg>
-);
-
-const IconAnalytics = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-       stroke="currentColor" strokeWidth="2"
-       strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 21H4.6c-.56 0-.84 0-1.05-.11a1 1 0 0 1-.44-.44C3 20.24 3 19.96 3 19.4V3"/>
-    <path d="M7 14l4-4 4 4 6-6"/>
-    <path d="M17 8h4v4"/>
-  </svg>
-);
-
-const IconDashboard = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="7" height="9" />
-    <rect x="14" y="3" width="7" height="5" />
-    <rect x="14" y="12" width="7" height="9" />
-    <rect x="3" y="16" width="7" height="5" />
-  </svg>
-);
-
-const IconTransform = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-    <path d="M12 12v9" />
-    <path d="m8 17 4 4 4-4" />
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="5" cy="6" r="2" />
+    <circle cx="19" cy="6" r="2" />
+    <circle cx="12" cy="18" r="2" />
+    <path d="M5 8v3a2 2 0 002 2h10a2 2 0 002-2V8" />
+    <path d="M12 13v3" />
   </svg>
 );
 
 const IconLogs = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
     <polyline points="14 2 14 8 20 8" />
     <line x1="16" y1="13" x2="8" y2="13" />
     <line x1="16" y1="17" x2="8" y2="17" />
-    <polyline points="10 9 9 9 8 9" />
+    <line x1="10" y1="9" x2="8" y2="9" />
   </svg>
 );
 
-const IconPipelineEditor = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const IconTransform = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 14.899A7 7 0 1115.71 8h1.79a4.5 4.5 0 012.5 8.242" />
+    <path d="M12 12v9" />
+    <path d="M8 17l4 4 4-4" />
+  </svg>
+);
+
+const IconConnector = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+  </svg>
+);
+
+const IconWorkspace = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <path d="M3 9h18" />
+    <path d="M9 21V9" />
+  </svg>
+);
+
+const IconSqlEditor = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const IconCatalog = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+  </svg>
+);
+
+const IconJobs = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="3" />
-    <circle cx="6" cy="12" r="1" fill="currentColor" />
-    <circle cx="18" cy="12" r="1" fill="currentColor" />
-    <path d="M9 12h1.5" />
-    <path d="M13.5 12H15" />
-    <path d="M12 9v1.5" />
-    <path d="M12 13.5V15" />
+    <circle cx="4" cy="6" r="2" />
+    <circle cx="20" cy="6" r="2" />
+    <circle cx="4" cy="18" r="2" />
+    <circle cx="20" cy="18" r="2" />
+    <path d="M6 6h4M14 6h4M6 18h4M14 18h4M12 9v-1M12 16v-1" />
   </svg>
 );
 
-/* ─── Updated Sections ─── */
+const IconAnalytics = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 21H4.6c-.56 0-.84 0-1.05-.11a1 1 0 01-.44-.44C3 20.24 3 19.96 3 19.4V3" />
+    <path d="M7 14l4-4 4 4 6-6" />
+    <path d="M17 8h4v4" />
+  </svg>
+);
+
+/* ─── Section config ─────────────────────────────────────────────────────── */
 const SECTIONS = [
   {
-    id: 'dashboard',
+    id: 'main',
+    label: null,
     items: [
-      { id: 'dashboard-home', label: 'Dashboard', icon: IconDashboard, to: '/dashboard' },
+      { id: 'dashboard', label: 'Dashboard', icon: IconDashboard, to: '/dashboard' },
     ],
   },
   {
     id: 'etl',
+    label: 'ETL',
     items: [
-      { id: 'pipelines', label: 'Pipelines', icon: IconPipeline, to: '/etl/pipelines' },
-      { id: 'etl-logs', label: 'Logs', icon: IconLogs, to: '/etl/logs' },
-      { id: 'etl-transform', label: 'Transform', icon: IconTransform, to: '/etl/transform' },
-      { id: 'etl-connectors', label: 'Connectors', icon: IconConnector, to: '/etl/connectors' },
+      { id: 'etl-pipelines',  label: 'Pipelines',   icon: IconPipeline,  to: '/etl/pipelines' },
+      { id: 'etl-connectors', label: 'Connectors',  icon: IconConnector, to: '/etl/connectors' },
+      { id: 'etl-transform',  label: 'Transform',   icon: IconTransform, to: '/etl/transform' },
+      { id: 'etl-logs',       label: 'Logs',        icon: IconLogs,      to: '/etl/logs' },
     ],
   },
   {
     id: 'dw',
+    label: 'DW',
     items: [
-      { id: 'dw-workspace', label: 'Warehouse', icon: IconWorkspace, to: '/dw/workspace' },
-      { id: 'dw-sql-editor', label: 'SQL Editor', icon: IconSqlEditor, to: '/dw/sql-editor' },
-      { id: 'dw-catalog', label: 'Catalog', icon: IconCatalog, to: '/dw/catalog' },
-      { id: 'dw-jobs', label: 'Jobs & Pipelines', icon: IconPipelineEditor, to: '/dw/jobs' },
+      { id: 'dw-workspace',   label: 'Workspace',      icon: IconWorkspace,  to: '/dw/workspace' },
+      { id: 'dw-sql',         label: 'SQL Editor',     icon: IconSqlEditor,  to: '/dw/sql-editor' },
+      { id: 'dw-catalog',     label: 'Catalog',        icon: IconCatalog,    to: '/dw/catalog' },
+      { id: 'dw-jobs',        label: 'Jobs',           icon: IconJobs,       to: '/dw/jobs' },
     ],
   },
   {
     id: 'analytics',
+    label: 'BI',
     items: [
-      { 
-        id: 'analytics-dashboard', 
-        label: 'Analytics', 
-        icon: IconAnalytics, 
-        to: '/analytics',
-        openInNewTab: false
-      },
+      { id: 'analytics', label: 'Analytics', icon: IconAnalytics, to: '/analytics' },
     ],
   },
 ];
 
+/* ─── Single nav item ────────────────────────────────────────────────────── */
+const NavItem = ({ id, label, icon: Icon, to }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div className="relative" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          `flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200 ${
+            isActive
+              ? 'bg-[var(--df-sidebar-active)]'
+              : 'hover:bg-[var(--df-sidebar-hover)]'
+          }`
+        }
+      >
+        {({ isActive }) => (
+          <span
+            style={{
+              color: isActive ? 'var(--df-accent)' : 'var(--df-text-muted)',
+              transition: 'color 0.2s',
+            }}
+          >
+            <Icon />
+          </span>
+        )}
+      </NavLink>
+
+      {/* Tooltip — only rendered when hovered */}
+      {hovered && (
+        <div
+          style={{
+            position: 'fixed',
+            left: '80px',
+            zIndex: 9999,
+            pointerEvents: 'none',
+            backgroundColor: 'var(--df-card-bg)',
+            border: '1px solid var(--df-border)',
+            color: 'var(--df-strong)',
+            boxShadow: 'var(--df-shadow-md)',
+            fontSize: '12px',
+            fontWeight: 500,
+            padding: '6px 12px',
+            borderRadius: '8px',
+            whiteSpace: 'nowrap',
+          }}
+          className="animate-fadeIn"
+        >
+          {label}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────── */
 const Sidebar = () => {
   React.useEffect(() => {
-    document.documentElement.style.setProperty('--df-sidebar-width', '72px');
+    document.documentElement.style.setProperty('--df-sidebar-width', '64px');
   }, []);
-
-  const commonClasses = "relative flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-300 group cursor-pointer";
 
   return (
     <aside
       style={{
-        width: '72px',
+        width: '64px',
         position: 'fixed',
         top: '64px',
         left: 0,
@@ -164,79 +198,47 @@ const Sidebar = () => {
         backgroundColor: 'var(--df-sidebar-bg)',
         borderRight: '1px solid var(--df-border)',
         zIndex: 40,
+        display: 'flex',
+        flexDirection: 'column',
+        paddingTop: '12px',
+        paddingBottom: '12px',
+        overflowY: 'auto',
+        overflowX: 'visible',
       }}
-      className="flex flex-col pt-6"
+      className="df-scrollbar"
     >
-      <nav className="flex-1 px-3 space-y-6">
-        {SECTIONS.map(({ id, items }) => (
-          <div key={id} className="space-y-3">
-            {items.map(({ id, label, icon: Icon, to, openInNewTab }) => {
-              // If openInNewTab is true, render as a regular link
-              if (openInNewTab) {
-                return (
-                  <a
-                    key={id}
-                    href={to}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${commonClasses} hover:bg-[var(--df-sidebar-hover)]`}
-                  >
-                    <span
-                      style={{ color: 'var(--df-text-soft)' }}
-                      className="transition-transform group-hover:scale-110"
-                    >
-                      <Icon />
-                    </span>
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '0 10px' }}>
+        {SECTIONS.map(({ id, label, items }, sectionIdx) => (
+          <div key={id}>
+            {/* Section divider + label (skip for first section) */}
+            {sectionIdx > 0 && (
+              <div style={{ margin: '8px 0 4px', padding: '0 2px' }}>
+                <div style={{ height: '1px', backgroundColor: 'var(--df-border)' }} />
+                {label && (
+                  <span style={{
+                    display: 'block',
+                    fontSize: '9px',
+                    fontWeight: 600,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--df-text-muted)',
+                    marginTop: '6px',
+                    marginBottom: '2px',
+                    textAlign: 'center',
+                    opacity: 0.6,
+                  }}>
+                    {label}
+                  </span>
+                )}
+              </div>
+            )}
 
-                    {/* Tooltip */}
-                    <div className="absolute left-[64px] px-4 py-2 rounded-xl bg-[var(--df-sidebar-bg)] border border-[var(--df-border)]
-                      text-sm text-[var(--df-strong)] whitespace-nowrap
-                      opacity-0 -translate-x-4 scale-90 pointer-events-none transition-all duration-300 
-                      group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 z-50 shadow-xl">
-                      {label}
-                    </div>
-                  </a>
-                );
-              }
-
-              // Otherwise, render as NavLink
-              return (
-                <NavLink
-                  key={id}
-                  to={to}
-                  className={({ isActive }) =>
-                    `${commonClasses} ${
-                      isActive
-                        ? 'bg-[var(--df-sidebar-active)]'
-                        : 'hover:bg-[var(--df-sidebar-hover)]'
-                    }`
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      <span
-                        style={{
-                          color: isActive
-                            ? 'var(--df-strong)'
-                            : 'var(--df-text-soft)',
-                        }}
-                        className="transition-transform group-hover:scale-110"
-                      >
-                        <Icon />
-                      </span>
-
-                      {/* Tooltip */}
-                      <div className="absolute left-[64px] px-4 py-2 rounded-xl bg-[var(--df-sidebar-bg)] border border-[var(--df-border)]
-                        text-sm text-[var(--df-strong)] whitespace-nowrap
-                        opacity-0 -translate-x-4 scale-90 pointer-events-none transition-all duration-300 
-                        group-hover:opacity-100 group-hover:translate-x-0 group-hover:scale-100 z-50 shadow-xl">
-                        {label}
-                      </div>
-                    </>
-                  )}
-                </NavLink>
-              );
-            })}
+            {/* Items */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              {items.map((item) => (
+                <NavItem key={item.id} {...item} />
+              ))}
+            </div>
           </div>
         ))}
       </nav>

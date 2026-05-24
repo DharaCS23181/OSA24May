@@ -33,8 +33,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #FFFFFF;
-  color: var(--color-dark-gray);
+  background-color: var(--df-bg, #FFFFFF);
+  color: var(--df-text, #111111);
   margin: 0;
   padding: 0;
 }
@@ -81,19 +81,15 @@ body {
   animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Remove all boldness from the website */
-* {
-  font-weight: 400 !important;
+/* Preserve meaningful font weights — only reset browser UA defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-b,
-strong,
+b, strong {
+  font-weight: 600;
+}
+
 th {
-  font-weight: 400 !important;
+  font-weight: 500;
 }

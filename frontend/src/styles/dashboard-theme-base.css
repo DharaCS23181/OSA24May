@@ -4,23 +4,23 @@
    Font: Inter
    ═══════════════════════════════════════════ */
 
-/* ── LIGHT THEME (default) — Pure white, bold dark borders ── */
+/* ── LIGHT THEME (default) — Clean white with subtle depth ── */
 :root,
 [data-theme="light"] {
-/* ── ALL backgrounds: pure bright white ── */
-  --df-bg: #FFFFFF;
-  --df-bg-secondary: #FFFFFF;
+  /* ── Backgrounds ── */
+  --df-bg: #F8F8FA;
+  --df-bg-secondary: #F8F8FA;
   --df-surface: #FFFFFF;
   --df-panel: #FFFFFF;
 
-  /* ── Borders: feather-light, barely visible ── */
-  --df-border: rgba(0, 0, 0, 0.07);
-  --df-border-light: rgba(0, 0, 0, 0.04);
+  /* ── Borders: visible but subtle ── */
+  --df-border: rgba(0, 0, 0, 0.09);
+  --df-border-light: rgba(0, 0, 0, 0.05);
 
   /* ── Typography ── */
-  --df-text: #111111;
-  --df-text-soft: #333333;
-  --df-text-muted: #555555;
+  --df-text: #1A1A1A;
+  --df-text-soft: #444444;
+  --df-text-muted: #777777;
   --df-strong: #000000;
 
   /* ── Accent — burgundy ── */
@@ -43,25 +43,31 @@
   /* ── Navbar / Sidebar ── */
   --df-nav-bg: #FFFFFF;
   --df-sidebar-bg: #FFFFFF;
-  --df-sidebar-hover: rgba(122, 30, 58, 0.05);
-  --df-sidebar-active: rgba(122, 30, 58, 0.08);
+  --df-sidebar-hover: rgba(122, 30, 58, 0.06);
+  --df-sidebar-active: rgba(122, 30, 58, 0.10);
 
   /* ── Inputs ── */
   --df-input-bg: #FFFFFF;
-  --df-input-border: rgba(0, 0, 0, 0.12);
+  --df-input-border: rgba(0, 0, 0, 0.14);
 
   /* ── Cards ── */
   --df-card-bg: #FFFFFF;
-  --df-card-border: rgba(0, 0, 0, 0.07);
+  --df-card-border: rgba(0, 0, 0, 0.08);
 
   /* ── Code ── */
-  --df-code-bg: #FFFFFF;
-  --df-code-border: rgba(0, 0, 0, 0.07);
+  --df-code-bg: #F5F5F7;
+  --df-code-border: rgba(0, 0, 0, 0.08);
 
   /* ── Table ── */
-  --df-table-header-bg: #FFFFFF;
+  --df-table-header-bg: #F5F5F7;
   --df-table-hover: rgba(122, 30, 58, 0.04);
-  --df-table-border: rgba(0, 0, 0, 0.05);
+  --df-table-border: rgba(0, 0, 0, 0.06);
+
+  /* ── Shadows ── */
+  --df-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --df-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --df-shadow-md: 0 4px 16px rgba(0,0,0,0.09);
+  --df-shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
 }
 
 /* ── DARK THEME — Out of the world ── */
@@ -133,8 +139,11 @@
   --df-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
   --df-shadow-glow: 0 4px 20px rgba(122, 30, 58, 0.15);
   --df-ease: cubic-bezier(0.23, 1, 0.32, 1);
-  --df-duration: 0.3s;
-  --df-duration-slow: 0.5s;
+  --df-duration: 0.2s;
+  --df-duration-slow: 0.4s;
+  --df-sidebar-width: 64px;
+  --df-font: 'Inter', sans-serif;
+  --df-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 /* ── Custom Professional Scrollbar ── */
