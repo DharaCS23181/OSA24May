@@ -89,15 +89,15 @@ const Navbar = () => {
       </div>
 
       {/* Center - Search + AI */}
-      <div className="flex-1 max-w-xl mx-6 flex items-center gap-2">
-        <div className="relative group flex-1">
+      <div className="flex-1 max-w-xl mx-6 flex items-center gap-2 min-w-0">
+        <div className="relative group flex-1 min-w-0">
           <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none" style={{ color: 'var(--df-text-muted)' }}>
             <SearchIcon />
           </div>
           <input
             type="text"
             placeholder="Search catalog, queries, logs..."
-            className="w-full h-9 rounded-lg pl-10 pr-16 text-sm focus:outline-none transition-all"
+            className="w-full h-9 rounded-lg pl-10 pr-16 text-sm focus:outline-none transition-all min-w-0"
             style={{
               fontFamily: "'Inter', sans-serif",
               backgroundColor: 'var(--df-input-bg)',
@@ -120,7 +120,7 @@ const Navbar = () => {
         </div>
         {/* AI Button */}
         <button
-          className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
+          className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap"
           style={{ backgroundColor: 'var(--df-accent)', color: '#fff', border: 'none' }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--df-accent-alt)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--df-accent)'; e.currentTarget.style.transform = 'scale(1)'; }}
@@ -209,7 +209,7 @@ const Navbar = () => {
             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--df-surface)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
-            <div className="flex flex-col items-end">
+            <div className="hidden md:flex flex-col items-end">
               <span className="text-xs font-medium" style={{ color: 'var(--df-strong)' }}>Admin</span>
               <span className="text-[10px] font-medium" style={{ color: 'var(--df-text-muted)' }}>Arithwise</span>
             </div>

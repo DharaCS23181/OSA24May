@@ -17,31 +17,33 @@ from app.database import Base
 
 class Job(Base):
     __tablename__ = "jobs"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     pipeline_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("pipelines.id", ondelete="CASCADE"),
+        ForeignKey("etl.pipelines.id", ondelete="CASCADE"),
         nullable=True,
     )
     name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     job_metadata: Mapped[dict | None] = mapped_column(JSON, nullable=True)
 
     trigger: Mapped[str] = mapped_column(
-        SAEnum("manual", "scheduled", "webhook", name="job_trigger"),
+        SAEnum("manual", "scheduled", "webhook", name="job_trigger", schema="etl"),
         default="manual",
         nullable=False,
     )
     status: Mapped[str] = mapped_column(
         SAEnum(
             "pending", "running", "success", "failed", "cancelled",
-            name="job_status",
+            name="job_status", schema="etl",
         ),
         default="pending",
         nullable=False,
     )
+
 
     started_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
@@ -83,31 +85,33 @@ class JobRun(Base):
     """Per-node execution record within a Job."""
 
     __tablename__ = "job_runs"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     job_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("jobs.id", ondelete="CASCADE"),
+        ForeignKey("etl.jobs.id", ondelete="CASCADE"),
         nullable=False,
     )
 
     # Node info from the DAG
     node_id: Mapped[str] = mapped_column(String(255), nullable=False)
     node_type: Mapped[str] = mapped_column(
-        SAEnum("extract", "transform", "transform_pandas", "load", name="node_type"),
+        SAEnum("extract", "transform", "transform_pandas", "load", name="node_type", schema="etl"),
         nullable=False,
     )
 
     status: Mapped[str] = mapped_column(
         SAEnum(
             "pending", "running", "success", "failed", "skipped", "cancelled",
-            name="job_run_status",
+            name="job_run_status", schema="etl",
         ),
         default="pending",
         nullable=False,
     )
+
 
     rows_processed: Mapped[int] = mapped_column(Integer, default=0)
     quality_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -123,7 +127,7 @@ class JobRun(Base):
     # Relationships
     job: Mapped["Job"] = relationship(back_populates="runs")
     chunk_failures: Mapped[list["ChunkFailure"]] = relationship(
-        back_populates="job_run", cascade="all, delete-orphan", lazy="selectin"
+        cascade="all, delete-orphan", lazy="selectin"
     )
 
     def __repr__(self) -> str:

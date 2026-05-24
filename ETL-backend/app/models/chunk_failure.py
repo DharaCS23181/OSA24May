@@ -10,20 +10,21 @@ from datetime import datetime, timezone
 
 from sqlalchemy import String, Text, Integer, Boolean, DateTime, ForeignKey
 from sqlalchemy import Uuid as UUID
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
 
 
 class ChunkFailure(Base):
     __tablename__ = "chunk_failures"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     job_run_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("job_runs.id", ondelete="CASCADE"),
+        ForeignKey("etl.job_runs.id", ondelete="CASCADE"),
         nullable=False,
     )
 
@@ -39,8 +40,6 @@ class ChunkFailure(Base):
         nullable=False,
     )
 
-    # Relationships
-    job_run: Mapped["JobRun"] = relationship(back_populates="chunk_failures")
-
     def __repr__(self) -> str:
         return f"<ChunkFailure(chunk={self.chunk_index}, recovered={self.recovered})>"
+

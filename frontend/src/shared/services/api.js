@@ -3,7 +3,7 @@
  * All API calls should flow through this module.
  */
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8004') + '/dw';
+const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/dw' : '/dw';
 
 
 async function request(url, options = {}) {

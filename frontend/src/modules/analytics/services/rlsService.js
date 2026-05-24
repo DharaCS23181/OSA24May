@@ -4,7 +4,7 @@
  * Vite proxies /api/rls/* → http://localhost:8010 (Analytics backend)
  */
 
-const BASE = '/analytics/rls';
+const BASE = '/api/rls';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 

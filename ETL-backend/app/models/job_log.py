@@ -18,16 +18,18 @@ from app.database import Base
 class JobLog(Base):
     """A high-level execution log for a specific job and DAG node."""
     __tablename__ = "job_logs"
+    __table_args__ = {"schema": "etl"}
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     job_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("jobs.id", ondelete="CASCADE"),
+        ForeignKey("etl.jobs.id", ondelete="CASCADE"),
         nullable=False,
         index=True,
     )
+
     
     # Status: SUCCESS, FAILED, INFO
     status: Mapped[str] = mapped_column(String(20), default="INFO", nullable=False)

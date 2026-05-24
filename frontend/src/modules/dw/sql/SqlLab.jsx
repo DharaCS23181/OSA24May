@@ -219,7 +219,7 @@ const SqlLab = () => {
   return (
     <div className={`flex flex-col h-full ${isResizingV ? 'cursor-row-resize select-none' : ''}`} style={{ fontFamily: "'Inter', sans-serif", backgroundColor: 'var(--df-bg-secondary)' }}>
       <div className="flex flex-1 overflow-hidden relative">
-        <div style={{ width: (isSidebarOpen && !isFocusMode) ? 260 : 0, borderRight: (isSidebarOpen && !isFocusMode) ? '1px solid var(--df-border)' : 'none', backgroundColor: 'var(--df-card-bg)' }} className="transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden">
+        <div style={{ width: (isSidebarOpen && !isFocusMode) ? 260 : 0, borderRight: (isSidebarOpen && !isFocusMode) ? '1px solid var(--df-border)' : 'none', backgroundColor: 'var(--df-card-bg)' }} className="flex-shrink-0 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden">
           <div style={{ width: 260, height: '100%' }}><SchemaBrowser onTablePreview={handleTablePreview} /></div>
         </div>
 

@@ -13,6 +13,7 @@ from app.database import Base
 
 class SystemSetting(Base):
     __tablename__ = "system_settings"
+    __table_args__ = {"schema": "etl"}
 
     key: Mapped[str] = mapped_column(String(100), primary_key=True)
     value: Mapped[str | None] = mapped_column(Text, nullable=True)

@@ -201,7 +201,7 @@ def get_all_tables(db: Session) -> list[dict]:
             (SELECT count(*) FROM pg_attribute a WHERE a.attrelid = c.oid AND a.attnum > 0 AND NOT a.attisdropped) AS column_count
         FROM pg_class c
         JOIN pg_namespace n ON n.oid = c.relnamespace
-        WHERE n.nspname NOT IN ('pg_catalog', 'information_schema', 'public')
+        WHERE n.nspname NOT IN ('pg_catalog', 'information_schema', 'public', 'workflow', 'history', 'analytics', 'etl', 'dw')
           AND n.nspname NOT LIKE 'pg_toast%'
           AND n.nspname NOT LIKE 'pg_temp%'
           AND c.relkind IN ('r', 'v', 'm', 'f')

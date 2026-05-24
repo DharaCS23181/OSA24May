@@ -95,9 +95,19 @@ def startup_event():
     try:
         from alembic.config import Config
         from alembic import command
+        from alembic.util.exc import CommandError
         alembic_cfg = Config("alembic.ini")
         command.upgrade(alembic_cfg, "head")
         print("SUCCESS: Alembic database migrations applied successfully.")
+    except CommandError as cmd_err:
+        err_msg = str(cmd_err)
+        if "Can't locate revision" in err_msg or "ResolutionError" in err_msg:
+            print(f"WARNING: Alembic migration could not find revision: {err_msg}")
+            print("INFO: This usually happens when local migration files are git-ignored but the database contains a recorded revision.")
+            print("INFO: The application will bypass migrations and initialize the schema directly using SQLAlchemy models.")
+        else:
+            print(f"WARNING: Alembic command error: {cmd_err}")
+            traceback.print_exc()
     except Exception as alembic_err:
         print(f"WARNING: Alembic migration failed (might be uninitialized): {alembic_err}")
         traceback.print_exc()

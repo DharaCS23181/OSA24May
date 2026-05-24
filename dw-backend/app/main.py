@@ -37,26 +37,25 @@ from app.core.database import engine, Base
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup: Initialize Postgres, verify MongoDB, start scheduler."""
+    """Startup: Initialize unified onestop_platform DB, verify MongoDB, start scheduler."""
     print("Starting OneStop Analytics server...")
 
     # -----------------------------
-    # 🐘 Init Postgres Databases & Schemas
+    # 🐘 Init Unified Platform Database (onestop_platform)
     # -----------------------------
     try:
-        from app.core.init_db import ensure_database_exists, ensure_schema_exists, init_jobs_db
+        from app.core.init_db import ensure_database_exists, init_db, init_jobs_db
         from app.core.config import settings
-        from app.core.jobs_database import JOBS_DATABASE_URL, jobs_engine
+        from app.core.jobs_database import jobs_engine
 
-        # 1. Ensure Databases exist
+        # 1. Ensure the single unified platform database exists
         ensure_database_exists(settings.DATABASE_URL)
-        ensure_database_exists(JOBS_DATABASE_URL)
 
-        # 2. Init Main DB Tables (Staging, Analytics, Warehouse)
-        init_db()
+        # 2. Init platform schemas (workflow, history) and ORM tables
+        init_db()  # creates workflow + history schemas
 
-        # 3. Init Jobs DB — runs jobs_schema.sql (creates schemas, enums, tables, adds missing columns)
-        init_jobs_db(jobs_engine)
+        # 3. Init workflow schema — runs jobs_schema.sql (creates enums, tables, adds missing columns)
+        init_jobs_db(jobs_engine)  # jobs_engine now == main engine (onestop_platform)
 
         # 4. Safety net: create_all for any ORM models not covered by SQL scripts
         from app.modules.jobs.models.job_models import JobsBase
@@ -70,10 +69,11 @@ async def lifespan(app: FastAPI):
         Base.metadata.create_all(bind=engine)
 
         # Success message simplified
-        print("Database connection established.")
+        print("Database connection established (onestop_platform).")
 
     except Exception as e:
-        print(f"ERROR [main]: FAILED: Postgres init failed: {e}")
+        print(f"ERROR [main]: FAILED: Database init failed: {e}")
+
 
     # -----------------------------
     # 🍃 Verify MongoDB
