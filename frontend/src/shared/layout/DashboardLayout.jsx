@@ -1,56 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import { useTheme } from '../context/ThemeContext';
 import '../../styles/dashboard-theme.css';
 
-const DashboardLayout = ({ children }) => {
+const DashboardContent = ({ children }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isDark } = useTheme();
 
   return (
     <div
-      className="h-screen w-full flex flex-col overflow-hidden"
+      className="h-screen w-full flex flex-col transition-colors duration-300 overflow-hidden"
       style={{
         fontFamily: "'Inter', sans-serif",
         backgroundColor: 'var(--df-bg)',
         color: 'var(--df-text)',
       }}
     >
-      {/* Fixed top navbar */}
       <Navbar />
-
-      {/* Body: sidebar + content */}
-      <div className="flex flex-1 overflow-hidden" style={{ paddingTop: '64px' }}>
-        {/* Fixed sidebar */}
-        <Sidebar />
-
-        {/* Scrollable main content */}
+      <div className="flex flex-1 pt-16 h-full overflow-hidden w-full">
+        <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
         <main
-          className="flex-1 df-scrollbar"
+          className="flex-1 flex flex-col overflow-hidden df-page-enter df-scrollbar transition-all duration-1000"
           style={{
-            marginLeft: 'var(--df-sidebar-width, 64px)',
-            overflowY: 'auto',
-            overflowX: 'hidden',
             backgroundColor: 'var(--df-bg-secondary)',
-            minHeight: 0,
-            display: 'flex',
-            flexDirection: 'column',
+            marginLeft: 'var(--df-sidebar-width, 72px)'
           }}
         >
-          <div
-            className="df-page-enter"
-            style={{
-              flex: 1,
-              padding: '24px 28px',
-              minHeight: 0,
-            }}
-          >
-            {children}
-          </div>
+          {children}
         </main>
       </div>
     </div>
   );
+};
+
+const DashboardLayout = ({ children }) => {
+  return <DashboardContent>{children}</DashboardContent>;
 };
 
 export default DashboardLayout;

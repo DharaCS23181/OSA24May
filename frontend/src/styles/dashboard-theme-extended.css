@@ -211,14 +211,9 @@
   background: rgba(128, 128, 128, 0.4);
 }
 
-/* ── Global theme transition — only bg/color/border, not layout props ── */
-body,
-.df-card,
-.df-input,
-.df-select,
-aside,
-nav,
-main,
-header {
-  transition: background-color 0.25s ease, color 0.2s ease, border-color 0.25s ease;
+/* ── Global theme transition ── */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
 }
