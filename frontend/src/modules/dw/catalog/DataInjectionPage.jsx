@@ -15,10 +15,8 @@ export default function DatasetUpload() {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("table_name", tableName);
-      const baseUrl = import.meta.env.VITE_API_URL || "https://dw.onestopanalytics.com";
-
-
-      const res = await fetch(`${baseUrl}/upload-dataset`, { method: "POST", body: formData });
+      const baseUrl = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${baseUrl}/dw/catalog/upload-table`, { method: "POST", body: formData });
       const data = await res.json();
       alert(data.message || "Dataset uploaded successfully");
       setFile(null);

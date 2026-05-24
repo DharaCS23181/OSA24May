@@ -3,7 +3,7 @@
  * All workspace API calls using fetch (consistent with existing api.js pattern)
  */
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'https://dw.onestopanalytics.com') + '/dw/workspace';
+const API_BASE = (import.meta.env.VITE_API_URL || '') + '/dw/workspace';
 
 
 

@@ -44,9 +44,11 @@ export default defineConfig({
         target: 'http://localhost:8004',
         changeOrigin: true,
         bypass: function (req) {
+          // For browser navigation (HTML), serve the Vite SPA instead of proxying
           if (req.headers.accept && req.headers.accept.includes('text/html')) {
-            return false; // Let Vite handle it
+            return req.url; // Bypass proxy, let Vite serve index.html
           }
+          // All API/fetch requests go to the backend
         }
       },
     },
