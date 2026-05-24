@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Environment
+.env
+.git/
+.gitignore
+
+# Dev artifacts
+uploads/
+outputs/
+app/outputs/
+*.log
+*.db
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/

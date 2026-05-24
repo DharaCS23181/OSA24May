@@ -1,0 +1,66 @@
+engine_version: 1
+sources:
+  pipedrive:
+    is_dirty: false
+    last_commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+    last_commit_timestamp: '2026-03-30T21:43:02+02:00'
+    files:
+      pipedrive\README.md:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 866cfa475c5559196841b100e89938963694f5c4
+        sha3_256: c8e62ea51fbfe0f7a25e12dcb8fc8838187f6c5f4290f22854a0c398fac02069
+      pipedrive\settings.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 5f960f0fd36408dcf24f3e0d342e3623c7daf264
+        sha3_256: 33a68288c258214a7bb27dcf19173fa531af7f23f61693f4675ec86819e1396a
+      pipedrive\typing.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 54d18332f4982373285a4bdd81d2bf67e5711bb2
+        sha3_256: 50f3672ef17cb5a4aadad9ad65eb8e078d7552afa14594734a8846977d3de023
+      pipedrive\__init__.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 9f4e765822186e19315d09df6449574b0853f165
+        sha3_256: 1d2087c21328f9d0972654e184a6baeb29b378befc41480879d3e5c4cfabf33b
+      pipedrive\helpers\custom_fields_munger.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: b65a4e30ecd04be6cf0c369dd5ece5c8647fbec8
+        sha3_256: 9f0eaa290c79a4dcabde8c9c48eaae6c072a1eb5eb939f5bc71fd2113f1a3fcd
+      pipedrive\helpers\pages.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 1fa82be52bfff569308412a3f1df3aa91243f4b8
+        sha3_256: 6c0a5ae8e9fb4bbd6a250f2091aa7eb7089989581f76a5303b8154c2e1d232dc
+      pipedrive\helpers\__init__.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: f5af5028804f018311504846d5dd618f3838dcb0
+        sha3_256: 5de29abfb3b3d433b7e16712936ffd7aa16b8b8e04cb6588de63103a64ad51f4
+      pipedrive\rest_v2\__init__.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 37c6c44720279e1e73bf19ee01d14809f22be95e
+        sha3_256: ab430d7ff2687a1737e2af71b7f67aedc2c50fa9b7d3bf8ec6965642ef1f5a55
+    dlt_version_constraint: '>=1.0.0'
+  stripe_analytics:
+    is_dirty: false
+    last_commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+    last_commit_timestamp: '2026-03-30T21:43:02+02:00'
+    files:
+      stripe_analytics\helpers.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: aceb3da7d038cfcc507d34aaf8316b919d5b14cf
+        sha3_256: de236ecde9b6f1bf52fc4e3235f991c645fc999ea76ffbaee5b73e6d12caea2d
+      stripe_analytics\metrics.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 9829ad232aaf1beb70d36f36f818ced5e11160b9
+        sha3_256: cd458e533c297f2c6dc351292e48ea82635f14116657f23ec962e2380afb952e
+      stripe_analytics\README.md:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 10d51a0acee4f87b5d683bf82ff66e930281f31d
+        sha3_256: e149a6f0ae8543e00e071704628b7c25a9392b8884a6d251d15eb25a2b538d83
+      stripe_analytics\settings.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: d7c3b9d38b3629c03eab097a73532f4f4ce29a66
+        sha3_256: 3910c51cfe51086e13a1728b94118e9a6c0531f15cae6dc5691763a12f4ad142
+      stripe_analytics\__init__.py:
+        commit_sha: 75b3ec17eab99d0079d9f61b7f47fc8b899a5738
+        git_sha: 853e58efd6228f5e54872a7bfa0b5c7f5e6e929e
+        sha3_256: abd071e2a485f8b19e303534fe6b1be245a42cab0fae539149c089c798f7f67b
+    dlt_version_constraint: '>=0.5.1'
