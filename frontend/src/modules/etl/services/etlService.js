@@ -48,6 +48,7 @@ export const api = {
   // Pipelines
   getPipelines: () => apiClient.get('/pipelines').then(r => r.data),
   getPipeline: (id) => apiClient.get(`/pipelines/${id}`).then(r => r.data),
+  getPipelineVersions: (id) => apiClient.get(`/pipelines/${id}/versions`).then(r => r.data),
   createPipeline: (data) => apiClient.post('/pipelines', data).then(r => r.data),
   updatePipeline: (id, data) => apiClient.put(`/pipelines/${id}`, data).then(r => r.data),
   executePipeline: (id) => apiClient.post(`/pipelines/${id}/execute`).then(r => r.data),

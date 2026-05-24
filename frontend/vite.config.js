@@ -40,9 +40,14 @@ export default defineConfig({
       },
 
       // ── DW Backend (port 8004) ────────────────────────────────────────────
-      '/dw/api': {
+      '/dw': {
         target: 'http://localhost:8004',
         changeOrigin: true,
+        bypass: function (req) {
+          if (req.headers.accept && req.headers.accept.includes('text/html')) {
+            return false; // Let Vite handle it
+          }
+        }
       },
     },
   },

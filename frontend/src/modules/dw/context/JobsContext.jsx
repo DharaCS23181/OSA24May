@@ -3,7 +3,7 @@ import { useToast } from '../../../shared/context/ToastContext';
 import api from '../../../shared/services/api';
 
 const JobsContext = createContext();
-const API_BASE = (import.meta.env.VITE_API_URL || 'https://dw.onestopanalytics.com') + '/dw/jobs';
+const API_BASE = (import.meta.env.VITE_API_URL || '') + '/dw/jobs';
 
 
 

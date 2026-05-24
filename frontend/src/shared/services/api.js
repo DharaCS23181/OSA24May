@@ -3,7 +3,7 @@
  * All API calls should flow through this module.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/dw' : '/dw';
+const API_BASE = import.meta.env.VITE_API_URL || '';
 
 
 async function request(url, options = {}) {
